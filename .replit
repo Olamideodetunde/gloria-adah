@@ -22,13 +22,13 @@ args = "GOA Website"
 name = "GOA API Server"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd artifacts/mockup-sandbox && API_PORT=3001 node server/index.js"
-waitForPort = 3001
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node server/index.js"
+waitForPort = 3001
 
 [[workflows.workflow]]
 name = "GOA Website"
@@ -39,7 +39,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd artifacts/mockup-sandbox && PORT=5000 BASE_PATH=/ npm run dev"
+args = "npm run dev"
 waitForPort = 5000
 
 [[ports]]
@@ -49,6 +49,10 @@ externalPort = 3001
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3003
 
 [[ports]]
 localPort = 23636

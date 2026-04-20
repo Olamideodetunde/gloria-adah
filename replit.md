@@ -1,0 +1,69 @@
+# Gloria Ondah & Associates — GOA Website
+
+## Project Overview
+Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law firm (CAC Reg: BN-3068204, est. 2017, Abuja/Lagos). Burgundy/gold editorial aesthetic with Paystack payments and Brevo email integration.
+
+## Project Structure
+```
+/
+├── src/                          # React + Vite frontend (TypeScript)
+│   ├── App.tsx                   # Root app with hash router
+│   ├── main.tsx                  # Entry point
+│   ├── index.css                 # Tailwind v4 + brand tokens
+│   ├── lib/
+│   │   └── utils.ts              # Tailwind cn() helper
+│   ├── components/
+│   │   ├── ui/                   # shadcn/ui components
+│   │   ├── shared/               # Nav, Footer, WhatsAppFAB, CTABand, SectionHeader, PageShell, motion.ts, routes.ts, practiceAreas.ts
+│   │   └── pages/                # Home, About, PracticeAreas, PracticeDetail, Attorney, Insights, InsightsSingle, Faq, Contact, Booking, Privacy, Terms, Disclaimer
+├── server/                       # Express API (ESM, Node.js)
+│   ├── index.js                  # Entry (port 3001)
+│   ├── db.js                     # PostgreSQL client (pg + SSL)
+│   ├── email.js                  # Brevo transactional email
+│   ├── paystack.js               # Paystack payment initiation
+│   └── routes/
+│       ├── bookings.js           # POST /api/bookings
+│       └── contact.js            # POST /api/contact
+├── public/
+│   ├── favicon.svg
+│   └── images/                   # hero.png, gloria.png, insight-1/2/3.png, flyer.png
+├── index.html                    # HTML entry with GOA meta tags
+├── vite.config.ts                # Port 5000, /api proxy to :3001
+├── tsconfig.json
+└── package.json                  # Single root package for all deps
+```
+
+## Workflows
+- **GOA Website** — `npm run dev` (Vite, port 5000, webview)
+- **GOA API Server** — `node server/index.js` (Express, port 3001, console)
+
+## Routing
+- Hash-based router in App.tsx (no react-router dependency)
+- Routes: `#/`, `#/about`, `#/practice-areas`, `#/practice/:slug`, `#/attorneys/gloria-ondah`, `#/insights`, `#/insights/:slug`, `#/faq`, `#/contact`, `#/booking`, `#/privacy`, `#/terms`, `#/disclaimer`
+
+## Brand
+- Primary: `#440a18` (deep burgundy) — HSL `345 74% 15%`
+- Secondary: `#b87d39` (gold) — HSL `32 53% 47%`
+- Fonts: Playfair Display (serif headings) + Plus Jakarta Sans (sans body)
+- Strict editorial aesthetic — `border-radius: 0` (no rounded corners)
+
+## Environment Variables Required
+- `DATABASE_URL` — PostgreSQL connection string (SSL)
+- `PAYSTACK_SECRET_KEY` — Paystack backend secret
+- `PAYSTACK_PUBLIC_KEY` — Paystack frontend key
+- `BREVO_API_KEY` — Brevo (formerly Sendinblue) API key
+  - ⚠️ Requires IP 34.182.90.163 whitelisted in Brevo dashboard for emails to send
+
+## Practice Areas (8 total)
+company-registration, contracts, compliance, litigation, ip, property, oil-gas, employment
+
+## Contact Details
+- Phone: 09029633193
+- WhatsApp: 07054588490
+- Email: G.ondahlawoffice@gmail.com
+- Abuja: No. 28, 3rd Avenue, Gwarinpa Estate
+
+## Key Notes
+- Previous mockup-sandbox code lives in `artifacts/mockup-sandbox/` and can eventually be removed
+- Booking flow: Service → Schedule → Details → Payment (Paystack) → Confirmation
+- All booking/contact submissions create DB records and send Brevo emails
