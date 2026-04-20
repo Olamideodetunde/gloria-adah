@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { MessageCircle, ArrowRight, Briefcase, Phone } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { MessageCircle, ArrowRight, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { fadeInUp, staggerContainer } from '../shared/motion';
 import { routes, getPracticeRoute, practiceIcons } from '../shared/routes';
@@ -41,12 +41,6 @@ export function Home() {
                 <Button size="lg" variant="outline" className="rounded-none h-14 px-8 text-base border-primary/20 text-primary hover:bg-primary/5 group">
                   <MessageCircle className="mr-2 h-5 w-5 text-secondary group-hover:scale-110 transition-transform" />
                   Chat on WhatsApp
-                </Button>
-              </a>
-              <a href="tel:+2349029633193">
-                <Button size="lg" variant="ghost" className="rounded-none h-14 px-6 text-base text-muted-foreground hover:text-primary group">
-                  <Phone className="mr-2 h-4 w-4 group-hover:text-secondary transition-colors" />
-                  Call Now
                 </Button>
               </a>
             </motion.div>
@@ -131,28 +125,102 @@ export function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-muted/20">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { text: "Gloria Ondah & Associates handled our complex regulatory filings with absolute precision. Their attention to detail saved us months of potential delays.", author: "Adaeze Okeke", role: "MD, Magma Oil and Gas" },
-              { text: "Finding a legal partner who understands the energy sector's nuances is rare. GOA has been instrumental in our NUPRC compliance and contract negotiations.", author: "Tunde Bakare", role: "Founder, Stelog Energy" },
-              { text: "From due diligence to final acquisition, their real estate advisory is top-tier. They don't just point out risks; they provide viable business solutions.", author: "Chiamaka Eze", role: "Director, Pacific Luxury Homes" }
-            ].map((testimonial, i) => (
-              <div key={i} className="p-8 border border-border bg-background relative">
-                <div className="text-6xl text-secondary/20 font-serif absolute top-4 left-4">"</div>
-                <p className="relative z-10 text-muted-foreground leading-relaxed mb-8 italic">"{testimonial.text}"</p>
-                <div>
-                  <div className="font-bold text-primary">{testimonial.author}</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">{testimonial.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
+
+
 
       <CTABand />
     </>
+  );
+}
+
+const testimonials = [
+  { text: "Gloria Ondah & Associates handled our complex regulatory filings with absolute precision. Their attention to detail saved us months of potential delays.", author: "Adaeze Okeke", role: "MD, Magma Oil and Gas" },
+  { text: "Finding a legal partner who understands the energy sector's nuances is rare. GOA has been instrumental in our NUPRC compliance and contract negotiations.", author: "Tunde Bakare", role: "Founder, Stelog Energy" },
+  { text: "From due diligence to final acquisition, their real estate advisory is top-tier. They don't just point out risks; they provide viable business solutions.", author: "Chiamaka Eze", role: "Director, Pacific Luxury Homes" },
+];
+
+function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[number] }) {
+  return (
+    <div className="p-8 border border-border bg-background relative h-full">
+      <div className="text-6xl text-secondary/20 font-serif absolute top-4 left-4">"</div>
+      <p className="relative z-10 text-muted-foreground leading-relaxed mb-8 italic">"{testimonial.text}"</p>
+      <div>
+        <div className="font-bold text-primary">{testimonial.author}</div>
+        <div className="text-xs text-muted-foreground uppercase tracking-wider">{testimonial.role}</div>
+      </div>
+    </div>
+  );
+}
+
+function TestimonialsSection() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(id);
+  }, []);
+
+  const go = (delta: number) => {
+    setIndex((i) => (i + delta + testimonials.length) % testimonials.length);
+  };
+
+  return (
+    <section className="py-24 bg-muted/20">
+      <div className="container mx-auto px-6">
+        <div className="hidden md:grid md:grid-cols-3 gap-8">
+          {testimonials.map((t, i) => (
+            <TestimonialCard key={i} testimonial={t} />
+          ))}
+        </div>
+
+        <div className="md:hidden">
+          <div className="relative min-h-[280px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+              >
+                <TestimonialCard testimonial={testimonials[index]} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="flex items-center justify-between mt-6">
+            <button
+              onClick={() => go(-1)}
+              aria-label="Previous testimonial"
+              className="w-10 h-10 flex items-center justify-center border border-border bg-background text-primary hover:bg-primary hover:text-white transition-colors"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  className={`h-1.5 transition-all ${i === index ? 'w-8 bg-secondary' : 'w-4 bg-border'}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() => go(1)}
+              aria-label="Next testimonial"
+              className="w-10 h-10 flex items-center justify-center border border-border bg-background text-primary hover:bg-primary hover:text-white transition-colors"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
