@@ -94,6 +94,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li><a href={routes.about} className="text-sm text-muted-foreground hover:text-secondary transition-colors">About Us</a></li>
               <li><a href={routes.attorney} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Our Attorney</a></li>
+              <li><a href={routes.caseStudies} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Case Studies</a></li>
               <li><a href={routes.insights} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Insights</a></li>
               <li><a href={routes.faq} className="text-sm text-muted-foreground hover:text-secondary transition-colors">FAQ</a></li>
               <li><a href={routes.booking} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Book Consultation</a></li>

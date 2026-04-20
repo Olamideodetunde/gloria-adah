@@ -46,6 +46,7 @@ export function Nav({ currentRoute }: { currentRoute: string }) {
               </div>
             </div>
 
+            <a href={routes.caseStudies} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute === routes.caseStudies ? 'text-secondary' : 'text-foreground'}`}>Case Studies</a>
             <a href={routes.insights} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute.startsWith('#/insight') ? 'text-secondary' : 'text-foreground'}`}>Insights</a>
             <a href={routes.contact} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute === routes.contact ? 'text-secondary' : 'text-foreground'}`}>Contact</a>
           </nav>
@@ -80,6 +81,7 @@ export function Nav({ currentRoute }: { currentRoute: string }) {
                 <a key={pa.slug} href={getPracticeRoute(pa.slug)} onClick={() => setMobileMenuOpen(false)} className="text-muted-foreground">{pa.title}</a>
               ))}
             </div>
+            <a href={routes.caseStudies} onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
             <a href={routes.insights} onClick={() => setMobileMenuOpen(false)}>Insights</a>
             <a href={routes.faq} onClick={() => setMobileMenuOpen(false)}>FAQ</a>
             <a href={routes.contact} onClick={() => setMobileMenuOpen(false)}>Contact</a>
