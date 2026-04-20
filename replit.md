@@ -72,7 +72,15 @@ company-registration, contracts, compliance, litigation, ip, property, oil-gas, 
 - Booking flow: Service → Schedule → Details → Payment (Paystack) → Confirmation
 - All booking/contact submissions create DB records and send Brevo emails
 - Calendar sync: Server generates .ics file and emails it as attachment to both client + firm
-- Blog system: 3 seeded posts (CAC returns, trademarks, NUPRC). Category filtering on Insights page.
+- Blog system: 6 seeded posts (CAC returns, trademarks, NUPRC, NDPR compliance, employment contracts, tax SMEs). Seed uses ON CONFLICT (slug) DO NOTHING so all 6 are always present.
+- Insights page: search bar (client-side title/excerpt filter), category tabs, reading time per post, featured + grid layout
+- InsightsSingle page: reading time, author card, related articles section (same category, excludes current)
 - Admin dashboard at `#/admin`: password login → tabs for blog posts (CRUD), bookings, contacts, stats
 - Admin auth: token = SHA256(ADMIN_PASSWORD:ADMIN_SECRET), stored in localStorage as `goa_admin_token`
 - Blog post content supports simple Markdown: ## headings, **bold**, - lists, > blockquotes
+- Contact page: 3 clickable info cards (Call Us, WhatsApp, Email), service dropdown + preferred contact method radio in form, business hours section (8am-6pm Mon-Fri, 24/7 WhatsApp), Google Maps embed for Abuja office
+- Home hero: 3 CTAs — "Book a Consultation" (primary), "Chat on WhatsApp" (outline), "Call Now" (ghost/tertiary)
+- Footer: newsletter subscription form (POST /api/contact/newsletter), office hours display
+- Server security: Helmet.js headers, express-rate-limit (20/15min for forms, 50/15min for admin)
+- SEO: Full Open Graph, Twitter Card, JSON-LD schema (LegalService type) in index.html
+- Accessibility: skip-to-main-content link in index.html

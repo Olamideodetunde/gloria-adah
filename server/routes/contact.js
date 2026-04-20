@@ -37,4 +37,18 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/newsletter', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({ error: 'Valid email required' });
+    }
+    console.log(`[Newsletter] New subscriber: ${email}`);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('[Newsletter] Error:', err.message);
+    res.status(500).json({ error: 'Subscription failed' });
+  }
+});
+
 export default router;

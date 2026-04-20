@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, ArrowRight, Briefcase } from 'lucide-react';
+import { MessageCircle, ArrowRight, Briefcase, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { fadeInUp, staggerContainer } from '../shared/motion';
 import { routes, getPracticeRoute, practiceIcons } from '../shared/routes';
@@ -41,6 +41,12 @@ export function Home() {
                 <Button size="lg" variant="outline" className="rounded-none h-14 px-8 text-base border-primary/20 text-primary hover:bg-primary/5 group">
                   <MessageCircle className="mr-2 h-5 w-5 text-secondary group-hover:scale-110 transition-transform" />
                   Chat on WhatsApp
+                </Button>
+              </a>
+              <a href="tel:+2349029633193">
+                <Button size="lg" variant="ghost" className="rounded-none h-14 px-6 text-base text-muted-foreground hover:text-primary group">
+                  <Phone className="mr-2 h-4 w-4 group-hover:text-secondary transition-colors" />
+                  Call Now
                 </Button>
               </a>
             </motion.div>

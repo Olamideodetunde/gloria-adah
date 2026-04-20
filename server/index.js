@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { initDb } from './db.js';
 import bookingsRouter from './routes/bookings.js';
 import contactRouter from './routes/contact.js';
@@ -9,14 +11,32 @@ import adminRouter from './routes/admin.js';
 const app = express();
 const PORT = parseInt(process.env.API_PORT || '3001', 10);
 
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
+}));
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+app.use(express.json({ limit: '2mb' }));
+
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  message: { error: 'Too many requests. Please try again in 15 minutes.' },
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+const adminLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 50,
+  message: { error: 'Too many requests.' }
+});
 
 app.get('/api/health', (_, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
-app.use('/api/bookings', bookingsRouter);
-app.use('/api/contact', contactRouter);
+app.use('/api/bookings', formLimiter, bookingsRouter);
+app.use('/api/contact', formLimiter, contactRouter);
 app.use('/api/posts', postsRouter);
-app.use('/api/admin', adminRouter);
+app.use('/api/admin', adminLimiter, adminRouter);
 
 app.use((err, _req, res, _next) => {
   console.error('[API] Unhandled error:', err.message);

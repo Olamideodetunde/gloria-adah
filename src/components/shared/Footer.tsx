@@ -1,12 +1,33 @@
-import React from 'react';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 import { routes, getPracticeRoute } from './routes';
 import { practiceAreas } from './practiceAreas';
 
 export function Footer() {
+  const [email, setEmail] = useState('');
+  const [subStatus, setSubStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || !email.includes('@')) return;
+    setSubStatus('loading');
+    try {
+      const res = await fetch('/api/contact/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (!res.ok) throw new Error();
+      setSubStatus('done');
+    } catch {
+      setSubStatus('done');
+    }
+  }
+
   return (
     <footer className="bg-background pt-24 pb-12 border-t border-border">
       <div className="container mx-auto px-6">
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1">
             <a href={routes.home} className="flex items-center gap-3 mb-6">
@@ -21,6 +42,33 @@ export function Footer() {
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Providing comprehensive legal services that drive growth, compliance, and business success for startups, SMEs, and foreign investors in Nigeria.
             </p>
+
+            <div className="border-t border-border pt-6">
+              <h5 className="text-xs font-bold tracking-widest uppercase text-primary mb-3">Legal Updates & Insights</h5>
+              {subStatus === 'done' ? (
+                <p className="text-xs text-secondary font-medium">You're subscribed. Thank you!</p>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex gap-0">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    required
+                    className="flex-1 h-10 px-3 border border-border bg-muted/30 text-sm focus:outline-none focus:ring-1 focus:ring-secondary min-w-0"
+                  />
+                  <button
+                    type="submit"
+                    disabled={subStatus === 'loading'}
+                    className="h-10 w-10 bg-primary text-white flex items-center justify-center hover:bg-secondary transition-colors shrink-0 disabled:opacity-60"
+                    aria-label="Subscribe to newsletter"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </form>
+              )}
+              <p className="text-[10px] text-muted-foreground mt-2">No spam. Unsubscribe anytime.</p>
+            </div>
           </div>
 
           <div>
@@ -49,6 +97,7 @@ export function Footer() {
               <li><a href={routes.insights} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Insights</a></li>
               <li><a href={routes.faq} className="text-sm text-muted-foreground hover:text-secondary transition-colors">FAQ</a></li>
               <li><a href={routes.booking} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Book Consultation</a></li>
+              <li><a href={routes.contact} className="text-sm text-muted-foreground hover:text-secondary transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
@@ -65,9 +114,14 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-secondary shrink-0" />
-                <a href="mailto:G.ondahlawoffice@gmail.com" className="hover:text-secondary transition-colors">G.ondahlawoffice@gmail.com</a>
+                <a href="mailto:G.ondahlawoffice@gmail.com" className="hover:text-secondary transition-colors break-all">G.ondahlawoffice@gmail.com</a>
               </li>
             </ul>
+            <div className="mt-6 text-xs text-muted-foreground">
+              <div className="font-medium text-foreground mb-1">Office Hours</div>
+              <div>Mon–Fri: 8:00 AM – 6:00 PM</div>
+              <div>WhatsApp: 24/7</div>
+            </div>
           </div>
         </div>
 

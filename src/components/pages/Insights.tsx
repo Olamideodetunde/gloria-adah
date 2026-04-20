@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, BookOpen, Rss, Tag, Clock } from 'lucide-react';
+import { ArrowRight, BookOpen, Rss, Tag, Clock, Search, X } from 'lucide-react';
 import { PageShell } from '../shared/PageShell';
 import { CTABand } from '../shared/CTABand';
 import { getInsightRoute } from '../shared/routes';
@@ -15,14 +15,22 @@ interface Post {
   cover_image: string;
   author: string;
   published_at: string;
+  content?: string;
 }
 
-const CATEGORIES = ['All', 'Corporate Law', 'Intellectual Property', 'Energy Law', 'Compliance', 'Tax', 'Property'];
+const CATEGORIES = ['All', 'Corporate Law', 'Intellectual Property', 'Energy Law', 'Compliance', 'Tax', 'Property', 'Employment'];
+
+function readingTime(content?: string): number {
+  if (!content) return 3;
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
 
 export function Insights() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetch('/api/posts')
@@ -32,7 +40,13 @@ export function Insights() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filtered = activeCategory === 'All' ? posts : posts.filter(p => p.category === activeCategory);
+  const filtered = posts.filter(p => {
+    const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+    const q = search.toLowerCase();
+    const matchesSearch = !q || p.title.toLowerCase().includes(q) || (p.excerpt || '').toLowerCase().includes(q);
+    return matchesCategory && matchesSearch;
+  });
+
   const [featured, ...regular] = filtered;
 
   function formatDate(iso: string) {
@@ -49,9 +63,25 @@ export function Insights() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-16 pb-8 border-b border-border"
+              className="mb-10"
             >
-              <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap">
+              <div className="relative mb-6">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Search articles..."
+                  className="w-full pl-11 pr-10 py-3 h-12 border border-input bg-background focus:outline-none focus:ring-1 focus:ring-secondary text-sm"
+                />
+                {search && (
+                  <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap pb-8 border-b border-border">
                 <Rss className="h-4 w-4 text-secondary shrink-0" />
                 {CATEGORIES.map(cat => (
                   <button
@@ -67,6 +97,12 @@ export function Insights() {
                 ))}
               </div>
             </motion.div>
+
+            {search && (
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm text-muted-foreground mb-8">
+                {filtered.length} result{filtered.length !== 1 ? 's' : ''} for "<strong className="text-foreground">{search}</strong>"
+              </motion.p>
+            )}
 
             {loading ? (
               <div className="grid md:grid-cols-3 gap-8">
@@ -86,11 +122,12 @@ export function Insights() {
                 className="text-center py-24 text-muted-foreground"
               >
                 <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                <p className="text-lg">No articles in this category yet.</p>
+                <p className="text-lg">{search ? 'No articles match your search.' : 'No articles in this category yet.'}</p>
+                {search && <button onClick={() => setSearch('')} className="mt-4 text-secondary underline text-sm">Clear search</button>}
               </motion.div>
             ) : (
               <AnimatePresence mode="wait">
-                <motion.div key={activeCategory} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+                <motion.div key={`${activeCategory}-${search}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
 
                   {featured && (
                     <motion.a
@@ -106,10 +143,11 @@ export function Insights() {
                             src={featured.cover_image || '/images/insight-1.png'}
                             alt={featured.title}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy"
                           />
                         </div>
                         <div className="p-10 lg:p-14 flex flex-col justify-center bg-background">
-                          <div className="flex items-center gap-3 mb-6">
+                          <div className="flex items-center gap-3 mb-6 flex-wrap">
                             <span className="flex items-center gap-1.5 text-xs font-bold tracking-widest text-secondary uppercase">
                               <Tag className="h-3 w-3" />{featured.category}
                             </span>
@@ -118,6 +156,7 @@ export function Insights() {
                               <Clock className="h-3 w-3" />
                               {formatDate(featured.published_at)}
                             </span>
+                            <span className="text-xs text-muted-foreground">{readingTime(featured.content)} min read</span>
                           </div>
                           <h2 className="text-3xl lg:text-4xl font-serif text-primary mb-5 leading-tight group-hover:text-secondary transition-colors duration-300">
                             {featured.title}
@@ -153,12 +192,14 @@ export function Insights() {
                             <img
                               src={post.cover_image || '/images/insight-1.png'}
                               alt={post.title}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              loading="lazy"
                             />
                           </div>
-                          <div className="flex items-center gap-3 mb-3">
+                          <div className="flex items-center gap-3 mb-3 flex-wrap">
                             <span className="text-xs font-bold tracking-widest text-secondary uppercase">{post.category}</span>
                             <span className="text-xs text-muted-foreground">{formatDate(post.published_at)}</span>
+                            <span className="text-xs text-muted-foreground">{readingTime(post.content)} min read</span>
                           </div>
                           <h4 className="text-xl font-serif text-primary leading-snug mb-3 group-hover:text-secondary transition-colors duration-200">
                             {post.title}
