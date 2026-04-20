@@ -31,9 +31,7 @@ export function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1">
             <a href={routes.home} className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary text-white flex items-center justify-center font-serif text-xl font-bold tracking-widest">
-                G·O·A
-              </div>
+              <img src="/images/goa-logo.png" alt="GOA" className="h-12 w-auto" />
               <div>
                 <div className="font-serif font-bold text-lg leading-tight text-primary">Gloria Ondah</div>
                 <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">& Associates</div>
