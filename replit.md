@@ -15,7 +15,7 @@ Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law fir
 │   ├── components/
 │   │   ├── ui/                   # shadcn/ui components
 │   │   ├── shared/               # Nav, Footer, WhatsAppFAB, CTABand, SectionHeader, PageShell, motion.ts, routes.ts, practiceAreas.ts
-│   │   └── pages/                # Home, About, PracticeAreas, PracticeDetail, Attorney, Insights, InsightsSingle, Faq, Contact, Booking, Privacy, Terms, Disclaimer
+│   │   └── pages/                # Home, About, PracticeAreas, PracticeDetail, Attorney, Insights, InsightsSingle, CaseStudies, Faq, Contact, Booking, Privacy, Terms, Disclaimer
 ├── server/                       # Express API (ESM, Node.js)
 │   ├── index.js                  # Entry (port 3001)
 │   ├── db.js                     # PostgreSQL client (pg + SSL)
@@ -41,7 +41,7 @@ Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law fir
 
 ## Routing
 - Hash-based router in App.tsx (no react-router dependency)
-- Routes: `#/`, `#/about`, `#/practice-areas`, `#/practice/:slug`, `#/attorneys/gloria-ondah`, `#/insights`, `#/insights/:slug`, `#/faq`, `#/contact`, `#/booking`, `#/privacy`, `#/terms`, `#/disclaimer`, `#/admin`
+- Routes: `#/`, `#/about`, `#/practice-areas`, `#/practice/:slug`, `#/attorneys/gloria-ondah`, `#/insights`, `#/insights/:slug`, `#/case-studies`, `#/faq`, `#/contact`, `#/booking`, `#/privacy`, `#/terms`, `#/disclaimer`, `#/admin`
 
 ## Brand
 - Primary: `#440a18` (deep burgundy) — HSL `345 74% 15%`
@@ -57,6 +57,7 @@ Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law fir
   - ⚠️ Requires IP 34.182.90.163 whitelisted in Brevo dashboard for emails to send
 - `ADMIN_PASSWORD` — Admin dashboard password (default: `GOA-Admin-2024`)
 - `ADMIN_SECRET` — Token signing secret (default: `goa-law-secret-key`)
+- `VITE_GA_MEASUREMENT_ID` — Google Analytics 4 Measurement ID (G-XXXXXXXXXX). Build-time client env var. If absent, GA simply doesn't load.
 
 ## Practice Areas (8 total)
 company-registration, contracts, compliance, litigation, ip, property, oil-gas, employment
