@@ -177,6 +177,13 @@ export function mockupPreviewPlugin(): Plugin {
       viteServer.middlewares.use((req, res, next) => {
         const requestUrl = new URL(req.url ?? "/", "http://127.0.0.1");
         const pathname = requestUrl.pathname;
+
+        if (pathname === "/" || pathname === "") {
+          res.writeHead(302, { Location: "/preview/goa-landing/Landing" });
+          res.end();
+          return;
+        }
+
         const originalEnd = res.end.bind(res);
 
         res.end = ((...args: Parameters<typeof originalEnd>) => {
