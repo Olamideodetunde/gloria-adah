@@ -2,14 +2,21 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { initDb } from './db.js';
 import bookingsRouter from './routes/bookings.js';
 import contactRouter from './routes/contact.js';
 import postsRouter from './routes/posts.js';
 import adminRouter from './routes/admin.js';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isProd = process.env.NODE_ENV === 'production';
+const PORT = isProd
+  ? parseInt(process.env.PORT || '5000', 10)
+  : parseInt(process.env.API_PORT || '3001', 10);
+
 const app = express();
-const PORT = parseInt(process.env.API_PORT || '3001', 10);
 
 app.use(helmet({
   contentSecurityPolicy: false,
@@ -38,6 +45,14 @@ app.use('/api/contact', formLimiter, contactRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/admin', adminLimiter, adminRouter);
 
+if (isProd) {
+  const distPath = path.join(__dirname, '..', 'dist');
+  app.use(express.static(distPath));
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
 app.use((err, _req, res, _next) => {
   console.error('[API] Unhandled error:', err.message);
   res.status(500).json({ error: 'Internal server error' });
@@ -46,7 +61,7 @@ app.use((err, _req, res, _next) => {
 initDb()
   .then(() => {
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`[API] Server running on port ${PORT}`);
+      console.log(`[API] Server running on port ${PORT} (${isProd ? 'production' : 'development'})`);
     });
   })
   .catch((err) => {
