@@ -1,34 +1,56 @@
-import sgMail from '@sendgrid/mail';
+import axios from 'axios';
 
 const FROM_EMAIL = 'G.ondahlawoffice@gmail.com';
 const FIRM_NAME = 'Gloria Ondah & Associates';
+const BREVO_API = 'https://api.brevo.com/v3/smtp/email';
 
 function isConfigured() {
-  return !!process.env.SENDGRID_API_KEY;
+  return !!process.env.BREVO_API_KEY;
 }
 
-function init() {
-  if (isConfigured()) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  }
-}
-
-init();
-
-export async function sendBookingConfirmation({ clientEmail, clientName, refCode, serviceName, date, time, price }) {
+async function sendEmail({ to, subject, html }) {
   if (!isConfigured()) {
-    console.log('[Email] SENDGRID_API_KEY not set — skipping booking confirmation email');
+    console.log('[Email] BREVO_API_KEY not set — skipping email');
     return;
   }
+
+  const recipients = Array.isArray(to)
+    ? to.map(t => (typeof t === 'string' ? { email: t } : t))
+    : [{ email: to }];
+
+  try {
+    await axios.post(
+      BREVO_API,
+      {
+        sender: { name: FIRM_NAME, email: FROM_EMAIL },
+        to: recipients,
+        subject,
+        htmlContent: html
+      },
+      {
+        headers: {
+          'api-key': process.env.BREVO_API_KEY,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    console.log(`[Email] Sent: "${subject}" → ${recipients.map(r => r.email).join(', ')}`);
+  } catch (err) {
+    const detail = err?.response?.data || err.message;
+    console.error('[Email] Brevo send failed:', JSON.stringify(detail));
+    throw err;
+  }
+}
+
+export async function sendBookingConfirmation({ clientEmail, clientName, refCode, serviceName, date, time, price }) {
   const isPaid = price > 0;
-  const msg = {
+  await sendEmail({
     to: clientEmail,
-    from: { email: FROM_EMAIL, name: FIRM_NAME },
     subject: `Booking Confirmed — ${refCode} | ${FIRM_NAME}`,
     html: `
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
         <div style="background:#440a18;padding:32px 40px;">
-          <h1 style="color:#c28741;font-size:22px;margin:0;letter-spacing:1px;">GLORIA ONDAH & ASSOCIATES</h1>
+          <h1 style="color:#c28741;font-size:22px;margin:0;letter-spacing:1px;">GLORIA ONDAH &amp; ASSOCIATES</h1>
           <p style="color:#fefefe;font-size:13px;margin:6px 0 0;">Your Trusted Partner for Legal Solutions and Representation</p>
         </div>
         <div style="padding:40px;border:1px solid #e8e0dc;border-top:none;">
@@ -52,34 +74,24 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
               <td style="padding:12px 0;color:#888;font-size:14px;">Time</td>
               <td style="padding:12px 0;">${time} (WAT)</td>
             </tr>
-            ${isPaid ? `<tr><td style="padding:12px 0;color:#888;font-size:14px;">Amount Paid</td><td style="padding:12px 0;font-weight:bold;">₦${price.toLocaleString()}</td></tr>` : '<tr><td style="padding:12px 0;color:#888;font-size:14px;">Fee</td><td style="padding:12px 0;color:#2e7d32;font-weight:bold;">Complimentary</td></tr>'}
+            ${isPaid
+              ? `<tr><td style="padding:12px 0;color:#888;font-size:14px;">Amount Paid</td><td style="padding:12px 0;font-weight:bold;">&#8358;${price.toLocaleString()}</td></tr>`
+              : `<tr><td style="padding:12px 0;color:#888;font-size:14px;">Fee</td><td style="padding:12px 0;color:#2e7d32;font-weight:bold;">Complimentary</td></tr>`}
           </table>
-          <p style="font-size:14px;color:#555;">Our team will be in touch with the meeting details before your appointment. If you need to reschedule or have any questions, please contact us:</p>
-          <p style="font-size:14px;"><strong>Phone:</strong> 09029633193 | <strong>WhatsApp:</strong> 07054588490<br/><strong>Email:</strong> G.ondahlawoffice@gmail.com</p>
+          <p style="font-size:14px;color:#555;">Our team will be in touch with meeting details before your appointment. If you need to reschedule or have any questions, please contact us:</p>
+          <p style="font-size:14px;"><strong>Phone:</strong> 09029633193 &nbsp;|&nbsp; <strong>WhatsApp:</strong> 07054588490<br/><strong>Email:</strong> G.ondahlawoffice@gmail.com</p>
           <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
-            Gloria Ondah & Associates | CAC Reg: BN-3068204 | No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
+            Gloria Ondah &amp; Associates &nbsp;|&nbsp; CAC Reg: BN-3068204 &nbsp;|&nbsp; No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
           </p>
         </div>
       </div>
     `
-  };
-  try {
-    await sgMail.send(msg);
-    console.log(`[Email] Booking confirmation sent to ${clientEmail}`);
-  } catch (err) {
-    console.error('[Email] Failed to send booking confirmation:', err?.response?.body || err.message);
-  }
+  });
 }
 
 export async function sendContactNotification({ name, email, phone, subject, message, refCode }) {
-  if (!isConfigured()) {
-    console.log('[Email] SENDGRID_API_KEY not set — skipping contact notification email');
-    return;
-  }
-
-  const notifyMsg = {
-    to: FROM_EMAIL,
-    from: { email: FROM_EMAIL, name: FIRM_NAME },
+  await sendEmail({
+    to: [{ email: FROM_EMAIL, name: FIRM_NAME }],
     subject: `New Contact Submission [${refCode}]: ${subject}`,
     html: `
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
@@ -97,33 +109,25 @@ export async function sendContactNotification({ name, email, phone, subject, mes
         </div>
       </div>
     `
-  };
+  });
 
-  const ackMsg = {
+  await sendEmail({
     to: email,
-    from: { email: FROM_EMAIL, name: FIRM_NAME },
     subject: `We received your message — ${FIRM_NAME}`,
     html: `
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
         <div style="background:#440a18;padding:32px 40px;">
-          <h1 style="color:#c28741;font-size:22px;margin:0;">GLORIA ONDAH & ASSOCIATES</h1>
+          <h1 style="color:#c28741;font-size:22px;margin:0;">GLORIA ONDAH &amp; ASSOCIATES</h1>
         </div>
         <div style="padding:40px;border:1px solid #e8e0dc;border-top:none;">
           <p>Dear ${name},</p>
-          <p>Thank you for contacting Gloria Ondah & Associates. We have received your enquiry (Ref: <strong>${refCode}</strong>) and a member of our team will respond within one business day.</p>
+          <p>Thank you for contacting Gloria Ondah &amp; Associates. We have received your enquiry (Ref: <strong>${refCode}</strong>) and a member of our team will respond within one business day.</p>
           <p style="font-size:14px;color:#555;">If your matter is urgent, please call us directly at <strong>09029633193</strong> or send a WhatsApp message to <strong>07054588490</strong>.</p>
           <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
-            Gloria Ondah & Associates | CAC Reg: BN-3068204 | No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
+            Gloria Ondah &amp; Associates &nbsp;|&nbsp; CAC Reg: BN-3068204 &nbsp;|&nbsp; No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
           </p>
         </div>
       </div>
     `
-  };
-
-  try {
-    await sgMail.sendMultiple([notifyMsg, ackMsg]);
-    console.log(`[Email] Contact notification sent for ${refCode}`);
-  } catch (err) {
-    console.error('[Email] Failed to send contact email:', err?.response?.body || err.message);
-  }
+  });
 }
