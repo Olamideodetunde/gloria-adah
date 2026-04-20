@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "ahpbnD7YnHkYGNeTv5CLI"
+uri = "file://artifacts/mockup-sandbox/public/images/hero.png"
+type = "image"
+title = "Legal desk with gavel"
+
+[[generated]]
+id = "4Wa8lh82WSiJXRl6h2lGI"
+uri = "file://artifacts/mockup-sandbox/public/images/gloria.png"
+type = "image"
+title = "Portrait of Nigerian woman lawyer"
+
+[[generated]]
+id = "GzUNxYDUVE-EnnQ8ezfqG"
+uri = "file://artifacts/mockup-sandbox/public/images/insight-1.png"
+type = "image"
+title = "Corporate compliance documents"
+
+[[generated]]
+id = "j6h02FvjLmhfZRczcz_Zx"
+uri = "file://artifacts/mockup-sandbox/public/images/insight-2.png"
+type = "image"
+title = "Trademark brand protection concept"
+
+[[generated]]
+id = "YoMIDA0vNY6be7zihxwPJ"
+uri = "file://artifacts/mockup-sandbox/public/images/insight-3.png"
+type = "image"
+title = "Oil and gas legal concept"
