@@ -11,7 +11,8 @@ export const routes = {
   booking: "#/booking",
   privacy: "#/privacy",
   terms: "#/terms",
-  disclaimer: "#/disclaimer"
+  disclaimer: "#/disclaimer",
+  admin: "#/admin"
 };
 
 export const getPracticeRoute = (slug: string) => `#/practice/${slug}`;

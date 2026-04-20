@@ -23,7 +23,9 @@ Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law fir
 │   ├── paystack.js               # Paystack payment initiation
 │   └── routes/
 │       ├── bookings.js           # POST /api/bookings
-│       └── contact.js            # POST /api/contact
+│       ├── contact.js            # POST /api/contact
+│       ├── posts.js              # GET/POST/PUT/DELETE /api/posts (blog CRUD)
+│       └── admin.js              # POST /api/admin/login + protected dashboard routes
 ├── public/
 │   ├── favicon.svg
 │   └── images/                   # hero.png, gloria.png, insight-1/2/3.png, flyer.png
@@ -39,7 +41,7 @@ Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law fir
 
 ## Routing
 - Hash-based router in App.tsx (no react-router dependency)
-- Routes: `#/`, `#/about`, `#/practice-areas`, `#/practice/:slug`, `#/attorneys/gloria-ondah`, `#/insights`, `#/insights/:slug`, `#/faq`, `#/contact`, `#/booking`, `#/privacy`, `#/terms`, `#/disclaimer`
+- Routes: `#/`, `#/about`, `#/practice-areas`, `#/practice/:slug`, `#/attorneys/gloria-ondah`, `#/insights`, `#/insights/:slug`, `#/faq`, `#/contact`, `#/booking`, `#/privacy`, `#/terms`, `#/disclaimer`, `#/admin`
 
 ## Brand
 - Primary: `#440a18` (deep burgundy) — HSL `345 74% 15%`
@@ -53,6 +55,8 @@ Full-stack law firm website for Gloria Ondah & Associates — a Nigerian law fir
 - `PAYSTACK_PUBLIC_KEY` — Paystack frontend key
 - `BREVO_API_KEY` — Brevo (formerly Sendinblue) API key
   - ⚠️ Requires IP 34.182.90.163 whitelisted in Brevo dashboard for emails to send
+- `ADMIN_PASSWORD` — Admin dashboard password (default: `GOA-Admin-2024`)
+- `ADMIN_SECRET` — Token signing secret (default: `goa-law-secret-key`)
 
 ## Practice Areas (8 total)
 company-registration, contracts, compliance, litigation, ip, property, oil-gas, employment
@@ -67,3 +71,8 @@ company-registration, contracts, compliance, litigation, ip, property, oil-gas, 
 - Previous mockup-sandbox code lives in `artifacts/mockup-sandbox/` and can eventually be removed
 - Booking flow: Service → Schedule → Details → Payment (Paystack) → Confirmation
 - All booking/contact submissions create DB records and send Brevo emails
+- Calendar sync: Server generates .ics file and emails it as attachment to both client + firm
+- Blog system: 3 seeded posts (CAC returns, trademarks, NUPRC). Category filtering on Insights page.
+- Admin dashboard at `#/admin`: password login → tabs for blog posts (CRUD), bookings, contacts, stats
+- Admin auth: token = SHA256(ADMIN_PASSWORD:ADMIN_SECRET), stored in localStorage as `goa_admin_token`
+- Blog post content supports simple Markdown: ## headings, **bold**, - lists, > blockquotes

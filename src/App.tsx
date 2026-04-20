@@ -18,6 +18,7 @@ import { Booking } from './components/pages/Booking';
 import { Privacy } from './components/pages/Privacy';
 import { Terms } from './components/pages/Terms';
 import { Disclaimer } from './components/pages/Disclaimer';
+import { Admin } from './components/pages/Admin';
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash || '#/');
@@ -45,6 +46,7 @@ export default function App() {
     if (route === '#/privacy') return <Privacy />;
     if (route === '#/terms') return <Terms />;
     if (route === '#/disclaimer') return <Disclaimer />;
+    if (route === '#/admin') return <Admin />;
     return <Home />;
   };
 
