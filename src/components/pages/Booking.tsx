@@ -262,9 +262,11 @@ export function Booking() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <label className="text-sm font-medium text-primary block mb-3">Select Date</label>
-                    <div className="border border-border inline-block p-2 bg-muted/10">
-                      <CalendarPicker mode="single" selected={selectedDate} onSelect={setSelectedDate}
-                        disabled={(date) => isBefore(date, startOfDay(new Date())) || isSunday(date)} className="rounded-md" />
+                    <div className="border border-border overflow-x-auto w-full max-w-[320px] bg-muted/10">
+                      <div className="p-2">
+                        <CalendarPicker mode="single" selected={selectedDate} onSelect={setSelectedDate}
+                          disabled={(date) => isBefore(date, startOfDay(new Date())) || isSunday(date)} className="rounded-md" />
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -285,11 +287,11 @@ export function Booking() {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-between items-center pt-8 border-t border-border">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-8 border-t border-border">
                   <div className="text-sm text-muted-foreground">
                     Selected: <span className="font-medium text-primary">{selectedDate ? format(selectedDate, 'MMM do, yyyy') : '--'}</span> at <span className="font-medium text-primary">{selectedTime || '--'}</span>
                   </div>
-                  <Button onClick={nextStep} disabled={!selectedDate || !selectedTime} className="bg-primary text-white rounded-none px-8">
+                  <Button onClick={nextStep} disabled={!selectedDate || !selectedTime} className="bg-primary text-white rounded-none px-8 w-full sm:w-auto">
                     Continue <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>

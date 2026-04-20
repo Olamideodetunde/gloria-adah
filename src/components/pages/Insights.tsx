@@ -49,21 +49,23 @@ export function Insights() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-wrap items-center gap-3 mb-16 pb-8 border-b border-border"
+              className="mb-16 pb-8 border-b border-border"
             >
-              <Rss className="h-4 w-4 text-secondary" />
-              {CATEGORIES.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200 border ${activeCategory === cat
-                    ? 'bg-primary text-white border-primary'
-                    : 'border-border text-muted-foreground hover:border-primary hover:text-primary bg-background'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+              <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap">
+                <Rss className="h-4 w-4 text-secondary shrink-0" />
+                {CATEGORIES.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`shrink-0 px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200 border whitespace-nowrap ${activeCategory === cat
+                      ? 'bg-primary text-white border-primary'
+                      : 'border-border text-muted-foreground hover:border-primary hover:text-primary bg-background'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
             </motion.div>
 
             {loading ? (

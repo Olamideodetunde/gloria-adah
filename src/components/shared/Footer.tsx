@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="bg-background pt-24 pb-12 border-t border-border">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1">
             <a href={routes.home} className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-primary text-white flex items-center justify-center font-serif text-xl font-bold tracking-widest">

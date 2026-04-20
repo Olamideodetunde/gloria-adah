@@ -34,7 +34,7 @@ export function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="relative h-[600px] w-full"
+                className="relative h-[360px] sm:h-[460px] lg:h-[600px] w-full"
               >
                 <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4"></div>
                 <img src="/images/gloria.png" alt="Law Firm Office" className="absolute inset-0 w-full h-full object-cover grayscale-[20%] sepia-[10%] contrast-[110%]" />

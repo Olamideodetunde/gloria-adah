@@ -23,7 +23,7 @@ export function Home() {
               Your Trusted Partner for Legal Solutions
             </motion.div>
 
-            <motion.h1 variants={fadeInUp} className="text-5xl lg:text-7xl leading-[1.1] mb-6 text-primary font-serif">
+            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 text-primary font-serif">
               Securing Your Business Interests in Nigeria.
             </motion.h1>
 
@@ -57,7 +57,7 @@ export function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[500px] lg:h-[700px] w-full"
+            className="relative h-[300px] sm:h-[420px] lg:h-[700px] w-full"
           >
             <div className="absolute inset-0 bg-secondary/10 translate-x-4 translate-y-4"></div>
             <img
