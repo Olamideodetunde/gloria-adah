@@ -45,6 +45,8 @@ export function Booking() {
   const [details, setDetails] = useState<DetailsValues | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [refCode, setRefCode] = useState("");
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [paystackUrl, setPaystackUrl] = useState<string | null>(null);
 
   const detailsForm = useForm<DetailsValues>({
     resolver: zodResolver(detailsSchema),
@@ -56,22 +58,62 @@ export function Booking() {
   const nextStep = () => setStep(s => s + 1);
   const prevStep = () => setStep(s => s - 1);
 
-  const handleDetailsSubmit = (data: DetailsValues) => {
+  const handleDetailsSubmit = async (data: DetailsValues) => {
     setDetails(data);
-    if (serviceObj?.price === 0) {
-      // Skip payment
-      processBooking();
-    } else {
-      nextStep();
+    setApiError(null);
+    setIsProcessing(true);
+
+    try {
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          serviceType: serviceObj?.name,
+          servicePrice: serviceObj?.price,
+          practiceArea: selectedPractice,
+          appointmentDate: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
+          appointmentTime: selectedTime,
+          clientName: data.name,
+          clientEmail: data.email,
+          clientPhone: data.phone,
+          clientCompany: data.company,
+          description: data.description
+        })
+      });
+
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Booking failed');
+
+      setRefCode(json.refCode);
+
+      if (!json.requiresPayment) {
+        setStep(5);
+      } else if (json.paystackConfigured && json.authorizationUrl) {
+        setPaystackUrl(json.authorizationUrl);
+        nextStep();
+      } else {
+        if (json.paystackError) {
+          setApiError(json.paystackError);
+        }
+        nextStep();
+      }
+    } catch (err: any) {
+      setApiError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsProcessing(false);
     }
   };
 
-  const processBooking = () => {
+  const processPayment = async () => {
+    if (paystackUrl) {
+      window.open(paystackUrl, '_blank');
+      setStep(5);
+      return;
+    }
     setIsProcessing(true);
     setTimeout(() => {
-      setRefCode(`GOA-${Math.floor(1000 + Math.random() * 9000)}-${new Date().getFullYear()}`);
       setIsProcessing(false);
-      setStep(5); // Success step
+      setStep(5);
     }, 2000);
   };
 
@@ -266,9 +308,12 @@ export function Booking() {
                       </FormItem>
                     )} />
                     
+                    {apiError && (
+                      <div className="text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3">{apiError}</div>
+                    )}
                     <div className="flex justify-end pt-6 border-t border-border">
-                      <Button type="submit" className="bg-primary text-white rounded-none px-8">
-                        {serviceObj?.price === 0 ? "Complete Booking" : "Proceed to Payment"} <ChevronRight className="ml-2 h-4 w-4" />
+                      <Button type="submit" disabled={isProcessing} className="bg-primary text-white rounded-none px-8">
+                        {isProcessing ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing...</> : <>{serviceObj?.price === 0 ? "Complete Booking" : "Proceed to Payment"} <ChevronRight className="ml-2 h-4 w-4" /></>}
                       </Button>
                     </div>
                   </form>
@@ -320,11 +365,11 @@ export function Booking() {
                       </div>
                     </div>
                     <Button 
-                      onClick={processBooking} 
+                      onClick={processPayment} 
                       disabled={isProcessing}
                       className="w-full bg-[#3bb75e] hover:bg-[#2fa350] text-white h-12 text-lg font-medium shadow-sm transition-colors"
                     >
-                      {isProcessing ? <Loader2 className="h-5 w-5 animate-spin" /> : `Pay ₦${serviceObj?.price.toLocaleString()}`}
+                      {isProcessing ? <Loader2 className="h-5 w-5 animate-spin" /> : (paystackUrl ? `Pay ₦${serviceObj?.price.toLocaleString()} via Paystack` : `Pay ₦${serviceObj?.price.toLocaleString()}`)}
                     </Button>
                   </div>
                   

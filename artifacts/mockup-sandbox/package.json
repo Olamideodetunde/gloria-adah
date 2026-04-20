@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
+    "api": "node server/index.js",
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -71,5 +72,13 @@
     "vaul": "^1.1.2",
     "vite": "^7.3.0",
     "zod": "^3.25.76"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
+    "axios": "^1.15.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
   }
 }

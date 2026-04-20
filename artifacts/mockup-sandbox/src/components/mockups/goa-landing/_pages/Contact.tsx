@@ -38,12 +38,33 @@ export function Contact() {
     }
   });
 
-  const onSubmit = (data: ContactFormValues) => {
-    // Mock submission
-    setTimeout(() => {
-      setRefId(`GOA-${Math.floor(1000 + Math.random() * 9000)}`);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const onSubmit = async (data: ContactFormValues) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          subject: data.subject,
+          message: data.message
+        })
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Submission failed');
+      setRefId(json.refCode);
       setIsSubmitted(true);
-    }, 1000);
+    } catch (err: any) {
+      setSubmitError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -244,8 +265,13 @@ export function Contact() {
                         )}
                       />
 
-                      <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-14 text-base">
-                        Send Message
+                      {submitError && (
+                        <div className="text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3">
+                          {submitError}
+                        </div>
+                      )}
+                      <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-14 text-base">
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
                       </Button>
                     </form>
                   </Form>
