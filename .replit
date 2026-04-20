@@ -28,7 +28,6 @@ outputType = "console"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "node server/index.js"
-waitForPort = 3001
 
 [[workflows.workflow]]
 name = "GOA Website"
@@ -63,6 +62,6 @@ localPort = 23637
 externalPort = 3000
 
 [deployment]
-deploymentTarget = "autoscale"
-run = ["npm", "start"]
+deploymentTarget = "vm"
+run = ["bash", "-c", "NODE_ENV=production node server/index.js"]
 build = ["npm", "run", "build"]
