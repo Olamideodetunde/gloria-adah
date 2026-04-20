@@ -3,23 +3,115 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format, isBefore, startOfDay, isSunday } from 'date-fns';
-import { Calendar as CalendarIcon, CheckCircle2, ChevronRight, Lock, Loader2, Download, ArrowLeft } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Lock, Loader2, Download, ArrowLeft, CalendarCheck, Calendar } from 'lucide-react';
 import { PageShell } from '../shared/PageShell';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar as CalendarPicker } from '@/components/ui/calendar';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { practiceAreas } from '../shared/practiceAreas';
 
 const serviceTypes = [
-  { id: 'initial', name: 'Initial Consultation', duration: '30 min', price: 15000 },
-  { id: 'strategy', name: 'Strategy Session', duration: '60 min', price: 35000 },
-  { id: 'document', name: 'Document Review', duration: '45 min', price: 25000 },
-  { id: 'retainer', name: 'Retainer Discovery', duration: '15 min', price: 0 }
+  { id: 'initial', name: 'Initial Consultation', duration: 30, price: 15000 },
+  { id: 'strategy', name: 'Strategy Session', duration: 60, price: 35000 },
+  { id: 'document', name: 'Document Review', duration: 45, price: 25000 },
+  { id: 'retainer', name: 'Retainer Discovery', duration: 15, price: 0 }
 ];
 
 const timeSlots = ["09:00 AM", "10:00 AM", "11:30 AM", "01:00 PM", "02:30 PM", "04:00 PM"];
+
+function parseTimeSlot(timeStr: string): { hours: number; minutes: number } {
+  const [time, period] = timeStr.split(' ');
+  const [h, m] = time.split(':').map(Number);
+  let hours = h;
+  if (period === 'PM' && h !== 12) hours = h + 12;
+  if (period === 'AM' && h === 12) hours = 0;
+  return { hours, minutes: m };
+}
+
+function toICSDateUTC(date: Date, hours: number, minutes: number): string {
+  const d = new Date(date);
+  d.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+  const watToUTC = hours - 1;
+  const utcHours = watToUTC < 0 ? 23 : watToUTC;
+  const y = d.getUTCFullYear();
+  const mo = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const dy = String(d.getUTCDate()).padStart(2, '0');
+  const hr = String(utcHours).padStart(2, '0');
+  const mn = String(minutes).padStart(2, '0');
+  return `${y}${mo}${dy}T${hr}${mn}00Z`;
+}
+
+function downloadICS(opts: {
+  date: Date;
+  timeStr: string;
+  durationMins: number;
+  serviceName: string;
+  refCode: string;
+  clientName: string;
+}) {
+  const { hours, minutes } = parseTimeSlot(opts.timeStr);
+  const startUTC = toICSDateUTC(opts.date, hours, minutes);
+  const totalEndMinutes = minutes + opts.durationMins;
+  const endHours = hours + Math.floor(totalEndMinutes / 60);
+  const endMins = totalEndMinutes % 60;
+  const endUTC = toICSDateUTC(opts.date, endHours, endMins);
+  const now = new Date();
+  const stamp = now.toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Gloria Ondah & Associates//GOA Booking//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:${opts.refCode}@goa-law.ng`,
+    `DTSTAMP:${stamp}`,
+    `DTSTART:${startUTC}`,
+    `DTEND:${endUTC}`,
+    `SUMMARY:Legal Consultation – ${opts.serviceName}`,
+    `DESCRIPTION:Booking Reference: ${opts.refCode}\\nService: ${opts.serviceName}\\nClient: ${opts.clientName}\\n\\nGloria Ondah & Associates\\nPhone: +234 902 963 3193\\nEmail: G.ondahlawoffice@gmail.com`,
+    'LOCATION:No. 28\\, 3rd Avenue\\, Gwarinpa Estate\\, Abuja / Virtual',
+    'STATUS:CONFIRMED',
+    'TRANSP:OPAQUE',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `GOA-${opts.refCode}.ics`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function googleCalendarUrl(opts: {
+  date: Date;
+  timeStr: string;
+  durationMins: number;
+  serviceName: string;
+  refCode: string;
+}): string {
+  const { hours, minutes } = parseTimeSlot(opts.timeStr);
+  const startUTC = toICSDateUTC(opts.date, hours, minutes);
+  const totalEndMinutes = minutes + opts.durationMins;
+  const endHours = hours + Math.floor(totalEndMinutes / 60);
+  const endMins = totalEndMinutes % 60;
+  const endUTC = toICSDateUTC(opts.date, endHours, endMins);
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: `Legal Consultation – ${opts.serviceName}`,
+    dates: `${startUTC}/${endUTC}`,
+    details: `Booking Reference: ${opts.refCode}\nService: ${opts.serviceName}\n\nGloria Ondah & Associates\nPhone: +234 902 963 3193`,
+    location: 'No. 28, 3rd Avenue, Gwarinpa Estate, Abuja / Virtual'
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
 
 const detailsSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -136,7 +228,7 @@ export function Booking() {
                       className={`cursor-pointer p-6 border transition-all ${selectedService === srv.id ? 'border-secondary bg-secondary/5 ring-1 ring-secondary/50' : 'border-border hover:border-primary/30 bg-background'}`}>
                       <div className="flex justify-between items-start mb-4">
                         <h3 className="font-bold text-primary">{srv.name}</h3>
-                        <span className="text-xs bg-muted px-2 py-1 rounded font-medium">{srv.duration}</span>
+                        <span className="text-xs bg-muted px-2 py-1 rounded font-medium">{srv.duration} min</span>
                       </div>
                       <div className="text-xl font-serif text-primary mb-1">{srv.price === 0 ? 'Free' : `₦${srv.price.toLocaleString()}`}</div>
                     </div>
@@ -171,7 +263,7 @@ export function Booking() {
                   <div>
                     <label className="text-sm font-medium text-primary block mb-3">Select Date</label>
                     <div className="border border-border inline-block p-2 bg-muted/10">
-                      <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate}
+                      <CalendarPicker mode="single" selected={selectedDate} onSelect={setSelectedDate}
                         disabled={(date) => isBefore(date, startOfDay(new Date())) || isSunday(date)} className="rounded-md" />
                     </div>
                   </div>
@@ -304,26 +396,78 @@ export function Booking() {
                 </div>
                 <h2 className="text-3xl font-serif text-primary">Booking Confirmed</h2>
                 <p className="text-muted-foreground text-lg">Your {serviceObj?.name} has been scheduled successfully.</p>
+
                 <div className="bg-muted p-6 text-left border border-border mt-8 mb-8 space-y-4">
                   <div className="flex justify-between border-b border-border pb-4">
-                    <span className="text-muted-foreground">Reference</span><span className="font-mono font-medium">{refCode}</span>
+                    <span className="text-muted-foreground">Reference</span>
+                    <span className="font-mono font-medium">{refCode}</span>
                   </div>
                   <div className="flex justify-between border-b border-border pb-4">
-                    <span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate ? format(selectedDate, 'EEEE, MMM do, yyyy') : ''}</span>
+                    <span className="text-muted-foreground">Date</span>
+                    <span className="font-medium">{selectedDate ? format(selectedDate, 'EEEE, MMM do, yyyy') : ''}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-border pb-4">
+                    <span className="text-muted-foreground">Time</span>
+                    <span className="font-medium">{selectedTime} (WAT)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Time</span><span className="font-medium">{selectedTime} (WAT)</span>
+                    <span className="text-muted-foreground">Duration</span>
+                    <span className="font-medium">{serviceObj?.duration} minutes</span>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground mb-8">A confirmation email will be sent to <strong>{details?.email}</strong>.</p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button variant="outline" className="border-border rounded-none h-12" onClick={() => alert("Calendar download coming soon")}>
-                    <Download className="mr-2 h-4 w-4 text-primary" /> Add to Calendar
-                  </Button>
-                  <a href={`https://wa.me/2347054588490?text=Hi, I just booked a ${serviceObj?.name} for ${selectedDate ? format(selectedDate, 'MMM do') : ''} at ${selectedTime}. Ref: ${refCode}`} target="_blank" rel="noreferrer">
-                    <Button className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-none h-12">Send WhatsApp Notification</Button>
-                  </a>
+
+                <p className="text-sm text-muted-foreground mb-8">
+                  A confirmation email will be sent to <strong>{details?.email}</strong>.
+                </p>
+
+                <div className="bg-muted/50 border border-border p-5 text-left space-y-3 mb-6">
+                  <h4 className="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2">
+                    <CalendarCheck className="h-4 w-4 text-secondary" /> Add to Your Calendar
+                  </h4>
+                  <p className="text-xs text-muted-foreground">Save this appointment so you don't miss it.</p>
+                  <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                    <Button
+                      variant="outline"
+                      className="border-border rounded-none h-11 flex-1 text-sm"
+                      onClick={() => {
+                        if (selectedDate && selectedTime && serviceObj) {
+                          downloadICS({
+                            date: selectedDate,
+                            timeStr: selectedTime,
+                            durationMins: serviceObj.duration,
+                            serviceName: serviceObj.name,
+                            refCode,
+                            clientName: details?.name || ''
+                          });
+                        }
+                      }}
+                    >
+                      <Download className="mr-2 h-4 w-4 text-primary" />
+                      Download .ics
+                    </Button>
+                    <a
+                      href={selectedDate && selectedTime && serviceObj ? googleCalendarUrl({
+                        date: selectedDate,
+                        timeStr: selectedTime,
+                        durationMins: serviceObj.duration,
+                        serviceName: serviceObj.name,
+                        refCode
+                      }) : '#'}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1"
+                    >
+                      <Button variant="outline" className="w-full border-[#4285F4]/30 text-[#4285F4] hover:bg-[#4285F4]/5 rounded-none h-11 text-sm">
+                        <Calendar className="mr-2 h-4 w-4" />
+                        Add to Google Calendar
+                      </Button>
+                    </a>
+                  </div>
                 </div>
+
+                <a href={`https://wa.me/2347054588490?text=Hi, I just booked a ${serviceObj?.name} for ${selectedDate ? format(selectedDate, 'MMM do') : ''} at ${selectedTime}. Ref: ${refCode}`} target="_blank" rel="noreferrer">
+                  <Button className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-none h-12">Send WhatsApp Notification</Button>
+                </a>
               </div>
             )}
           </div>
