@@ -11,75 +11,94 @@ import { CTABand } from '../shared/CTABand';
 export function Home() {
   return (
     <>
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
+        {/* Background texture overlay */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)', backgroundSize: '12px 12px' }} />
+
+        {/* Hero image — floats right, fades into background */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="absolute right-0 top-0 h-full w-full lg:w-[58%] pointer-events-none"
+        >
+          <img
+            src="/images/hero.png"
+            alt="Legal desk with gavel"
+            className="w-full h-full object-cover object-center"
+            style={{ filter: 'grayscale(15%) sepia(20%) contrast(105%) brightness(0.7)' }}
+          />
+          {/* Left fade into dark bg */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 10%, transparent 55%)' }} />
+          {/* Bottom fade */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, transparent 30%)' }} />
+        </motion.div>
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-6 pt-36 pb-24 lg:pt-48 lg:pb-32">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
             className="max-w-2xl"
           >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 bg-muted border border-border text-xs font-medium tracking-wide uppercase mb-6">
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 text-white/80 text-xs font-medium tracking-widest uppercase mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-              Your Trusted Partner for Legal Solutions
+              Your Trusted Legal Partner in Nigeria
             </motion.div>
 
-            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 text-primary font-serif">
-              Securing Your Business Interests in Nigeria.
+            <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] mb-8 font-serif">
+              <span className="text-white">Securing Your</span>
+              <br />
+              <span className="text-white">Business </span>
+              <span className="text-secondary italic">Interests</span>
+              <br />
+              <span className="text-white">in </span>
+              <span className="text-secondary italic">Nigeria.</span>
             </motion.h1>
 
-            <motion.p variants={fadeInUp} className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-xl">
+            <motion.p variants={fadeInUp} className="text-lg text-white/70 mb-12 leading-relaxed max-w-xl">
               Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors.
             </motion.p>
 
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center mb-12">
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center mb-14">
               <a href={routes.booking}>
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-none h-14 px-8 text-base">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-10 text-base font-semibold shadow-lg shadow-secondary/20">
                   Book a Consultation
                 </Button>
               </a>
               <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
-                <Button size="lg" variant="outline" className="rounded-none h-14 px-8 text-base border-primary/20 text-primary hover:bg-primary/5 group">
+                <Button size="lg" variant="outline" className="rounded-none h-14 px-8 text-base border-white/30 text-white hover:bg-white/10 group">
                   <FaWhatsapp className="mr-2 h-5 w-5 text-[#25D366] group-hover:scale-110 transition-transform" />
                   Chat on WhatsApp
                 </Button>
               </a>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="flex items-center gap-4 text-sm font-medium text-foreground/80 border-t border-border pt-8">
-              <div className="flex -space-x-2">
-                <div className="w-8 h-8 rounded-full bg-secondary/20 border-2 border-background flex items-center justify-center text-secondary text-xs font-bold">8+</div>
+            <motion.div variants={fadeInUp} className="flex items-center gap-6 border-t border-white/20 pt-8">
+              <div className="text-center">
+                <div className="text-2xl font-serif font-bold text-secondary">8+</div>
+                <div className="text-xs text-white/50 uppercase tracking-wider">Years</div>
               </div>
-              <p>Years of Legal Excellence <span className="mx-2 text-secondary">•</span> Serving Clients Across Nigeria & Internationally</p>
+              <div className="w-px h-10 bg-white/20" />
+              <div className="text-center">
+                <div className="text-2xl font-serif font-bold text-secondary">200+</div>
+                <div className="text-xs text-white/50 uppercase tracking-wider">Clients</div>
+              </div>
+              <div className="w-px h-10 bg-white/20" />
+              <div className="text-center">
+                <div className="text-2xl font-serif font-bold text-secondary">95%</div>
+                <div className="text-xs text-white/50 uppercase tracking-wider">Success Rate</div>
+              </div>
+              <div className="hidden sm:block w-px h-10 bg-white/20" />
+              <div className="hidden sm:block text-sm text-white/50 leading-relaxed">
+                Serving clients across<br />Nigeria & internationally
+              </div>
             </motion.div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[300px] sm:h-[420px] lg:h-[700px] w-full"
-          >
-            <div className="absolute inset-0 bg-secondary/10 translate-x-4 translate-y-4"></div>
-            <img
-              src="/images/hero.png"
-              alt="Legal desk with gavel"
-              className="absolute inset-0 w-full h-full object-cover grayscale-[20%] sepia-[10%] contrast-[110%]"
-            />
-          </motion.div>
         </div>
       </section>
 
-      <section className="border-y border-border bg-muted py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-border/50 text-center">
-            <div className="px-4"><div className="text-4xl font-serif text-primary mb-2">8+</div><div className="text-xs uppercase tracking-wider text-muted-foreground">Years Experience</div></div>
-            <div className="px-4"><div className="text-4xl font-serif text-primary mb-2">200+</div><div className="text-xs uppercase tracking-wider text-muted-foreground">Clients Served</div></div>
-            <div className="px-4"><div className="text-4xl font-serif text-primary mb-2">95%</div><div className="text-xs uppercase tracking-wider text-muted-foreground">Success Rate</div></div>
-            <div className="px-4"><div className="text-4xl font-serif text-primary mb-2">24/7</div><div className="text-xs uppercase tracking-wider text-muted-foreground">Availability</div></div>
-          </div>
-        </div>
-      </section>
 
       <section className="py-32 bg-muted/30">
         <div className="container mx-auto px-6">

@@ -21,16 +21,26 @@ export function Nav({ currentRoute }: { currentRoute: string }) {
           <a href={routes.home} className="flex items-center gap-3">
             <img src="/images/goa-logo.png" alt="GOA" className="h-12 w-auto" />
             <div className="hidden sm:block">
-              <div className="font-serif font-bold text-lg leading-tight text-primary">Gloria Ondah</div>
-              <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">& Associates</div>
+              <div className={`font-serif font-bold text-lg leading-tight transition-colors ${isScrolled ? 'text-primary' : 'text-white'}`}>Gloria Ondah</div>
+              <div className={`text-[10px] tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-muted-foreground' : 'text-white/60'}`}>& Associates</div>
             </div>
           </a>
 
           <nav className="hidden lg:flex items-center gap-8">
-            <a href={routes.about} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute === routes.about ? 'text-secondary' : 'text-foreground'}`}>About</a>
+            {[
+              { href: routes.about, label: 'About', active: currentRoute === routes.about },
+              { href: routes.caseStudies, label: 'Case Studies', active: currentRoute === routes.caseStudies },
+              { href: routes.insights, label: 'Insights', active: currentRoute.startsWith('#/insight') },
+              { href: routes.contact, label: 'Contact', active: currentRoute === routes.contact },
+            ].map(link => (
+              <a key={link.href} href={link.href}
+                className={`text-sm font-medium hover:text-secondary transition-colors ${link.active ? 'text-secondary' : isScrolled ? 'text-foreground' : 'text-white/80'}`}>
+                {link.label}
+              </a>
+            ))}
 
             <div className="relative group">
-              <a href={routes.practiceAreas} className={`flex items-center gap-1 text-sm font-medium hover:text-secondary transition-colors ${currentRoute.startsWith('#/practice') ? 'text-secondary' : 'text-foreground'}`}>
+              <a href={routes.practiceAreas} className={`flex items-center gap-1 text-sm font-medium hover:text-secondary transition-colors ${currentRoute.startsWith('#/practice') ? 'text-secondary' : isScrolled ? 'text-foreground' : 'text-white/80'}`}>
                 Practice Areas <ChevronDown className="h-3 w-3" />
               </a>
               <div className="absolute top-full left-0 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
@@ -43,26 +53,22 @@ export function Nav({ currentRoute }: { currentRoute: string }) {
                 </div>
               </div>
             </div>
-
-            <a href={routes.caseStudies} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute === routes.caseStudies ? 'text-secondary' : 'text-foreground'}`}>Case Studies</a>
-            <a href={routes.insights} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute.startsWith('#/insight') ? 'text-secondary' : 'text-foreground'}`}>Insights</a>
-            <a href={routes.contact} className={`text-sm font-medium hover:text-secondary transition-colors ${currentRoute === routes.contact ? 'text-secondary' : 'text-foreground'}`}>Contact</a>
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
             <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
-              <Button variant="outline" size="icon" className="rounded-full border-primary/20 text-primary hover:bg-primary/5">
+              <Button variant="outline" size="icon" className={`rounded-full transition-colors ${isScrolled ? 'border-primary/20 text-primary hover:bg-primary/5' : 'border-white/30 text-white hover:bg-white/10'}`}>
                 <MessageCircle className="h-4 w-4" />
               </Button>
             </a>
             <a href={routes.booking}>
-              <Button className="bg-primary hover:bg-primary/90 text-white rounded-none px-8">
+              <Button className={`rounded-none px-8 transition-colors ${isScrolled ? 'bg-primary hover:bg-primary/90 text-white' : 'bg-secondary hover:bg-secondary/90 text-white'}`}>
                 Book Consultation
               </Button>
             </a>
           </div>
 
-          <button className="lg:hidden text-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className={`lg:hidden transition-colors ${isScrolled ? 'text-primary' : 'text-white'}`} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
