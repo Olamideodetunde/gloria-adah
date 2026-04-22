@@ -85,7 +85,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background selection:bg-secondary selection:text-white flex flex-col overflow-x-hidden">
-      <Nav currentRoute={route} />
+      <Nav currentRoute={route} darkHero={route === '#/' || route === ''} />
       <main className="flex-grow">
         <AnimatePresence mode="wait">
           <motion.div
