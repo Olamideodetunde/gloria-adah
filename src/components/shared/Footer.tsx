@@ -126,7 +126,7 @@ export function Footer() {
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-            <span>&copy; {new Date().getFullYear()} Gloria Ondah & Associates. All rights reserved.</span>
+            <span><a href={routes.admin} className="opacity-0 hover:opacity-0 select-none pointer-events-auto" tabIndex={-1} aria-hidden="true">&copy;</a> {new Date().getFullYear()} Gloria Ondah &amp; Associates. All rights reserved.</span>
             <span className="hidden md:inline text-border">|</span>
             <span>CAC Reg: BN-3068204</span>
           </div>
