@@ -27,6 +27,7 @@
     "express": "^5.2.1",
     "express-rate-limit": "^8.3.2",
     "framer-motion": "^12.23.24",
+    "googleapis": "^171.4.0",
     "helmet": "^8.1.0",
     "lucide-react": "^0.545.0",
     "multer": "^2.1.1",

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { pool } from '../db.js';
 import { initializePayment, verifyPayment, isConfigured as paystackConfigured } from '../paystack.js';
 import { sendBookingConfirmation } from '../email.js';
+import { createCalendarEvent } from '../calendar.js';
 
 const router = Router();
 
@@ -39,13 +40,24 @@ router.post('/', async (req, res) => {
     );
 
     if (price === 0) {
-      await sendBookingConfirmation({
-        clientEmail, clientName, refCode,
-        serviceName: serviceType,
-        date: appointmentDate,
-        time: appointmentTime,
-        price: 0
-      });
+      await Promise.all([
+        sendBookingConfirmation({
+          clientEmail, clientName, refCode,
+          serviceName: serviceType,
+          date: appointmentDate,
+          time: appointmentTime,
+          price: 0
+        }),
+        createCalendarEvent({
+          refCode, clientName, clientEmail,
+          clientPhone, clientCompany,
+          serviceName: serviceType,
+          practiceArea: practiceArea || null,
+          date: appointmentDate,
+          time: appointmentTime,
+          price: 0
+        })
+      ]);
       return res.json({ refCode, requiresPayment: false });
     }
 
@@ -98,15 +110,29 @@ router.get('/verify', async (req, res) => {
       const { rows } = await pool.query('SELECT * FROM bookings WHERE ref_code=$1', [reference]);
       const booking = rows[0];
       if (booking) {
-        await sendBookingConfirmation({
-          clientEmail: booking.client_email,
-          clientName: booking.client_name,
-          refCode: booking.ref_code,
-          serviceName: booking.service_type,
-          date: booking.appointment_date,
-          time: booking.appointment_time,
-          price: booking.service_price
-        });
+        await Promise.all([
+          sendBookingConfirmation({
+            clientEmail: booking.client_email,
+            clientName: booking.client_name,
+            refCode: booking.ref_code,
+            serviceName: booking.service_type,
+            date: booking.appointment_date,
+            time: booking.appointment_time,
+            price: booking.service_price
+          }),
+          createCalendarEvent({
+            refCode: booking.ref_code,
+            clientName: booking.client_name,
+            clientEmail: booking.client_email,
+            clientPhone: booking.client_phone,
+            clientCompany: booking.client_company,
+            serviceName: booking.service_type,
+            practiceArea: booking.practice_area,
+            date: booking.appointment_date,
+            time: booking.appointment_time,
+            price: booking.service_price
+          })
+        ]);
       }
 
       res.json({ status: 'success', refCode: reference });
@@ -134,15 +160,29 @@ router.post('/verify-inline', async (req, res) => {
       const { rows } = await pool.query('SELECT * FROM bookings WHERE ref_code=$1', [reference]);
       const booking = rows[0];
       if (booking) {
-        await sendBookingConfirmation({
-          clientEmail: booking.client_email,
-          clientName: booking.client_name,
-          refCode: booking.ref_code,
-          serviceName: booking.service_type,
-          date: booking.appointment_date,
-          time: booking.appointment_time,
-          price: booking.service_price
-        });
+        await Promise.all([
+          sendBookingConfirmation({
+            clientEmail: booking.client_email,
+            clientName: booking.client_name,
+            refCode: booking.ref_code,
+            serviceName: booking.service_type,
+            date: booking.appointment_date,
+            time: booking.appointment_time,
+            price: booking.service_price
+          }),
+          createCalendarEvent({
+            refCode: booking.ref_code,
+            clientName: booking.client_name,
+            clientEmail: booking.client_email,
+            clientPhone: booking.client_phone,
+            clientCompany: booking.client_company,
+            serviceName: booking.service_type,
+            practiceArea: booking.practice_area,
+            date: booking.appointment_date,
+            time: booking.appointment_time,
+            price: booking.service_price
+          })
+        ]);
       }
 
       res.json({ status: 'success', refCode: reference });
