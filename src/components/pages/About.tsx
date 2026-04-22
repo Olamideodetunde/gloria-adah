@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Award, ShieldCheck, Target, Eye, HeartHandshake, Scale, Sparkles, Zap, Users, Brain } from 'lucide-react';
 import { PageShell } from '../shared/PageShell';
 import { CTABand } from '../shared/CTABand';
 import { fadeInUp, staggerContainer } from '../shared/motion';
@@ -47,10 +48,16 @@ export function About() {
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-12 mb-20">
               <div className="bg-background p-10 border border-border">
+                <div className="w-12 h-12 mb-4 bg-secondary/10 text-secondary flex items-center justify-center">
+                  <Target className="h-6 w-6" />
+                </div>
                 <h3 className="text-2xl font-serif text-primary mb-4">Our Mission</h3>
                 <p className="text-muted-foreground leading-relaxed">To provide exceptional, tailored legal solutions that empower our clients to navigate complexities, mitigate risks, and achieve their strategic goals.</p>
               </div>
               <div className="bg-background p-10 border border-border">
+                <div className="w-12 h-12 mb-4 bg-secondary/10 text-secondary flex items-center justify-center">
+                  <Eye className="h-6 w-6" />
+                </div>
                 <h3 className="text-2xl font-serif text-primary mb-4">Our Vision</h3>
                 <p className="text-muted-foreground leading-relaxed">To be the foremost legal partner in Nigeria, recognized globally for integrity, excellence, and an unwavering commitment to client success.</p>
               </div>
@@ -60,13 +67,16 @@ export function About() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {[
-                { title: "Professionalism", desc: "Highest standards in every engagement" },
-                { title: "Transparency", desc: "Clear communication and honest billing" },
-                { title: "Efficiency", desc: "Timely delivery without compromising quality" },
-                { title: "Integrity", desc: "Ethical practice above all else" },
-                { title: "Responsiveness", desc: "Accessible and attentive to client needs" }
+                { title: "Professionalism", desc: "Highest standards in every engagement", icon: Award },
+                { title: "Transparency", desc: "Clear communication and honest billing", icon: Sparkles },
+                { title: "Efficiency", desc: "Timely delivery without compromising quality", icon: Zap },
+                { title: "Integrity", desc: "Ethical practice above all else", icon: ShieldCheck },
+                { title: "Responsiveness", desc: "Accessible and attentive to client needs", icon: Users }
               ].map((value, i) => (
                 <div key={i} className="text-center p-6 bg-background border border-border">
+                  <div className="w-10 h-10 mx-auto mb-3 bg-secondary/10 text-secondary flex items-center justify-center">
+                    <value.icon className="h-5 w-5" />
+                  </div>
                   <h4 className="font-bold text-primary mb-2">{value.title}</h4>
                   <p className="text-xs text-muted-foreground">{value.desc}</p>
                 </div>
