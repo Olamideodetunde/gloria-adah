@@ -42,19 +42,8 @@ export function Home() {
             variants={staggerContainer}
             className="max-w-2xl"
           >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 text-white/80 text-xs font-medium tracking-widest uppercase mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-              Your Trusted Legal Partner in Nigeria
-            </motion.div>
-
-            <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] mb-8 font-serif">
-              <span className="text-white">Securing Your</span>
-              <br />
-              <span className="text-white">Business </span>
-              <span className="text-secondary italic">Interests</span>
-              <br />
-              <span className="text-white">in </span>
-              <span className="text-secondary italic">Nigeria.</span>
+            <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl leading-[1.12] mb-8 font-serif">
+              <span className="text-white">Securing Your Business </span><span className="text-secondary italic">Interests</span><span className="text-white"> in </span><span className="text-secondary italic">Nigeria.</span>
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-lg text-white/70 mb-12 leading-relaxed max-w-xl">
