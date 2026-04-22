@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, FileText, CalendarCheck, MessageSquare,
   LogOut, Eye, EyeOff, Pencil, Trash2, Plus, Save,
   X, CheckCircle, Clock, BarChart3, Globe, GlobeLock,
-  RefreshCw, ChevronDown, ChevronUp, Lock
+  RefreshCw, ChevronDown, ChevronUp, Lock, Upload, ImageIcon
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -73,6 +73,9 @@ export function Admin() {
   const [savingPost, setSavingPost] = useState(false);
   const [postError, setPostError] = useState('');
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const login = async () => {
     setLoginLoading(true);
@@ -148,16 +151,39 @@ export function Admin() {
     finally { setSavingPost(false); }
   };
 
+  const handleImageUpload = async (file: File) => {
+    setUploading(true);
+    setUploadError('');
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      setEditingPost(p => ({ ...p, cover_image: data.url }));
+    } catch (e: any) {
+      setUploadError(e.message || 'Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const openNew = () => {
     setEditingPost({ title: '', slug: '', excerpt: '', content: '', category: 'Insights', cover_image: '', author: 'Gloria Ondah', is_published: false });
     setEditorOpen(true);
     setPostError('');
+    setUploadError('');
   };
 
   const openEdit = (post: Post) => {
     setEditingPost({ ...post });
     setEditorOpen(true);
     setPostError('');
+    setUploadError('');
   };
 
   function formatDate(iso: string) {
@@ -396,14 +422,50 @@ export function Admin() {
                           className="rounded-none h-11"
                         />
                       </div>
-                      <div>
-                        <label className="text-sm font-medium text-foreground block mb-2">Cover Image URL</label>
-                        <Input
-                          value={editingPost.cover_image || ''}
-                          onChange={e => setEditingPost(p => ({ ...p, cover_image: e.target.value }))}
-                          className="rounded-none h-11"
-                          placeholder="/images/insight-1.png"
+                      <div className="md:col-span-1">
+                        <label className="text-sm font-medium text-foreground block mb-2">Cover Image</label>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={e => { const f = e.target.files?.[0]; if (f) handleImageUpload(f); e.target.value = ''; }}
                         />
+                        {editingPost.cover_image ? (
+                          <div className="relative group border border-border">
+                            <img src={editingPost.cover_image} alt="Cover preview" className="w-full h-28 object-cover" />
+                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => fileInputRef.current?.click()}
+                                className="text-white text-xs bg-primary px-3 py-1.5 flex items-center gap-1"
+                              >
+                                <Upload className="h-3 w-3" /> Change
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setEditingPost(p => ({ ...p, cover_image: '' }))}
+                                className="text-white text-xs bg-red-600 px-3 py-1.5 flex items-center gap-1"
+                              >
+                                <X className="h-3 w-3" /> Remove
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            disabled={uploading}
+                            className="w-full h-28 border-2 border-dashed border-border hover:border-secondary transition-colors flex flex-col items-center justify-center gap-2 text-muted-foreground hover:text-secondary disabled:opacity-60"
+                          >
+                            {uploading ? (
+                              <><RefreshCw className="h-5 w-5 animate-spin" /><span className="text-xs">Uploading…</span></>
+                            ) : (
+                              <><ImageIcon className="h-5 w-5" /><span className="text-xs font-medium">Click to upload image</span><span className="text-[10px]">JPG, PNG, WEBP · max 8 MB</span></>
+                            )}
+                          </button>
+                        )}
+                        {uploadError && <p className="text-xs text-red-600 mt-1">{uploadError}</p>}
                       </div>
                     </div>
 
