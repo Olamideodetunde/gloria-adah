@@ -1,6 +1,6 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FaWhatsapp } from 'react-icons/fa';
 
 export function WhatsAppFAB() {
   return (
@@ -13,7 +13,7 @@ export function WhatsAppFAB() {
       animate={{ scale: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
-      <MessageCircle className="h-6 w-6" />
+      <FaWhatsapp className="h-6 w-6" />
     </motion.a>
   );
 }
