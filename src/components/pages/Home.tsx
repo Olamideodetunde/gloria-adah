@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MessageCircle, ArrowRight, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { fadeInUp, staggerContainer } from '../shared/motion';
 import { routes, getPracticeRoute, practiceIcons } from '../shared/routes';
@@ -39,7 +40,7 @@ export function Home() {
               </a>
               <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
                 <Button size="lg" variant="outline" className="rounded-none h-14 px-8 text-base border-primary/20 text-primary hover:bg-primary/5 group">
-                  <MessageCircle className="mr-2 h-5 w-5 text-secondary group-hover:scale-110 transition-transform" />
+                  <FaWhatsapp className="mr-2 h-5 w-5 text-[#25D366] group-hover:scale-110 transition-transform" />
                   Chat on WhatsApp
                 </Button>
               </a>
