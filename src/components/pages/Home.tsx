@@ -12,31 +12,35 @@ export function Home() {
   return (
     <>
       <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
-        {/* Background texture overlay */}
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)', backgroundSize: '12px 12px' }} />
 
-        {/* Hero image — floats right, fades into background */}
+        {/* Full-bleed background image */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="absolute right-0 top-0 h-full w-full lg:w-[58%] pointer-events-none"
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.4, ease: 'easeOut' }}
+          className="absolute inset-0 pointer-events-none"
         >
           <img
             src="/images/hero.png"
-            alt="Legal desk with gavel"
+            alt=""
             className="w-full h-full object-cover object-center"
-            style={{ filter: 'grayscale(45%) contrast(110%) brightness(0.58)' }}
+            style={{ filter: 'grayscale(50%) contrast(115%) brightness(0.45)' }}
           />
-          {/* Mobile: strong overlay — clean burgundy, no brown cast */}
-          <div className="absolute inset-0 lg:hidden" style={{ background: 'hsl(var(--primary) / 0.85)' }} />
-          {/* Desktop: smooth left fade — no flat block, just a long silky gradient */}
-          <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 20%, hsl(var(--primary) / 0.5) 42%, hsl(var(--primary) / 0.15) 58%, transparent 70%)' }} />
-          {/* Bottom fade */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.4) 18%, transparent 38%)' }} />
-          {/* Top vignette for depth */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 28%)' }} />
         </motion.div>
+
+        {/* Overlay layers — stacked, no seams */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Left anchor: solid primary covers text column */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 30%, hsl(var(--primary)/0.75) 48%, hsl(var(--primary)/0.25) 66%, transparent 82%)' }} />
+          {/* Mobile: full primary tint so text stays readable */}
+          <div className="absolute inset-0 lg:hidden" style={{ background: 'hsl(var(--primary)/0.78)' }} />
+          {/* Bottom ground shadow */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, hsl(var(--primary)/0.5) 14%, transparent 32%)' }} />
+          {/* Top vignette */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 22%)' }} />
+          {/* Subtle diagonal texture */}
+          <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: 'repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)', backgroundSize: '12px 12px' }} />
+        </div>
 
         {/* Content */}
         <div className="relative z-10 container mx-auto px-6 pt-36 pb-24 lg:pt-48 lg:pb-32">
