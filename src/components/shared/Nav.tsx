@@ -17,7 +17,7 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
 
   return (
     <>
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-md border-b border-border py-4' : 'bg-transparent py-6'}`}>
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-background/95 backdrop-blur-md border-b border-border py-4' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           <a href={routes.home} className="flex items-center gap-3">
             <img src="/images/goa-logo.png" alt="GOA" className="h-12 w-auto" />
@@ -69,8 +69,12 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
             </a>
           </div>
 
-          <button className={`lg:hidden transition-colors ${useDark ? 'text-white' : 'text-primary'}`} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X /> : <Menu />}
+          <button
+            className={`lg:hidden transition-colors p-1 ${mobileMenuOpen ? 'text-primary' : useDark ? 'text-white' : 'text-primary'}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </header>

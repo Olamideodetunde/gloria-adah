@@ -26,12 +26,14 @@ export function Home() {
             src="/images/hero.png"
             alt="Legal desk with gavel"
             className="w-full h-full object-cover object-center"
-            style={{ filter: 'grayscale(15%) sepia(20%) contrast(105%) brightness(0.7)' }}
+            style={{ filter: 'grayscale(15%) sepia(20%) contrast(105%) brightness(0.65)' }}
           />
-          {/* Left fade into dark bg */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 10%, transparent 55%)' }} />
+          {/* Mobile: strong overlay so text is fully readable */}
+          <div className="absolute inset-0 lg:hidden" style={{ background: 'hsl(var(--primary) / 0.82)' }} />
+          {/* Desktop: left fade into dark bg */}
+          <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 10%, transparent 55%)' }} />
           {/* Bottom fade */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, transparent 30%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, transparent 35%)' }} />
         </motion.div>
 
         {/* Content */}
