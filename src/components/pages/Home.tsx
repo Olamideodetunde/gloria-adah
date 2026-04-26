@@ -26,14 +26,16 @@ export function Home() {
             src="/images/hero.png"
             alt="Legal desk with gavel"
             className="w-full h-full object-cover object-center"
-            style={{ filter: 'grayscale(15%) sepia(20%) contrast(105%) brightness(0.65)' }}
+            style={{ filter: 'grayscale(45%) contrast(110%) brightness(0.58)' }}
           />
-          {/* Mobile: strong overlay so text is fully readable */}
-          <div className="absolute inset-0 lg:hidden" style={{ background: 'hsl(var(--primary) / 0.82)' }} />
-          {/* Desktop: left fade into dark bg */}
-          <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 10%, transparent 55%)' }} />
+          {/* Mobile: strong overlay — clean burgundy, no brown cast */}
+          <div className="absolute inset-0 lg:hidden" style={{ background: 'hsl(var(--primary) / 0.85)' }} />
+          {/* Desktop: smooth left fade — no flat block, just a long silky gradient */}
+          <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 20%, hsl(var(--primary) / 0.5) 42%, hsl(var(--primary) / 0.15) 58%, transparent 70%)' }} />
           {/* Bottom fade */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, transparent 35%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.4) 18%, transparent 38%)' }} />
+          {/* Top vignette for depth */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 28%)' }} />
         </motion.div>
 
         {/* Content */}
