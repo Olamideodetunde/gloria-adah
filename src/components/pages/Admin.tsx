@@ -37,7 +37,7 @@ interface Booking {
   id: number; ref_code: string; service_type: string; service_price: number;
   practice_area: string; appointment_date: string; appointment_time: string;
   client_name: string; client_email: string; client_phone: string;
-  client_company: string; status: string; payment_status: string; created_at: string;
+  client_company: string; description: string; status: string; payment_status: string; created_at: string;
 }
 interface Contact {
   id: number; ref_code: string; name: string; email: string; phone: string;

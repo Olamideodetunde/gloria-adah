@@ -69,7 +69,6 @@ export async function createCalendarEvent({
         description,
         start: { dateTime: fmt(startDateTime), timeZone: 'Africa/Lagos' },
         end: { dateTime: fmt(endDateTime), timeZone: 'Africa/Lagos' },
-        attendees: [{ email: clientEmail, displayName: clientName }],
         reminders: {
           useDefault: false,
           overrides: [

@@ -17,6 +17,7 @@ const PORT = parseInt(process.env.PORT || '5000', 10);
 
 const app = express();
 
+app.set('trust proxy', 1);
 app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ limit: '2mb' }));

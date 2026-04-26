@@ -1,10 +1,10 @@
-import { defineConfig } from "vite";
+import { defineConfig, type UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-export default defineConfig(async () => ({
+export default defineConfig(async (): Promise<UserConfig> => ({
   plugins: [
     react(),
     tailwindcss(),
