@@ -15,6 +15,36 @@ function getCalendarClient() {
   return google.calendar({ version: 'v3', auth });
 }
 
+// Returns busy time ranges for a given Lagos-local date (YYYY-MM-DD).
+// WAT is UTC+1 with no DST, so converting is a fixed offset.
+export async function getBusyTimes(dateStr) {
+  try {
+    const calendar = getCalendarClient();
+    const calendarId = process.env.GOOGLE_CALENDAR_ID;
+    if (!calendar || !calendarId) return [];
+
+    const [y, m, d] = dateStr.split('-').map(Number);
+    // 00:00 Lagos = 23:00 UTC previous day; 24:00 Lagos = 23:00 UTC same day
+    const dayStartUTC = new Date(Date.UTC(y, m - 1, d - 1, 23, 0, 0));
+    const dayEndUTC = new Date(Date.UTC(y, m - 1, d, 23, 0, 0));
+
+    const result = await calendar.freebusy.query({
+      requestBody: {
+        timeMin: dayStartUTC.toISOString(),
+        timeMax: dayEndUTC.toISOString(),
+        timeZone: 'Africa/Lagos',
+        items: [{ id: calendarId }],
+      },
+    });
+
+    const busy = result.data?.calendars?.[calendarId]?.busy || [];
+    return busy.map(b => ({ start: new Date(b.start), end: new Date(b.end) }));
+  } catch (err) {
+    console.error('[Calendar] freebusy query failed:', err.message);
+    return [];
+  }
+}
+
 export async function createCalendarEvent({
   refCode,
   clientName,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +19,9 @@ const serviceTypes = [
   { id: 'retainer', name: 'Retainer Discovery', duration: 15, price: 0 }
 ];
 
-const timeSlots = ["09:00 AM", "10:00 AM", "11:30 AM", "01:00 PM", "02:30 PM", "04:00 PM"];
+const ALL_TIME_SLOTS = ["09:00 AM", "10:00 AM", "11:30 AM", "01:00 PM", "02:30 PM", "04:00 PM"];
+
+type SlotAvailability = { time: string; available: boolean; reason: 'past' | 'booked' | null };
 
 function parseTimeSlot(timeStr: string): { hours: number; minutes: number } {
   const [time, period] = timeStr.split(' ');
@@ -135,6 +137,10 @@ export function Booking() {
   const [refCode, setRefCode] = useState("");
   const [apiError, setApiError] = useState<string | null>(null);
   const [paystackUrl, setPaystackUrl] = useState<string | null>(null);
+  const [slots, setSlots] = useState<SlotAvailability[]>(
+    ALL_TIME_SLOTS.map(t => ({ time: t, available: true, reason: null }))
+  );
+  const [loadingSlots, setLoadingSlots] = useState(false);
 
   const detailsForm = useForm<DetailsValues>({
     resolver: zodResolver(detailsSchema),
@@ -144,6 +150,33 @@ export function Booking() {
   const serviceObj = serviceTypes.find(s => s.id === selectedService);
   const nextStep = () => setStep(s => s + 1);
   const prevStep = () => setStep(s => s - 1);
+
+  // Fetch real availability whenever the date or service duration changes.
+  // Use primitive dependencies (date string + duration) so we don't re-fetch on every render.
+  const selectedDateKey = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
+  const serviceDuration = serviceObj?.duration ?? 0;
+  useEffect(() => {
+    if (!selectedDateKey || !serviceDuration) return;
+    let cancelled = false;
+    setLoadingSlots(true);
+    setSelectedTime(null);
+
+    fetch(`/api/bookings/availability?date=${selectedDateKey}&duration=${serviceDuration}`)
+      .then(r => r.json())
+      .then((data: { slots?: SlotAvailability[] }) => {
+        if (cancelled) return;
+        if (Array.isArray(data.slots)) setSlots(data.slots);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          // Fallback: show all as available so booking still works if API fails.
+          setSlots(ALL_TIME_SLOTS.map(t => ({ time: t, available: true, reason: null })));
+        }
+      })
+      .finally(() => { if (!cancelled) setLoadingSlots(false); });
+
+    return () => { cancelled = true; };
+  }, [selectedDateKey, serviceDuration]);
 
   const handleDetailsSubmit = async (data: DetailsValues) => {
     setDetails(data);
@@ -271,19 +304,43 @@ export function Booking() {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-primary block mb-3">Available Times (WAT)</label>
-                    {selectedDate ? (
-                      <div className="grid grid-cols-2 gap-3">
-                        {timeSlots.map(time => (
-                          <div key={time} onClick={() => setSelectedTime(time)}
-                            className={`cursor-pointer py-3 text-center border text-sm font-medium transition-colors ${selectedTime === time ? 'border-secondary bg-secondary text-white' : 'border-border hover:border-primary text-primary bg-background'}`}>
-                            {time}
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
+                    {!selectedDate ? (
                       <div className="h-[200px] border border-dashed border-border flex items-center justify-center text-sm text-muted-foreground text-center p-6 bg-muted/20">
                         Please select a date first to see available times.
                       </div>
+                    ) : loadingSlots ? (
+                      <div className="h-[200px] border border-dashed border-border flex flex-col items-center justify-center gap-2 bg-muted/20">
+                        <Loader2 className="h-5 w-5 animate-spin text-primary/60" />
+                        <span className="text-xs text-muted-foreground">Checking the calendar…</span>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="grid grid-cols-2 gap-3">
+                          {slots.map(({ time, available, reason }) => {
+                            const isSelected = selectedTime === time;
+                            return (
+                              <div
+                                key={time}
+                                onClick={() => available && setSelectedTime(time)}
+                                title={!available ? (reason === 'past' ? 'Time has already passed' : 'This slot is already booked') : undefined}
+                                className={`relative py-3 text-center border text-sm font-medium transition-colors ${
+                                  !available
+                                    ? 'cursor-not-allowed border-border/50 bg-muted/40 text-muted-foreground/60 line-through'
+                                    : isSelected
+                                      ? 'cursor-pointer border-secondary bg-secondary text-white'
+                                      : 'cursor-pointer border-border hover:border-primary text-primary bg-background'
+                                }`}
+                              >
+                                {time}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {slots.every(s => !s.available) && (
+                          <p className="text-xs text-muted-foreground mt-3">No openings on this date — please pick another day.</p>
+                        )}
+                        <p className="text-[11px] text-muted-foreground/80 mt-3">Times update live based on the firm's calendar.</p>
+                      </>
                     )}
                   </div>
                 </div>

@@ -2,13 +2,67 @@ import { Router } from 'express';
 import { pool } from '../db.js';
 import { initializePayment, verifyPayment, isConfigured as paystackConfigured } from '../paystack.js';
 import { sendBookingConfirmation } from '../email.js';
-import { createCalendarEvent } from '../calendar.js';
+import { createCalendarEvent, getBusyTimes } from '../calendar.js';
 
 const router = Router();
+
+const TIME_SLOTS = ["09:00 AM", "10:00 AM", "11:30 AM", "01:00 PM", "02:30 PM", "04:00 PM"];
 
 function makeRef() {
   return `GOA-${Math.floor(1000 + Math.random() * 9000)}-${new Date().getFullYear()}`;
 }
+
+// Convert "YYYY-MM-DD" + "HH:MM AM/PM" (Lagos local) to a UTC Date object.
+function lagosSlotToUTC(dateStr, slotStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const [time, period] = slotStr.split(' ');
+  const [h, mn] = time.split(':').map(Number);
+  let hours = h;
+  if (period === 'PM' && h !== 12) hours = h + 12;
+  if (period === 'AM' && h === 12) hours = 0;
+  return new Date(Date.UTC(y, m - 1, d, hours - 1, mn, 0));
+}
+
+// GET /api/bookings/availability?date=YYYY-MM-DD&duration=30
+router.get('/availability', async (req, res) => {
+  try {
+    const { date } = req.query;
+    const duration = parseInt(req.query.duration, 10) || 30;
+    if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      return res.status(400).json({ error: 'Valid date (YYYY-MM-DD) required' });
+    }
+
+    const [busyRanges, dbRows] = await Promise.all([
+      getBusyTimes(date),
+      pool.query(
+        `SELECT appointment_time FROM bookings
+         WHERE appointment_date = $1 AND status IN ('confirmed', 'awaiting_payment')`,
+        [date]
+      ),
+    ]);
+
+    const dbBookedTimes = new Set(dbRows.rows.map(r => r.appointment_time));
+    const now = new Date();
+
+    const slots = TIME_SLOTS.map(time => {
+      const startUTC = lagosSlotToUTC(date, time);
+      const endUTC = new Date(startUTC.getTime() + duration * 60000);
+      const isPast = startUTC.getTime() <= now.getTime();
+      const calendarConflict = busyRanges.some(b => startUTC < b.end && endUTC > b.start);
+      const dbConflict = dbBookedTimes.has(time);
+      return {
+        time,
+        available: !isPast && !calendarConflict && !dbConflict,
+        reason: isPast ? 'past' : (calendarConflict || dbConflict) ? 'booked' : null,
+      };
+    });
+
+    res.json({ date, duration, slots });
+  } catch (err) {
+    console.error('[Bookings] Availability error:', err.message);
+    res.status(500).json({ error: 'Could not load availability' });
+  }
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -20,6 +74,19 @@ router.post('/', async (req, res) => {
 
     if (!serviceType || !appointmentDate || !appointmentTime || !clientName || !clientEmail || !clientPhone) {
       return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Race-condition guard: someone else may have grabbed this slot since the page loaded.
+    const existing = await pool.query(
+      `SELECT 1 FROM bookings
+       WHERE appointment_date = $1
+         AND appointment_time = $2
+         AND status IN ('confirmed', 'awaiting_payment')
+       LIMIT 1`,
+      [appointmentDate, appointmentTime]
+    );
+    if (existing.rowCount > 0) {
+      return res.status(409).json({ error: 'That time was just booked by someone else. Please choose another slot.' });
     }
 
     const refCode = makeRef();
