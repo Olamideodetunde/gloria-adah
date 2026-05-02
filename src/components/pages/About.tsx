@@ -38,7 +38,7 @@ export function About() {
                 className="relative h-[360px] sm:h-[460px] lg:h-[600px] w-full"
               >
                 <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4"></div>
-                <img src="/images/gloria.png" alt="Law Firm Office" className="absolute inset-0 w-full h-full object-cover grayscale-[20%] sepia-[10%] contrast-[110%]" />
+                <img src="/images/gloria.png" alt="Gloria Ondah, Principal" className="absolute inset-0 w-full h-full object-cover object-top grayscale-[20%] sepia-[10%] contrast-[110%]" />
               </motion.div>
             </div>
           </div>
