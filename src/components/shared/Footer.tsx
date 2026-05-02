@@ -126,7 +126,7 @@ export function Footer() {
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-            <span><a href={routes.admin} className="opacity-0 hover:opacity-0 select-none pointer-events-auto" tabIndex={-1} aria-hidden="true">&copy;</a> {new Date().getFullYear()} Gloria Ondah &amp; Associates. All rights reserved.</span>
+            <span>&copy; {new Date().getFullYear()} Gloria Ondah &amp; Associates. All rights reserved.</span>
             <span className="hidden md:inline text-border">|</span>
             <span>CAC Reg: BN-3068204</span>
           </div>
@@ -134,6 +134,7 @@ export function Footer() {
             <a href={routes.privacy} className="hover:text-primary transition-colors">Privacy Policy</a>
             <a href={routes.terms} className="hover:text-primary transition-colors">Terms of Use</a>
             <a href={routes.disclaimer} className="hover:text-primary transition-colors">Disclaimer</a>
+            <a href={routes.admin} className="hover:text-primary transition-colors">Staff Login</a>
           </div>
         </div>
       </div>
