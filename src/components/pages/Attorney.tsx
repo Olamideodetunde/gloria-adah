@@ -15,8 +15,8 @@ export function Attorney() {
           <div className="container mx-auto px-6">
             <div className="grid lg:grid-cols-12 gap-16">
               <div className="lg:col-span-4 space-y-8">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="aspect-[3/4] relative bg-muted">
-                  <img src="/images/gloria.png" alt="Gloria Ondah" className="w-full h-full object-cover object-top" />
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative w-full bg-muted">
+                  <img src="/images/gloria.png" alt="Gloria Ondah" className="w-full h-auto block" />
                 </motion.div>
                 <div className="bg-muted p-8 border border-border">
                   <h3 className="font-serif text-primary text-xl mb-6">Contact Info</h3>

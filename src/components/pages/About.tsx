@@ -35,10 +35,10 @@ export function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="relative aspect-[3/4] sm:aspect-auto sm:h-[460px] lg:h-[600px] w-full"
+                className="relative w-full"
               >
-                <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4"></div>
-                <img src="/images/gloria.png" alt="Gloria Ondah, Principal" className="absolute inset-0 w-full h-full object-cover object-top grayscale-[20%] sepia-[10%] contrast-[110%]" />
+                <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4 pointer-events-none"></div>
+                <img src="/images/gloria.png" alt="Gloria Ondah, Principal" className="relative w-full h-auto block grayscale-[20%] sepia-[10%] contrast-[110%]" />
               </motion.div>
             </div>
           </div>
