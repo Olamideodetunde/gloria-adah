@@ -7,7 +7,8 @@ import { practiceAreas } from './practiceAreas';
 export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; darkHero?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const useDark = darkHero && !isScrolled;
+  // useDark only when: hero page + not scrolled + mobile menu is closed
+  const useDark = darkHero && !isScrolled && !mobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -15,9 +16,16 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll while mobile menu is open so the page doesn't
+  // scroll underneath the overlay and trigger the transparent state.
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   return (
     <>
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-background/95 backdrop-blur-md border-b border-border py-4' : 'bg-transparent py-6'}`}>
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${mobileMenuOpen ? 'bg-background border-b border-border py-4' : isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border py-4' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           <a href={routes.home} className="flex items-center gap-3">
             <img src="/images/goa-logo.png" alt="GOA" className="h-12 w-auto" />
