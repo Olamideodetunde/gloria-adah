@@ -74,7 +74,7 @@ export function Home() {
 
             <motion.div variants={fadeInUp} className="flex items-center gap-6 border-t border-white/20 pt-8">
               <div className="text-center">
-                <div className="text-2xl font-serif font-bold text-secondary">8+</div>
+                <div className="text-2xl font-serif font-bold text-secondary">10+</div>
                 <div className="text-xs text-white/50 uppercase tracking-wider">Years</div>
               </div>
               <div className="w-px h-10 bg-white/20" />
