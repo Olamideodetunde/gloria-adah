@@ -12,12 +12,27 @@ export function Home() {
   return (
     <>
       {/* Hero Section - Ultra Premium with Mobile Optimization */}
-      <section className="relative min-h-screen flex items-center bg-white">
+      <section className="relative min-h-screen flex items-center bg-white overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.015]" style={{ 
           backgroundImage: 'radial-gradient(circle at 1px 1px, #002366 1px, transparent 0)',
           backgroundSize: '40px 40px'
         }} />
+        
+        {/* Mobile Background Image - Clean and Subtle */}
+        <div className="absolute inset-0 lg:hidden">
+          <img
+            src="/images/hero.png"
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ 
+              filter: 'brightness(1.15) contrast(1.05) saturate(0.8)',
+              opacity: '0.08'
+            }}
+          />
+          {/* Additional white overlay for extra subtlety */}
+          <div className="absolute inset-0 bg-white/85" />
+        </div>
         
         <div className="container mx-auto px-6 py-32 sm:py-40 lg:py-48 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
