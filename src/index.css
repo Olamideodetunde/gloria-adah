@@ -34,25 +34,25 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 218 35% 12%;
+  --foreground: 0 0% 10%;
   --card: 0 0% 100%;
-  --card-foreground: 218 35% 12%;
+  --card-foreground: 0 0% 10%;
   --popover: 0 0% 100%;
-  --popover-foreground: 218 35% 12%;
-  --primary: 218 55% 19%;
+  --popover-foreground: 0 0% 10%;
+  --primary: 217 100% 20%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 38 62% 48%;
+  --secondary: 345 100% 25%;
   --secondary-foreground: 0 0% 100%;
-  --muted: 218 20% 96%;
-  --muted-foreground: 218 15% 45%;
-  --accent: 38 62% 48%;
+  --muted: 0 0% 98%;
+  --muted-foreground: 220 9% 46%;
+  --accent: 345 100% 25%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
-  --border: 218 20% 88%;
-  --input: 218 20% 88%;
-  --ring: 38 62% 48%;
-  --radius: 0rem;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 217 100% 20%;
+  --radius: 2px;
 }
 
 @layer base {
@@ -61,9 +61,15 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    line-height: 1.7;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-normal tracking-tight;
+    @apply font-serif font-bold tracking-tight;
+    letter-spacing: -0.02em;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.7;
   }
 }
 

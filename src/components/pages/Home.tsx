@@ -11,99 +11,130 @@ import { CTABand } from '../shared/CTABand';
 export function Home() {
   return (
     <>
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
+      {/* Hero Section - Airy and Authoritative */}
+      <section className="relative min-h-screen flex items-center bg-white">
+        <div className="container mx-auto px-6 py-32 lg:py-40">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column - Text Content */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="max-w-2xl"
+            >
+              {/* Tagline */}
+              <motion.div variants={fadeInUp} className="mb-6">
+                <span className="text-secondary text-xs font-bold tracking-[0.2em] uppercase">
+                  COMMITTED TO EXCELLENCE
+                </span>
+              </motion.div>
 
-        {/* Full-bleed background image */}
-        <motion.div
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, ease: 'easeOut' }}
-          className="absolute inset-0 pointer-events-none"
-        >
-          <img
-            src="/images/hero.png"
-            alt=""
-            className="w-full h-full object-cover object-center"
-            style={{ filter: 'grayscale(50%) contrast(115%) brightness(0.45)' }}
-          />
-        </motion.div>
+              {/* Main Headline */}
+              <motion.h1 
+                variants={fadeInUp} 
+                className="text-5xl sm:text-6xl lg:text-7xl leading-[1.1] mb-8 font-serif font-bold text-primary"
+                style={{ letterSpacing: '-0.02em' }}
+              >
+                Securing Your Business Interests in Nigeria.
+              </motion.h1>
 
-        {/* Overlay layers — stacked, no seams */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Left anchor: solid primary covers text column */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 30%, hsl(var(--primary)/0.75) 48%, hsl(var(--primary)/0.25) 66%, transparent 82%)' }} />
-          {/* Mobile: full primary tint so text stays readable */}
-          <div className="absolute inset-0 lg:hidden" style={{ background: 'hsl(var(--primary)/0.78)' }} />
-          {/* Bottom ground shadow */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, hsl(var(--primary)) 0%, hsl(var(--primary)/0.5) 14%, transparent 32%)' }} />
-          {/* Top vignette */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 22%)' }} />
-          {/* Subtle diagonal texture */}
-          <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: 'repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)', backgroundSize: '12px 12px' }} />
-        </div>
+              {/* Sub-headline */}
+              <motion.p 
+                variants={fadeInUp} 
+                className="text-lg text-muted-foreground mb-12 leading-relaxed max-w-xl"
+              >
+                Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors.
+              </motion.p>
 
-        {/* Content */}
-        <div className="relative z-10 container mx-auto px-6 pt-36 pb-24 lg:pt-48 lg:pb-32">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="max-w-2xl"
-          >
-            <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl leading-[1.12] mb-8 font-serif">
-              <span className="text-white">Securing Your Business </span><span className="text-secondary italic">Interests</span><span className="text-white"> in </span><span className="text-secondary italic">Nigeria.</span>
-            </motion.h1>
+              {/* CTA Buttons */}
+              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center mb-16">
+                <a href={routes.booking}>
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-white h-14 px-10 text-base font-semibold shadow-sm"
+                    style={{ borderRadius: '2px' }}
+                  >
+                    Book a Consultation
+                  </Button>
+                </a>
+                <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="h-14 px-8 text-base border-secondary text-secondary hover:bg-secondary/5 group"
+                    style={{ borderRadius: '2px', borderWidth: '1px' }}
+                  >
+                    <FaWhatsapp className="mr-2 h-5 w-5 text-[#25D366] group-hover:scale-110 transition-transform" />
+                    Chat on WhatsApp
+                  </Button>
+                </a>
+              </motion.div>
 
-            <motion.p variants={fadeInUp} className="text-lg text-white/70 mb-12 leading-relaxed max-w-xl">
-              Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors.
-            </motion.p>
-
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center mb-14">
-              <a href={routes.booking}>
-                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-10 text-base font-semibold shadow-lg shadow-secondary/20">
-                  Book a Consultation
-                </Button>
-              </a>
-              <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
-                <Button size="lg" variant="outline" className="rounded-none h-14 px-8 text-base border-white/30 text-white hover:bg-white/10 group">
-                  <FaWhatsapp className="mr-2 h-5 w-5 text-[#25D366] group-hover:scale-110 transition-transform" />
-                  Chat on WhatsApp
-                </Button>
-              </a>
+              {/* Stats Bar */}
+              <motion.div 
+                variants={fadeInUp} 
+                className="flex items-center gap-8 border-t border-border pt-8"
+              >
+                <div className="text-center">
+                  <div className="text-3xl font-serif font-bold text-primary">10+</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Years</div>
+                </div>
+                <div className="w-px h-12 bg-border" />
+                <div className="text-center">
+                  <div className="text-3xl font-serif font-bold text-primary">200+</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Clients</div>
+                </div>
+                <div className="w-px h-12 bg-border" />
+                <div className="text-center">
+                  <div className="text-3xl font-serif font-bold text-primary">95%</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Success Rate</div>
+                </div>
+              </motion.div>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="flex items-center gap-6 border-t border-white/20 pt-8">
-              <div className="text-center">
-                <div className="text-2xl font-serif font-bold text-secondary">10+</div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">Years</div>
+            {/* Right Column - Professional Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
+              className="relative hidden lg:block"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <img
+                  src="/images/hero.png"
+                  alt="Professional Legal Services"
+                  className="w-full h-full object-cover"
+                  style={{ 
+                    filter: 'brightness(1.1) contrast(1.05)',
+                    maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%)'
+                  }}
+                />
+                {/* Subtle overlay for high-key effect */}
+                <div 
+                  className="absolute inset-0" 
+                  style={{ background: 'rgba(255, 255, 255, 0.15)' }}
+                />
               </div>
-              <div className="w-px h-10 bg-white/20" />
-              <div className="text-center">
-                <div className="text-2xl font-serif font-bold text-secondary">200+</div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">Clients</div>
-              </div>
-              <div className="w-px h-10 bg-white/20" />
-              <div className="text-center">
-                <div className="text-2xl font-serif font-bold text-secondary">95%</div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">Success Rate</div>
-              </div>
-              <div className="hidden sm:block w-px h-10 bg-white/20" />
-              <div className="hidden sm:block text-sm text-white/50 leading-relaxed">
-                Serving clients across<br />Nigeria & internationally
-              </div>
+              
+              {/* Decorative accent line */}
+              <div 
+                className="absolute top-0 left-0 w-1 h-32 bg-secondary"
+                style={{ transform: 'translateX(-2rem)' }}
+              />
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
 
-      <section className="py-32 bg-muted/30">
-        <div className="container mx-auto px-6">
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">Areas of Expertise</h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-primary">Comprehensive Legal Services</h3>
+            <h2 className="text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">AREAS OF EXPERTISE</h2>
+            <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">Comprehensive Legal Services</h3>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1">
             {practiceAreas.map((area, i) => {
               const Icon = practiceIcons[area.slug as keyof typeof practiceIcons] || Briefcase;
               return (
@@ -114,11 +145,11 @@ export function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-background p-8 border border-border hover:border-secondary/50 transition-colors group block"
+                  className="bg-white p-10 border border-border hover:border-secondary transition-colors group block"
                 >
-                  <Icon className="h-8 w-8 text-secondary mb-6 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg font-serif text-primary mb-3 leading-snug">{area.title}</h4>
-                  <p className="text-sm text-muted-foreground mb-6 line-clamp-2">{area.short}</p>
+                  <Icon className="h-10 w-10 text-secondary mb-6 group-hover:scale-105 transition-transform" />
+                  <h4 className="text-lg font-serif font-bold text-primary mb-3 leading-snug">{area.title}</h4>
+                  <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed">{area.short}</p>
                   <span className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center transition-colors">
                     Learn more <ArrowRight className="ml-2 h-4 w-4" />
                   </span>
@@ -159,12 +190,12 @@ const testimonials = [
 
 function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[number] }) {
   return (
-    <div className="p-8 border border-border bg-background relative h-full">
-      <div className="text-6xl text-secondary/20 font-serif absolute top-4 left-4">"</div>
-      <p className="relative z-10 text-muted-foreground leading-relaxed mb-8 italic">"{testimonial.text}"</p>
-      <div>
+    <div className="p-10 border border-border bg-white relative h-full">
+      <div className="text-6xl text-secondary/15 font-serif absolute top-6 left-6">"</div>
+      <p className="relative z-10 text-muted-foreground leading-relaxed mb-8">"{testimonial.text}"</p>
+      <div className="border-t border-secondary pt-4">
         <div className="font-bold text-primary">{testimonial.author}</div>
-        <div className="text-xs text-muted-foreground uppercase tracking-wider">{testimonial.role}</div>
+        <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{testimonial.role}</div>
       </div>
     </div>
   );
@@ -185,9 +216,14 @@ function TestimonialsSection() {
   };
 
   return (
-    <section className="py-24 bg-muted/20">
-      <div className="container mx-auto px-6">
-        <div className="hidden md:grid md:grid-cols-3 gap-8">
+    <section className="py-24 bg-muted">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">CLIENT TESTIMONIALS</h2>
+          <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">Trusted by Industry Leaders</h3>
+        </div>
+        
+        <div className="hidden md:grid md:grid-cols-3 gap-1">
           {testimonials.map((t, i) => (
             <TestimonialCard key={i} testimonial={t} />
           ))}
@@ -212,7 +248,7 @@ function TestimonialsSection() {
             <button
               onClick={() => go(-1)}
               aria-label="Previous testimonial"
-              className="w-10 h-10 flex items-center justify-center border border-border bg-background text-primary hover:bg-primary hover:text-white transition-colors"
+              className="w-10 h-10 flex items-center justify-center border border-border bg-white text-primary hover:bg-primary hover:text-white transition-colors"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -231,7 +267,7 @@ function TestimonialsSection() {
             <button
               onClick={() => go(1)}
               aria-label="Next testimonial"
-              className="w-10 h-10 flex items-center justify-center border border-border bg-background text-primary hover:bg-primary hover:text-white transition-colors"
+              className="w-10 h-10 flex items-center justify-center border border-border bg-white text-primary hover:bg-primary hover:text-white transition-colors"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
