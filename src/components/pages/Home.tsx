@@ -11,7 +11,7 @@ import { CTABand } from '../shared/CTABand';
 export function Home() {
   return (
     <>
-      {/* Hero Section - Ultra Premium */}
+      {/* Hero Section - Ultra Premium with Mobile Optimization */}
       <section className="relative min-h-screen flex items-center bg-white">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.015]" style={{ 
@@ -19,8 +19,8 @@ export function Home() {
           backgroundSize: '40px 40px'
         }} />
         
-        <div className="container mx-auto px-6 py-40 lg:py-48 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-20 items-center">
+        <div className="container mx-auto px-6 py-32 sm:py-40 lg:py-48 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             {/* Left Column - Premium Text Content */}
             <motion.div
               initial="hidden"
@@ -29,48 +29,48 @@ export function Home() {
               className="lg:col-span-6 max-w-2xl"
             >
               {/* Overline with decorative element */}
-              <motion.div variants={fadeInUp} className="mb-8 flex items-center gap-4">
-                <div className="w-12 h-[1px] bg-secondary" />
-                <span className="text-secondary text-[11px] font-bold tracking-[0.25em] uppercase">
+              <motion.div variants={fadeInUp} className="mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
+                <div className="w-8 sm:w-12 h-[1px] bg-secondary" />
+                <span className="text-secondary text-[10px] sm:text-[11px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">
                   COMMITTED TO EXCELLENCE
                 </span>
               </motion.div>
 
-              {/* Main Headline - Larger, Bolder */}
+              {/* Main Headline - Responsive sizing */}
               <motion.h1 
                 variants={fadeInUp} 
-                className="text-6xl sm:text-7xl lg:text-8xl leading-[0.95] mb-10 font-serif font-bold text-primary"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] mb-8 sm:mb-10 font-serif font-bold text-primary"
                 style={{ letterSpacing: '-0.03em' }}
               >
                 Securing Your
-                <span className="block mt-2">Business</span>
-                <span className="block mt-2 text-secondary italic">Interests.</span>
+                <span className="block mt-1 sm:mt-2">Business</span>
+                <span className="block mt-1 sm:mt-2 text-secondary italic">Interests.</span>
               </motion.h1>
 
-              {/* Sub-headline with more breathing room */}
+              {/* Sub-headline with responsive sizing */}
               <motion.p 
                 variants={fadeInUp} 
-                className="text-xl text-muted-foreground mb-14 leading-relaxed max-w-xl font-light"
+                className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 sm:mb-14 leading-relaxed max-w-xl font-light"
               >
                 Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors across Nigeria.
               </motion.p>
 
-              {/* CTA Buttons - More prominent */}
-              <motion.div variants={fadeInUp} className="flex flex-wrap gap-5 items-center mb-20">
-                <a href={routes.booking}>
+              {/* CTA Buttons - Mobile optimized */}
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-stretch sm:items-center mb-12 sm:mb-20">
+                <a href={routes.booking} className="w-full sm:w-auto">
                   <Button 
                     size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-white h-16 px-12 text-base font-semibold shadow-sm hover:shadow-md transition-all"
+                    className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white h-14 sm:h-16 px-8 sm:px-12 text-base font-semibold shadow-sm hover:shadow-md transition-all"
                     style={{ borderRadius: '0px' }}
                   >
                     Book a Consultation
                   </Button>
                 </a>
-                <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
+                <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="h-16 px-10 text-base border-secondary border-[1.5px] text-secondary hover:bg-secondary hover:text-white group transition-all"
+                    className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-10 text-base border-secondary border-[1.5px] text-secondary hover:bg-secondary hover:text-white group transition-all"
                     style={{ borderRadius: '0px' }}
                   >
                     <FaWhatsapp className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -79,29 +79,29 @@ export function Home() {
                 </a>
               </motion.div>
 
-              {/* Stats Bar - More refined */}
+              {/* Stats Bar - Mobile responsive */}
               <motion.div 
                 variants={fadeInUp} 
-                className="flex items-center gap-10 pt-10 border-t border-border/50"
+                className="flex flex-wrap items-center gap-6 sm:gap-10 pt-8 sm:pt-10 border-t border-border/50"
               >
                 <div>
-                  <div className="text-4xl font-serif font-bold text-primary mb-1">10+</div>
-                  <div className="text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Years Experience</div>
+                  <div className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-1">10+</div>
+                  <div className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Years Experience</div>
                 </div>
-                <div className="w-[1px] h-14 bg-border/50" />
+                <div className="w-[1px] h-12 sm:h-14 bg-border/50" />
                 <div>
-                  <div className="text-4xl font-serif font-bold text-primary mb-1">200+</div>
-                  <div className="text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Satisfied Clients</div>
+                  <div className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-1">200+</div>
+                  <div className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Satisfied Clients</div>
                 </div>
-                <div className="w-[1px] h-14 bg-border/50" />
+                <div className="w-[1px] h-12 sm:h-14 bg-border/50" />
                 <div>
-                  <div className="text-4xl font-serif font-bold text-primary mb-1">95%</div>
-                  <div className="text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Success Rate</div>
+                  <div className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-1">95%</div>
+                  <div className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Success Rate</div>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Right Column - Sophisticated Image Treatment */}
+            {/* Right Column - Sophisticated Image Treatment (Desktop Only) */}
             <motion.div
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
@@ -163,13 +163,13 @@ export function Home() {
       </section>
 
 
-      <section className="py-32 bg-white">
+      <section className="py-20 sm:py-28 lg:py-32 bg-white">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">AREAS OF EXPERTISE</h2>
-            <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">Comprehensive Legal Services</h3>
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-3 sm:mb-4">AREAS OF EXPERTISE</h2>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary">Comprehensive Legal Services</h3>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-1">
             {practiceAreas.map((area, i) => {
               const Icon = practiceIcons[area.slug as keyof typeof practiceIcons] || Briefcase;
               return (
@@ -180,11 +180,11 @@ export function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white p-10 border border-border hover:border-secondary transition-colors group block"
+                  className="bg-white p-8 sm:p-10 border border-border hover:border-secondary transition-colors group block"
                 >
-                  <Icon className="h-10 w-10 text-secondary mb-6 group-hover:scale-105 transition-transform" />
-                  <h4 className="text-lg font-serif font-bold text-primary mb-3 leading-snug">{area.title}</h4>
-                  <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed">{area.short}</p>
+                  <Icon className="h-8 sm:h-10 w-8 sm:w-10 text-secondary mb-5 sm:mb-6 group-hover:scale-105 transition-transform" />
+                  <h4 className="text-base sm:text-lg font-serif font-bold text-primary mb-2 sm:mb-3 leading-snug">{area.title}</h4>
+                  <p className="text-sm text-muted-foreground mb-5 sm:mb-6 line-clamp-2 leading-relaxed">{area.short}</p>
                   <span className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center transition-colors">
                     Learn more <ArrowRight className="ml-2 h-4 w-4" />
                   </span>
@@ -195,14 +195,14 @@ export function Home() {
         </div>
       </section>
 
-      <section className="py-16 bg-background overflow-hidden border-y border-border">
-        <div className="container mx-auto px-6 mb-8 text-center">
-          <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Trusted by forward-thinking organizations</h3>
+      <section className="py-12 sm:py-14 lg:py-16 bg-background overflow-hidden border-y border-border">
+        <div className="container mx-auto px-6 mb-6 sm:mb-8 text-center">
+          <h3 className="text-[10px] sm:text-xs font-bold tracking-[0.15em] sm:tracking-widest text-muted-foreground uppercase">Trusted by forward-thinking organizations</h3>
         </div>
-        <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll whitespace-nowrap opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+        <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_64px,_black_calc(100%-64px),transparent_100%)] sm:[mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-6 sm:[&_li]:mx-8 animate-infinite-scroll whitespace-nowrap opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
             {["Canada Institute of Knowledge Development", "Magma Oil and Gas", "Stelog Energy Group", "Nokkies Automobile", "NIRSAL Microfinance Bank", "Mirak Global", "Zain Global UK", "Pacific Luxury Homes"].map((name, i) => (
-              <li key={i} className="text-xl md:text-2xl font-serif font-bold text-foreground/40">{name}</li>
+              <li key={i} className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40">{name}</li>
             ))}
           </ul>
         </div>
@@ -225,12 +225,12 @@ const testimonials = [
 
 function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[number] }) {
   return (
-    <div className="p-10 border border-border bg-white relative h-full">
-      <div className="text-6xl text-secondary/15 font-serif absolute top-6 left-6">"</div>
-      <p className="relative z-10 text-muted-foreground leading-relaxed mb-8">"{testimonial.text}"</p>
-      <div className="border-t border-secondary pt-4">
-        <div className="font-bold text-primary">{testimonial.author}</div>
-        <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{testimonial.role}</div>
+    <div className="p-8 sm:p-10 border border-border bg-white relative h-full">
+      <div className="text-5xl sm:text-6xl text-secondary/15 font-serif absolute top-4 sm:top-6 left-4 sm:left-6">"</div>
+      <p className="relative z-10 text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">"{testimonial.text}"</p>
+      <div className="border-t border-secondary pt-3 sm:pt-4">
+        <div className="font-bold text-sm sm:text-base text-primary">{testimonial.author}</div>
+        <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider mt-1">{testimonial.role}</div>
       </div>
     </div>
   );
@@ -251,11 +251,11 @@ function TestimonialsSection() {
   };
 
   return (
-    <section className="py-24 bg-muted">
+    <section className="py-16 sm:py-20 lg:py-24 bg-muted">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">CLIENT TESTIMONIALS</h2>
-          <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">Trusted by Industry Leaders</h3>
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <h2 className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-3 sm:mb-4">CLIENT TESTIMONIALS</h2>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary">Trusted by Industry Leaders</h3>
         </div>
         
         <div className="hidden md:grid md:grid-cols-3 gap-1">

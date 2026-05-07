@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, MessageCircle, ChevronDown } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { routes, getPracticeRoute } from './routes';
 import { practiceAreas } from './practiceAreas';
@@ -84,21 +85,35 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
       </header>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background pt-24 px-6 lg:hidden overflow-y-auto">
-          <nav className="flex flex-col gap-6 text-2xl font-serif">
-            <a href={routes.home} onClick={() => setMobileMenuOpen(false)}>Home</a>
-            <a href={routes.about} onClick={() => setMobileMenuOpen(false)}>About</a>
-            <a href={routes.practiceAreas} onClick={() => setMobileMenuOpen(false)}>Practice Areas</a>
-            <div className="pl-4 flex flex-col gap-4 text-lg font-sans">
+        <div className="fixed inset-0 z-40 bg-white pt-24 px-6 lg:hidden overflow-y-auto">
+          <nav className="flex flex-col gap-6 text-2xl font-serif pb-8">
+            <a href={routes.home} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Home</a>
+            <a href={routes.about} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">About</a>
+            <a href={routes.practiceAreas} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Practice Areas</a>
+            <div className="pl-6 flex flex-col gap-4 text-base font-sans border-l-2 border-border">
               {practiceAreas.map(pa => (
-                <a key={pa.slug} href={getPracticeRoute(pa.slug)} onClick={() => setMobileMenuOpen(false)} className="text-muted-foreground">{pa.title}</a>
+                <a key={pa.slug} href={getPracticeRoute(pa.slug)} onClick={() => setMobileMenuOpen(false)} className="text-muted-foreground hover:text-secondary transition-colors">{pa.title}</a>
               ))}
             </div>
-            <a href={routes.caseStudies} onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
-            <a href={routes.insights} onClick={() => setMobileMenuOpen(false)}>Insights</a>
-            <a href={routes.faq} onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-            <a href={routes.contact} onClick={() => setMobileMenuOpen(false)}>Contact</a>
-            <a href={routes.booking} onClick={() => setMobileMenuOpen(false)} className="text-secondary">Book Consultation</a>
+            <a href={routes.caseStudies} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Case Studies</a>
+            <a href={routes.insights} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Insights</a>
+            <a href={routes.faq} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">FAQ</a>
+            <a href={routes.contact} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Contact</a>
+            
+            {/* Mobile CTA Buttons */}
+            <div className="mt-6 pt-6 border-t border-border flex flex-col gap-4">
+              <a href={routes.booking} onClick={() => setMobileMenuOpen(false)} className="w-full">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white h-14 text-base font-semibold" style={{ borderRadius: '0px' }}>
+                  Book Consultation
+                </Button>
+              </a>
+              <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full">
+                <Button variant="outline" className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white h-14 text-base" style={{ borderRadius: '0px' }}>
+                  <FaWhatsapp className="mr-2 h-5 w-5" />
+                  Chat on WhatsApp
+                </Button>
+              </a>
+            </div>
           </nav>
         </div>
       )}
