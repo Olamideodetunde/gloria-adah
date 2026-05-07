@@ -11,48 +11,57 @@ import { CTABand } from '../shared/CTABand';
 export function Home() {
   return (
     <>
-      {/* Hero Section - Airy and Authoritative */}
+      {/* Hero Section - Ultra Premium */}
       <section className="relative min-h-screen flex items-center bg-white">
-        <div className="container mx-auto px-6 py-32 lg:py-40">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column - Text Content */}
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-[0.015]" style={{ 
+          backgroundImage: 'radial-gradient(circle at 1px 1px, #002366 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }} />
+        
+        <div className="container mx-auto px-6 py-40 lg:py-48 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-20 items-center">
+            {/* Left Column - Premium Text Content */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
-              className="max-w-2xl"
+              className="lg:col-span-6 max-w-2xl"
             >
-              {/* Tagline */}
-              <motion.div variants={fadeInUp} className="mb-6">
-                <span className="text-secondary text-xs font-bold tracking-[0.2em] uppercase">
+              {/* Overline with decorative element */}
+              <motion.div variants={fadeInUp} className="mb-8 flex items-center gap-4">
+                <div className="w-12 h-[1px] bg-secondary" />
+                <span className="text-secondary text-[11px] font-bold tracking-[0.25em] uppercase">
                   COMMITTED TO EXCELLENCE
                 </span>
               </motion.div>
 
-              {/* Main Headline */}
+              {/* Main Headline - Larger, Bolder */}
               <motion.h1 
                 variants={fadeInUp} 
-                className="text-5xl sm:text-6xl lg:text-7xl leading-[1.1] mb-8 font-serif font-bold text-primary"
-                style={{ letterSpacing: '-0.02em' }}
+                className="text-6xl sm:text-7xl lg:text-8xl leading-[0.95] mb-10 font-serif font-bold text-primary"
+                style={{ letterSpacing: '-0.03em' }}
               >
-                Securing Your Business Interests in Nigeria.
+                Securing Your
+                <span className="block mt-2">Business</span>
+                <span className="block mt-2 text-secondary italic">Interests.</span>
               </motion.h1>
 
-              {/* Sub-headline */}
+              {/* Sub-headline with more breathing room */}
               <motion.p 
                 variants={fadeInUp} 
-                className="text-lg text-muted-foreground mb-12 leading-relaxed max-w-xl"
+                className="text-xl text-muted-foreground mb-14 leading-relaxed max-w-xl font-light"
               >
-                Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors.
+                Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors across Nigeria.
               </motion.p>
 
-              {/* CTA Buttons */}
-              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center mb-16">
+              {/* CTA Buttons - More prominent */}
+              <motion.div variants={fadeInUp} className="flex flex-wrap gap-5 items-center mb-20">
                 <a href={routes.booking}>
                   <Button 
                     size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-white h-14 px-10 text-base font-semibold shadow-sm"
-                    style={{ borderRadius: '2px' }}
+                    className="bg-primary hover:bg-primary/90 text-white h-16 px-12 text-base font-semibold shadow-sm hover:shadow-md transition-all"
+                    style={{ borderRadius: '0px' }}
                   >
                     Book a Consultation
                   </Button>
@@ -61,66 +70,92 @@ export function Home() {
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="h-14 px-8 text-base border-secondary text-secondary hover:bg-secondary/5 group"
-                    style={{ borderRadius: '2px', borderWidth: '1px' }}
+                    className="h-16 px-10 text-base border-secondary border-[1.5px] text-secondary hover:bg-secondary hover:text-white group transition-all"
+                    style={{ borderRadius: '0px' }}
                   >
-                    <FaWhatsapp className="mr-2 h-5 w-5 text-[#25D366] group-hover:scale-110 transition-transform" />
+                    <FaWhatsapp className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" />
                     Chat on WhatsApp
                   </Button>
                 </a>
               </motion.div>
 
-              {/* Stats Bar */}
+              {/* Stats Bar - More refined */}
               <motion.div 
                 variants={fadeInUp} 
-                className="flex items-center gap-8 border-t border-border pt-8"
+                className="flex items-center gap-10 pt-10 border-t border-border/50"
               >
-                <div className="text-center">
-                  <div className="text-3xl font-serif font-bold text-primary">10+</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Years</div>
+                <div>
+                  <div className="text-4xl font-serif font-bold text-primary mb-1">10+</div>
+                  <div className="text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Years Experience</div>
                 </div>
-                <div className="w-px h-12 bg-border" />
-                <div className="text-center">
-                  <div className="text-3xl font-serif font-bold text-primary">200+</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Clients</div>
+                <div className="w-[1px] h-14 bg-border/50" />
+                <div>
+                  <div className="text-4xl font-serif font-bold text-primary mb-1">200+</div>
+                  <div className="text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Satisfied Clients</div>
                 </div>
-                <div className="w-px h-12 bg-border" />
-                <div className="text-center">
-                  <div className="text-3xl font-serif font-bold text-primary">95%</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Success Rate</div>
+                <div className="w-[1px] h-14 bg-border/50" />
+                <div>
+                  <div className="text-4xl font-serif font-bold text-primary mb-1">95%</div>
+                  <div className="text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Success Rate</div>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Right Column - Professional Image */}
+            {/* Right Column - Sophisticated Image Treatment */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
+              initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-              className="relative hidden lg:block"
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+              className="lg:col-span-6 relative hidden lg:block"
             >
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img
-                  src="/images/hero.png"
-                  alt="Professional Legal Services"
-                  className="w-full h-full object-cover"
-                  style={{ 
-                    filter: 'brightness(1.1) contrast(1.05)',
-                    maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%)'
-                  }}
-                />
-                {/* Subtle overlay for high-key effect */}
-                <div 
-                  className="absolute inset-0" 
-                  style={{ background: 'rgba(255, 255, 255, 0.15)' }}
-                />
+              {/* Main image container */}
+              <div className="relative">
+                {/* Decorative frame */}
+                <div className="absolute -top-6 -left-6 w-full h-full border-2 border-secondary/20" />
+                
+                {/* Image */}
+                <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+                  <img
+                    src="/images/hero.png"
+                    alt="Professional Legal Excellence"
+                    className="w-full h-full object-cover"
+                    style={{ 
+                      filter: 'brightness(1.05) contrast(1.08) saturate(0.95)',
+                    }}
+                  />
+                  {/* Gradient overlay for sophistication */}
+                  <div 
+                    className="absolute inset-0" 
+                    style={{ 
+                      background: 'linear-gradient(to top, rgba(255,255,255,0.4) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.2) 100%)'
+                    }}
+                  />
+                </div>
+                
+                {/* Floating accent card */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1 }}
+                  className="absolute -bottom-8 -left-8 bg-white border border-border p-8 shadow-lg max-w-xs"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <div className="font-serif font-bold text-primary text-lg mb-1">Trusted Partner</div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Serving clients across Nigeria & internationally with excellence.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
               
-              {/* Decorative accent line */}
+              {/* Decorative vertical line */}
               <div 
-                className="absolute top-0 left-0 w-1 h-32 bg-secondary"
-                style={{ transform: 'translateX(-2rem)' }}
+                className="absolute top-0 -right-12 w-[2px] h-40 bg-gradient-to-b from-secondary to-transparent"
               />
             </motion.div>
           </div>
