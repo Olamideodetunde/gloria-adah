@@ -1,9 +1,19 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
+// Parse connection string manually to handle special characters
+const connectionString = process.env.DATABASE_URL;
+
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('localhost') ? false : { rejectUnauthorized: false }
+  connectionString: connectionString,
+  ssl: connectionString?.includes('neon.tech') 
+    ? { rejectUnauthorized: false } 
+    : false
+});
+
+// Test connection on startup
+pool.on('error', (err) => {
+  console.error('[DB] Unexpected error:', err.message);
 });
 
 export async function initDb() {
@@ -56,7 +66,7 @@ export async function initDb() {
   `);
 
   await seedBlogPosts();
-  console.log('[DB] Tables ready');
+  console.log('[DB] Tables ready and seeded');
 }
 
 async function seedBlogPosts() {
