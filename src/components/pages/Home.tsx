@@ -82,7 +82,7 @@ export function Home() {
               </motion.p>
 
               {/* CTA Buttons - Mobile optimized */}
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row flex-wrap gap-4 items-stretch sm:items-center mb-10 sm:mb-12">
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row flex-wrap gap-4 items-stretch sm:items-center">
                 <a href={routes.booking} className="w-full sm:w-auto">
                   <button
                     className="w-full sm:w-auto h-14 sm:h-[60px] px-6 sm:px-8 rounded-full font-extrabold text-[#17202d] transition-transform hover:-translate-y-0.5"
@@ -107,43 +107,6 @@ export function Home() {
                     Chat on WhatsApp
                   </button>
                 </a>
-              </motion.div>
-
-              {/* Badges */}
-              <motion.div 
-                variants={fadeInUp} 
-                className="flex flex-wrap gap-3"
-              >
-                <div 
-                  className="px-4 py-2.5 rounded-full text-white/84 text-sm"
-                  style={{
-                    background: 'rgba(255,255,255,0.08)',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    backdropFilter: 'blur(12px)'
-                  }}
-                >
-                  10+ Years Experience
-                </div>
-                <div 
-                  className="px-4 py-2.5 rounded-full text-white/84 text-sm"
-                  style={{
-                    background: 'rgba(255,255,255,0.08)',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    backdropFilter: 'blur(12px)'
-                  }}
-                >
-                  200+ Satisfied Clients
-                </div>
-                <div 
-                  className="px-4 py-2.5 rounded-full text-white/84 text-sm"
-                  style={{
-                    background: 'rgba(255,255,255,0.08)',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    backdropFilter: 'blur(12px)'
-                  }}
-                >
-                  95% Success Rate
-                </div>
               </motion.div>
             </motion.div>
           </div>
