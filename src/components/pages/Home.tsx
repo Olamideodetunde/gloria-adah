@@ -11,42 +11,54 @@ import { CTABand } from '../shared/CTABand';
 export function Home() {
   return (
     <>
-      {/* Hero Section - Ultra Premium with Mobile Optimization */}
-      <section className="relative min-h-screen flex items-center bg-white overflow-hidden">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-[0.015]" style={{ 
-          backgroundImage: 'radial-gradient(circle at 1px 1px, #002366 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }} />
+      {/* Hero Section - Wine Gradient Background with Image Overlay */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Wine gradient background */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            background: 'linear-gradient(180deg, #800020 0%, #6f1d1b 42%, #5b1918 100%)'
+          }}
+        />
         
-        {/* Mobile Background Image - Clean and Subtle */}
-        <div className="absolute inset-0 lg:hidden">
-          <img
-            src="/images/hero.png"
-            alt=""
-            className="w-full h-full object-cover"
-            style={{ 
-              filter: 'brightness(1.15) contrast(1.05) saturate(0.8)',
-              opacity: '0.08'
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `
+                linear-gradient(135deg, rgba(128,0,32,0.72), rgba(111,29,27,0.54)),
+                url('/images/hero.png')
+              `,
+              backgroundPosition: 'center center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat'
             }}
           />
-          {/* Additional white overlay for extra subtlety */}
-          <div className="absolute inset-0 bg-white/85" />
+          {/* Additional gradient overlay for depth */}
+          <div 
+            className="absolute inset-0 opacity-20"
+            style={{
+              background: `
+                radial-gradient(circle at 18% 22%, rgba(255,255,255,0.08), transparent 22%),
+                radial-gradient(circle at 78% 38%, rgba(215,162,75,0.08), transparent 20%),
+                linear-gradient(180deg, rgba(7,22,38,0.14), rgba(7,22,38,0.42))
+              `
+            }}
+          />
         </div>
         
         <div className="container mx-auto px-6 py-32 sm:py-40 lg:py-48 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-            {/* Left Column - Premium Text Content */}
+          <div className="max-w-4xl">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
-              className="lg:col-span-6 max-w-2xl"
             >
               {/* Overline with decorative element */}
               <motion.div variants={fadeInUp} className="mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
-                <div className="w-8 sm:w-12 h-[1px] bg-secondary" />
-                <span className="text-secondary text-[10px] sm:text-[11px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">
+                <div className="w-10 sm:w-12 h-[2px] rounded-full" style={{ background: 'linear-gradient(90deg, #d7a24b, rgba(255,255,255,0.1))' }} />
+                <span className="text-[#f2ddb2] text-[11px] sm:text-[13px] font-bold tracking-[0.24em] uppercase">
                   COMMITTED TO EXCELLENCE
                 </span>
               </motion.div>
@@ -54,126 +66,100 @@ export function Home() {
               {/* Main Headline - Responsive sizing */}
               <motion.h1 
                 variants={fadeInUp} 
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] mb-8 sm:mb-10 font-serif font-bold text-primary"
-                style={{ letterSpacing: '-0.03em' }}
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.7rem] leading-[0.98] mb-6 sm:mb-7 font-serif font-bold text-white max-w-[11ch]"
+                style={{ letterSpacing: '-0.03em', textWrap: 'balance' }}
               >
-                Securing Your
-                <span className="block mt-1 sm:mt-2">Business</span>
-                <span className="block mt-1 sm:mt-2 text-secondary italic">Interests.</span>
+                Securing Your Business{' '}
+                <span className="text-[#ffe7ad] italic">Interests.</span>
               </motion.h1>
 
               {/* Sub-headline with responsive sizing */}
               <motion.p 
                 variants={fadeInUp} 
-                className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 sm:mb-14 leading-relaxed max-w-xl font-light"
+                className="text-base sm:text-lg lg:text-[1.12rem] text-white/86 mb-8 sm:mb-10 leading-[1.75] max-w-[620px]"
               >
                 Providing comprehensive legal services that drive growth, compliance and business success for startups, SMEs, and foreign investors across Nigeria.
               </motion.p>
 
               {/* CTA Buttons - Mobile optimized */}
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-stretch sm:items-center mb-12 sm:mb-20">
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row flex-wrap gap-4 items-stretch sm:items-center mb-10 sm:mb-12">
                 <a href={routes.booking} className="w-full sm:w-auto">
-                  <Button 
-                    size="lg" 
-                    className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white h-14 sm:h-16 px-8 sm:px-12 text-base font-semibold shadow-sm hover:shadow-md transition-all"
-                    style={{ borderRadius: '0px' }}
+                  <button
+                    className="w-full sm:w-auto h-14 sm:h-[60px] px-6 sm:px-8 rounded-full font-extrabold text-[#17202d] transition-transform hover:-translate-y-0.5"
+                    style={{
+                      background: 'linear-gradient(135deg, #ffbf4d, #eb9f24)',
+                      boxShadow: '0 16px 30px rgba(235,159,36,0.22)'
+                    }}
                   >
                     Book a Consultation
-                  </Button>
+                    <ArrowRight className="inline-block ml-2 h-[18px] w-[18px]" />
+                  </button>
                 </a>
                 <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-10 text-base border-secondary border-[1.5px] text-secondary hover:bg-secondary hover:text-white group transition-all"
-                    style={{ borderRadius: '0px' }}
+                  <button
+                    className="w-full sm:w-auto h-14 sm:h-[60px] px-6 sm:px-8 rounded-full font-extrabold text-white border border-white/22 transition-transform hover:-translate-y-0.5"
+                    style={{
+                      background: 'rgba(255,255,255,0.08)',
+                      backdropFilter: 'blur(14px)'
+                    }}
                   >
-                    <FaWhatsapp className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" />
+                    <FaWhatsapp className="inline-block mr-2 h-[18px] w-[18px]" />
                     Chat on WhatsApp
-                  </Button>
+                  </button>
                 </a>
               </motion.div>
 
-              {/* Stats Bar - Mobile responsive */}
+              {/* Badges */}
               <motion.div 
                 variants={fadeInUp} 
-                className="flex flex-wrap items-center gap-6 sm:gap-10 pt-8 sm:pt-10 border-t border-border/50"
+                className="flex flex-wrap gap-3"
               >
-                <div>
-                  <div className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-1">10+</div>
-                  <div className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Years Experience</div>
+                <div 
+                  className="px-4 py-2.5 rounded-full text-white/84 text-sm"
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    backdropFilter: 'blur(12px)'
+                  }}
+                >
+                  10+ Years Experience
                 </div>
-                <div className="w-[1px] h-12 sm:h-14 bg-border/50" />
-                <div>
-                  <div className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-1">200+</div>
-                  <div className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Satisfied Clients</div>
+                <div 
+                  className="px-4 py-2.5 rounded-full text-white/84 text-sm"
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    backdropFilter: 'blur(12px)'
+                  }}
+                >
+                  200+ Satisfied Clients
                 </div>
-                <div className="w-[1px] h-12 sm:h-14 bg-border/50" />
-                <div>
-                  <div className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-1">95%</div>
-                  <div className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-[0.15em]">Success Rate</div>
+                <div 
+                  className="px-4 py-2.5 rounded-full text-white/84 text-sm"
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    backdropFilter: 'blur(12px)'
+                  }}
+                >
+                  95% Success Rate
                 </div>
               </motion.div>
             </motion.div>
-
-            {/* Right Column - Sophisticated Image Treatment (Desktop Only) */}
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-              className="lg:col-span-6 relative hidden lg:block"
-            >
-              {/* Main image container */}
-              <div className="relative">
-                {/* Decorative frame */}
-                <div className="absolute -top-6 -left-6 w-full h-full border-2 border-secondary/20" />
-                
-                {/* Image */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-                  <img
-                    src="/images/hero.png"
-                    alt="Professional Legal Excellence"
-                    className="w-full h-full object-cover"
-                    style={{ 
-                      filter: 'brightness(1.05) contrast(1.08) saturate(0.95)',
-                    }}
-                  />
-                  {/* Gradient overlay for sophistication */}
-                  <div 
-                    className="absolute inset-0" 
-                    style={{ 
-                      background: 'linear-gradient(to top, rgba(255,255,255,0.4) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.2) 100%)'
-                    }}
-                  />
-                </div>
-                
-                {/* Floating accent card */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1 }}
-                  className="absolute -bottom-8 -left-8 bg-white border border-border p-8 shadow-lg max-w-xs"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                      <Briefcase className="h-6 w-6 text-secondary" />
-                    </div>
-                    <div>
-                      <div className="font-serif font-bold text-primary text-lg mb-1">Trusted Partner</div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        Serving clients across Nigeria & internationally with excellence.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-              
-              {/* Decorative vertical line */}
-              <div 
-                className="absolute top-0 -right-12 w-[2px] h-40 bg-gradient-to-b from-secondary to-transparent"
-              />
-            </motion.div>
           </div>
+        </div>
+
+        {/* Scroll hint */}
+        <div className="absolute left-6 bottom-6 flex items-center gap-3 text-white/62 text-sm tracking-[0.08em] uppercase">
+          <div 
+            className="w-2.5 h-2.5 rounded-full"
+            style={{
+              background: '#f0b247',
+              boxShadow: '0 0 0 0 rgba(240,178,71,0.55)',
+              animation: 'pulse 1.8s infinite'
+            }}
+          />
+          <span className="hidden sm:inline">Scroll to explore</span>
         </div>
       </section>
 
