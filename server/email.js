@@ -149,7 +149,7 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
         <p>Dear ${clientName},</p>
         <p>Your consultation has been successfully scheduled. Please find your booking details below.</p>
         <p style="background:#fff8f0;border-left:3px solid #b87d39;padding:12px 16px;font-size:14px;color:#6b4c1e;">
-          📅 A calendar invite is attached to this email. Open the <strong>.ics</strong> file to add this appointment to Google Calendar, Apple Calendar, or Outlook.
+          📅 A Google Calendar invitation has been sent directly to your inbox. You can also use the attached <strong>.ics</strong> file to manually add this appointment to your preferred calendar (Apple Calendar, Outlook, etc.).
         </p>
         <table style="width:100%;border-collapse:collapse;margin:24px 0;">
           ${bookingRows}

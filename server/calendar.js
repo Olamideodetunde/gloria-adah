@@ -94,9 +94,13 @@ export async function createCalendarEvent({
 
     const event = await calendar.events.insert({
       calendarId,
+      sendUpdates: 'all',
       requestBody: {
         summary: `[GOA] ${serviceName} — ${clientName}`,
         description,
+        attendees: [
+          { email: clientEmail, displayName: clientName }
+        ],
         start: { dateTime: fmt(startDateTime), timeZone: 'Africa/Lagos' },
         end: { dateTime: fmt(endDateTime), timeZone: 'Africa/Lagos' },
         reminders: {
