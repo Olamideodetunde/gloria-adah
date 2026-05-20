@@ -43,7 +43,6 @@ export function Footer() {
             <div className="text-xs text-muted-foreground space-y-1 mb-6">
               <div><span className="font-semibold text-foreground">Founded:</span> 2015</div>
               <div><span className="font-semibold text-foreground">Registered:</span> 2020 (CAC: BN-3068204)</div>
-              <div><span className="font-semibold text-foreground">Experience:</span> 9+ Years</div>
             </div>
 
             <div className="border-t border-border pt-6">

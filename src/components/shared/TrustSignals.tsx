@@ -4,12 +4,6 @@ import { Award, Users, Briefcase, TrendingUp } from 'lucide-react';
 export function TrustSignals() {
   const stats = [
     {
-      icon: Award,
-      value: '9+',
-      label: 'Years of Excellence',
-      description: 'Founded in 2015'
-    },
-    {
       icon: Users,
       value: '200+',
       label: 'Clients Served',
@@ -26,6 +20,12 @@ export function TrustSignals() {
       value: '98%',
       label: 'Success Rate',
       description: 'Client satisfaction'
+    },
+    {
+      icon: Award,
+      value: 'NBA',
+      label: 'Certified',
+      description: 'Nigerian Bar Association'
     }
   ];
 

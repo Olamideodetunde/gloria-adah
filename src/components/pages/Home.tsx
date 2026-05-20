@@ -222,6 +222,50 @@ export function Home() {
             <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">NIRSAL Microfinance Bank</li>
             <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Pacific Luxury Homes</li>
           </ul>
+          {/* Duplicate for seamless infinite scroll */}
+          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 sm:[&_li]:mx-12 animate-infinite-scroll whitespace-nowrap" aria-hidden="true">
+            {/* CIDP Logo */}
+            <li className="flex items-center justify-center h-16 sm:h-20">
+              <img 
+                src="/images/cikdp.png" 
+                alt="Canada Institute of Knowledge Development" 
+                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+              />
+            </li>
+            
+            {/* Stelog Logo */}
+            <li className="flex items-center justify-center h-16 sm:h-20">
+              <img 
+                src="/images/stelog.webp" 
+                alt="Stelog Energy Group" 
+                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+              />
+            </li>
+            
+            {/* Mirak Logo */}
+            <li className="flex items-center justify-center h-16 sm:h-20">
+              <img 
+                src="/images/mirak.jpeg" 
+                alt="Mirak Global" 
+                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+              />
+            </li>
+            
+            {/* Zain Global Logo */}
+            <li className="flex items-center justify-center h-16 sm:h-20">
+              <img 
+                src="/images/zain global.jpg" 
+                alt="Zain Global UK" 
+                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+              />
+            </li>
+            
+            {/* Text fallback for clients without logos */}
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Magma Oil and Gas</li>
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Nokkies Automobile</li>
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">NIRSAL Microfinance Bank</li>
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Pacific Luxury Homes</li>
+          </ul>
         </div>
       </section>
 
