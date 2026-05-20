@@ -164,10 +164,52 @@ export function Home() {
           <h3 className="text-[10px] sm:text-xs font-bold tracking-[0.15em] sm:tracking-widest text-muted-foreground uppercase">Trusted by forward-thinking organizations</h3>
         </div>
         <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_64px,_black_calc(100%-64px),transparent_100%)] sm:[mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-6 sm:[&_li]:mx-8 animate-infinite-scroll whitespace-nowrap opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            {["Canada Institute of Knowledge Development", "Magma Oil and Gas", "Stelog Energy Group", "Nokkies Automobile", "NIRSAL Microfinance Bank", "Mirak Global", "Zain Global UK", "Pacific Luxury Homes"].map((name, i) => (
-              <li key={i} className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40">{name}</li>
-            ))}
+          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-6 sm:[&_li]:mx-8 animate-infinite-scroll whitespace-nowrap">
+            {/* CIDP Logo */}
+            <li className="flex items-center justify-center h-12 sm:h-14">
+              <img 
+                src="/images/cikdp.png" 
+                alt="Canada Institute of Knowledge Development" 
+                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+              />
+            </li>
+            
+            {/* Stelog Logo */}
+            <li className="flex items-center justify-center h-12 sm:h-14">
+              <img 
+                src="/images/stelog.webp" 
+                alt="Stelog Energy Group" 
+                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+              />
+            </li>
+            
+            {/* Mirak Logo */}
+            <li className="flex items-center justify-center h-12 sm:h-14">
+              <img 
+                src="/images/mirak.jpeg" 
+                alt="Mirak Global" 
+                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+              />
+            </li>
+            
+            {/* Zain Global Logo */}
+            <li className="flex items-center justify-center h-12 sm:h-14">
+              <img 
+                src="/images/zain global.jpg" 
+                alt="Zain Global UK" 
+                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+              />
+            </li>
+            
+            {/* Text fallback for clients without logos */}
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Magma Oil and Gas</li>
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Nokkies Automobile</li>
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">NIRSAL Microfinance Bank</li>
+            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Pacific Luxury Homes</li>
           </ul>
         </div>
       </section>
