@@ -15,7 +15,7 @@ export function About() {
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
                 <motion.h2 variants={fadeInUp} className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">Firm Story</motion.h2>
                 <motion.h3 variants={fadeInUp} className="text-3xl md:text-4xl font-serif text-primary mb-6 leading-tight">
-                  Founded in 2017, registered in 2020.
+                  Founded in 2015, registered in 2020.
                 </motion.h3>
                 <div className="space-y-6 text-muted-foreground leading-relaxed">
                   <motion.p variants={fadeInUp}>

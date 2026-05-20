@@ -16,7 +16,7 @@ export function CTABand() {
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-6">
           <a href={routes.booking} className="w-full sm:w-auto">
             <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 rounded-full h-14 px-8 text-base font-bold">
-              Book Free Consultation
+              Book Consultation
             </Button>
           </a>
           <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
@@ -26,8 +26,12 @@ export function CTABand() {
             </Button>
           </a>
         </div>
-        <p className="text-sm text-white/70">
-          Typically respond within 1 hour • Mon-Fri: 9AM - 6PM WAT
+        <p className="text-sm text-[#ffe7ad] font-medium flex items-center justify-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          Typically responds within 1 hour during business hours.
         </p>
       </div>
     </section>

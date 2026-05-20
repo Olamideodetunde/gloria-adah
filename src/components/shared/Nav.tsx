@@ -110,7 +110,7 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
               <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full">
                 <Button variant="outline" className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white h-14 text-base" style={{ borderRadius: '0px' }}>
                   <FaWhatsapp className="mr-2 h-5 w-5" />
-                  Chat on WhatsApp
+                  Request Legal Support
                 </Button>
               </a>
             </div>

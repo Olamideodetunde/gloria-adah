@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 
 export function PricingTable() {
+  const [revealedTiers, setRevealedTiers] = useState<Record<number, boolean>>({});
+
+  const toggleReveal = (index: number) => {
+    setRevealedTiers(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   const pricingTiers = [
     {
       name: 'Initial Consultation',
       price: 'FREE',
-      duration: '15–30 mins',
-      description: 'Understanding your legal issue and determining how we can assist',
+      duration: '15–30 Minutes',
+      description: 'For understanding the client’s issue, determining if we can assist, giving brief preliminary guidance, and building trust.',
       features: [
-        'Case assessment',
-        'Preliminary guidance',
-        'Determine if we can help',
-        'No obligation'
+        'Understand legal issue',
+        'Determine if we can assist',
+        'Brief preliminary guidance',
+        'Build trust & alignment'
       ],
       highlight: true
     },
@@ -20,48 +29,48 @@ export function PricingTable() {
       name: 'Legal Advisory Session',
       price: '₦20,000 – ₦50,000',
       duration: 'Per session',
-      description: 'In-depth legal advice and strategic guidance',
+      description: 'In-depth legal advice, options analysis, and strategic guidance.',
       features: [
-        'Detailed legal analysis',
-        'Strategic recommendations',
-        'Legal opinions',
-        'Follow-up support'
+        'Detailed case analysis',
+        'Strategic options review',
+        'Legal advisory & guidance',
+        'Actionable next steps'
       ]
     },
     {
-      name: 'Contract Review',
+      name: 'Contract Review Consultation',
       price: 'From ₦50,000',
       duration: 'Per document',
-      description: 'Comprehensive contract analysis and review',
+      description: 'Comprehensive contract analysis, risk assessment, and review.',
       features: [
         'Thorough document review',
-        'Risk identification',
-        'Amendment suggestions',
-        'Negotiation support'
+        'Identify hidden risks',
+        'Clause-by-clause analysis',
+        'Amendment recommendations'
       ]
     },
     {
-      name: 'Business Compliance',
+      name: 'Business Compliance Consultation',
       price: 'From ₦75,000',
       duration: 'Per consultation',
-      description: 'Regulatory compliance and corporate advisory',
+      description: 'Regulatory compliance assessment and corporate structuring advisory.',
       features: [
-        'Compliance assessment',
-        'Regulatory guidance',
-        'Documentation support',
-        'Ongoing advisory'
+        'CAC & regulatory audit',
+        'Compliance risk mitigation',
+        'Filing requirements guide',
+        'Corporate structure advisory'
       ]
     },
     {
-      name: 'Retainership',
+      name: 'Retainership Consultation',
       price: 'Custom Pricing',
-      duration: 'Monthly/Quarterly',
-      description: 'Dedicated legal support for your business',
+      duration: 'Tailored Retainer',
+      description: 'Dedicated legal support and priority representation for your business.',
       features: [
-        'Priority access',
-        'Unlimited consultations',
-        'Proactive legal support',
-        'Dedicated attorney'
+        'Priority access & booking',
+        'Ongoing corporate advisory',
+        'Drafting & negotiations',
+        'Dedicated legal counsel'
       ]
     }
   ];
@@ -101,13 +110,24 @@ export function PricingTable() {
                 <h4 className="text-xl font-serif font-bold text-primary mb-2">
                   {tier.name}
                 </h4>
-                <div className="text-3xl font-bold text-secondary mb-1">
-                  {tier.price}
+                <div className="min-h-[48px] flex items-center mb-2">
+                  {revealedTiers[index] ? (
+                    <div className="text-3xl font-bold text-secondary animate-in fade-in zoom-in-95 duration-200">
+                      {tier.price}
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => toggleReveal(index)}
+                      className="text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary/90 px-4 py-2.5 rounded-none transition-all duration-300 cursor-pointer shadow-sm hover:shadow"
+                    >
+                      Click to View Fee
+                    </button>
+                  )}
                 </div>
                 <div className="text-sm text-muted-foreground mb-3">
                   {tier.duration}
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed min-h-[60px]">
                   {tier.description}
                 </p>
               </div>
@@ -125,10 +145,8 @@ export function PricingTable() {
         </div>
 
         <div className="bg-primary/5 border border-primary/20 p-6 rounded-lg max-w-4xl mx-auto">
-          <p className="text-sm text-foreground/80 leading-relaxed">
-            <strong className="text-primary">Important:</strong> The free initial consultation is for understanding your legal issue and determining if we can assist. 
-            Detailed legal advisory, document review, legal opinions, strategy sessions, contract drafting/review, compliance advisory, 
-            and ongoing consultations are billable services. Pricing varies based on complexity and scope of work.
+          <p className="text-sm text-foreground/80 leading-relaxed text-center">
+            <strong className="text-primary font-bold">Important Note:</strong> Detailed legal advisory, document review, legal opinions, strategy sessions, contract drafting/review, compliance advisory, and ongoing consultations are billable.
           </p>
         </div>
       </div>

@@ -61,7 +61,7 @@ export function PracticeDetail({ slug }: { slug: string }) {
                   <p className="text-primary-foreground/80 mb-8 text-sm">Schedule a consultation to discuss your specific needs with our legal experts.</p>
                   <div className="space-y-4 mb-8">
                     <a href="tel:+2349029633193" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><Phone className="h-4 w-4 text-secondary" />09029633193</a>
-                    <a href="https://wa.me/2347054588490" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><MessageCircle className="h-4 w-4 text-secondary" />07054588490</a>
+                    <a href="https://wa.me/2347054588490" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><MessageCircle className="h-4 w-4 text-secondary" />07054588490 (Responds in 1 hr)</a>
                     <a href="mailto:G.ondahlawoffice@gmail.com" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><Mail className="h-4 w-4 text-secondary" />G.ondahlawoffice@gmail.com</a>
                   </div>
                   <a href={routes.booking} className="block w-full">

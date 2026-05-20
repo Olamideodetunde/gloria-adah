@@ -81,7 +81,7 @@ export function Contact() {
           >
             {[
               { icon: Phone, label: 'Call Us', value: '09029633193', href: 'tel:+2349029633193', sub: 'Mon–Fri, 8am–6pm WAT' },
-              { icon: MessageCircle, label: 'WhatsApp', value: '07054588490', href: 'https://wa.me/2347054588490', sub: '24/7 Messaging' },
+              { icon: MessageCircle, label: 'WhatsApp', value: '07054588490', href: 'https://wa.me/2347054588490', sub: 'Typically responds within 1 hour during business hours.' },
               { icon: Mail, label: 'Email Us', value: 'G.ondahlawoffice@gmail.com', href: 'mailto:G.ondahlawoffice@gmail.com', sub: 'Response within 1 business day' }
             ].map((card) => {
               const Icon = card.icon;
@@ -222,7 +222,7 @@ export function Contact() {
                       )} />
                       {submitError && <div className="text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3">{submitError}</div>}
                       <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-14 text-base">
-                        {isSubmitting ? 'Sending Message...' : 'Send Message'}
+                        {isSubmitting ? 'Sending Message...' : 'Send a Message'}
                       </Button>
                     </form>
                   </Form>

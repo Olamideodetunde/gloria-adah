@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, FileSearch, Handshake, Briefcase, HeadphonesIcon } from 'lucide-react';
+import { routes } from './routes';
 
 export function HowItWorks() {
   const steps = [
@@ -86,9 +87,9 @@ export function HowItWorks() {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="/booking" className="inline-block">
+          <a href={routes.booking} className="inline-block">
             <button className="h-14 px-8 rounded-full font-bold text-white bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl">
-              Start Your Free Consultation
+              Schedule a Call
             </button>
           </a>
         </div>

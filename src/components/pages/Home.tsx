@@ -94,7 +94,7 @@ export function Home() {
                       boxShadow: '0 16px 30px rgba(235,159,36,0.22)'
                     }}
                   >
-                    Book Free Consultation
+                    Book Consultation
                     <ArrowRight className="inline-block ml-2 h-[18px] w-[18px]" />
                   </button>
                 </a>
@@ -107,9 +107,16 @@ export function Home() {
                     }}
                   >
                     <FaWhatsapp className="inline-block mr-2 h-[18px] w-[18px]" />
-                    Chat on WhatsApp
+                    Request Legal Support
                   </button>
                 </a>
+              </motion.div>
+              <motion.div variants={fadeInUp} className="mt-4 flex items-center gap-2 text-[#f2ddb2]/80 text-xs">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span>Typically responds within 1 hour during business hours.</span>
               </motion.div>
             </motion.div>
           </div>
@@ -167,105 +174,121 @@ export function Home() {
               );
             })}
           </div>
+          
+          <div className="mt-16 text-center">
+            <a href={routes.booking} className="inline-block">
+              <button
+                className="h-14 px-8 rounded-full font-bold text-[#17202d] transition-transform hover:-translate-y-0.5"
+                style={{
+                  background: 'linear-gradient(135deg, #ffbf4d, #eb9f24)',
+                  boxShadow: '0 16px 30px rgba(235,159,36,0.22)'
+                }}
+              >
+                Schedule a Call
+                <ArrowRight className="inline-block ml-2 h-4 w-4" />
+              </button>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="py-12 sm:py-14 lg:py-16 bg-background overflow-hidden border-y border-border">
-        <div className="container mx-auto px-6 mb-6 sm:mb-8 text-center">
-          <h3 className="text-[10px] sm:text-xs font-bold tracking-[0.15em] sm:tracking-widest text-muted-foreground uppercase">Trusted by forward-thinking organizations</h3>
-        </div>
-        <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_64px,_black_calc(100%-64px),transparent_100%)] sm:[mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 sm:[&_li]:mx-12 animate-infinite-scroll whitespace-nowrap">
-            {/* CIDP Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/cikdp.png" 
-                alt="Canada Institute of Knowledge Development" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
-            </li>
-            
-            {/* Stelog Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/stelog.webp" 
-                alt="Stelog Energy Group" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
-            </li>
-            
-            {/* Mirak Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/mirak.jpeg" 
-                alt="Mirak Global" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
-            </li>
-            
-            {/* Zain Global Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/zain global.jpg" 
-                alt="Zain Global UK" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
-            </li>
-            
-            {/* Text fallback for clients without logos */}
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Magma Oil and Gas</li>
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Nokkies Automobile</li>
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">NIRSAL Microfinance Bank</li>
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Pacific Luxury Homes</li>
-          </ul>
-          {/* Duplicate for seamless infinite scroll */}
-          <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 sm:[&_li]:mx-12 animate-infinite-scroll whitespace-nowrap" aria-hidden="true">
-            {/* CIDP Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/cikdp.png" 
-                alt="Canada Institute of Knowledge Development" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-              />
-            </li>
-            
-            {/* Stelog Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/stelog.webp" 
-                alt="Stelog Energy Group" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-              />
-            </li>
-            
-            {/* Mirak Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/mirak.jpeg" 
-                alt="Mirak Global" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-              />
-            </li>
-            
-            {/* Zain Global Logo */}
-            <li className="flex items-center justify-center h-16 sm:h-20">
-              <img 
-                src="/images/zain global.jpg" 
-                alt="Zain Global UK" 
-                className="max-h-14 sm:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-              />
-            </li>
-            
-            {/* Text fallback for clients without logos */}
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Magma Oil and Gas</li>
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Nokkies Automobile</li>
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">NIRSAL Microfinance Bank</li>
-            <li className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-foreground/40 opacity-70 hover:opacity-100 transition-opacity duration-300">Pacific Luxury Homes</li>
-          </ul>
+      <section className="py-20 bg-white border-y border-border">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl md:text-4xl font-serif font-bold text-primary">
+              Partners & Clients
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 md:gap-x-12 md:gap-y-16 max-w-5xl mx-auto items-center justify-items-center">
+            {/* NNPC */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 200 60" className="max-h-12 w-auto object-contain">
+                <g transform="translate(10, 5)">
+                  <path d="M 0,25 L 15,5 L 35,5 L 20,25 Z" fill="#2E7D32" />
+                  <path d="M 20,25 L 35,5 L 45,18 L 30,38 Z" fill="#FBC02D" />
+                  <path d="M 10,38 L 30,38 L 20,50 L 0,50 Z" fill="#C62828" />
+                  <path d="M 30,38 L 45,18 L 50,30 L 35,50 Z" fill="#2E7D32" fillOpacity="0.8" />
+                </g>
+                <text x="70" y="38" fontFamily="'Outfit', sans-serif" fontWeight="900" fontSize="28" fill="#1C2D37" letterSpacing="1">NNPC</text>
+              </svg>
+            </div>
+
+            {/* SLB */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 160 50" className="max-h-12 w-auto object-contain">
+                <g transform="translate(5, 5)">
+                  <path d="M 0,25 C 20,10 40,35 60,35 L 60,15 C 40,15 20,0 0,15 Z" fill="#0033A0" />
+                  <text x="65" y="32" fontFamily="'Outfit', sans-serif" fontWeight="900" fontSize="36" fill="#0033A0" letterSpacing="-2">slb</text>
+                </g>
+              </svg>
+            </div>
+
+            {/* Shell */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 50 50" className="max-h-12 w-auto object-contain">
+                <path d="M 25,2 C 12,2 5,10 5,20 C 5,28 10,33 13,38 L 8,46 L 16,46 L 18,43 C 20,44 22,45 25,45 C 28,45 30,44 32,43 L 34,46 L 42,46 L 37,38 C 40,33 45,28 45,20 C 45,10 38,2 25,2 Z" fill="#FFD500" stroke="#E21B23" strokeWidth="3" />
+                <path d="M 25,7 C 22,7 18,9 15,13 L 20,38 C 22,39 23,40 25,40 C 27,40 28,39 30,38 L 35,13 C 32,9 28,7 25,7 Z" fill="#E21B23" />
+                <path d="M 12,18 C 12,18 14,30 20,34" stroke="#E21B23" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <path d="M 38,18 C 38,18 36,30 30,34" stroke="#E21B23" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+              </svg>
+            </div>
+
+            {/* Reservoir Group */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 220 50" className="max-h-10 w-auto object-contain">
+                <g transform="translate(5, 5)">
+                  <circle cx="20" cy="20" r="16" fill="none" stroke="#0056B3" strokeWidth="3" />
+                  <path d="M 20,9 C 20,9 13,18 13,21 C 13,25 16,28 20,28 C 24,28 27,25 27,21 C 27,18 20,9 20,9 Z" fill="#FBC02D" stroke="#0056B3" strokeWidth="2" />
+                  <text x="48" y="24" fontFamily="'Outfit', sans-serif" fontWeight="bold" fontSize="13" fill="#0056B3" letterSpacing="1.2">RESERVOIR GROUP</text>
+                </g>
+              </svg>
+            </div>
+
+            {/* Renaissance */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 220 50" className="max-h-10 w-auto object-contain">
+                <g transform="translate(5, 5)">
+                  <path d="M 5,25 C 10,12 25,12 35,18 C 25,18 18,22 15,30 Z" fill="#E67E22" />
+                  <path d="M 15,30 C 22,25 35,28 40,32 C 30,35 18,35 10,28 Z" fill="#27AE60" />
+                  <text x="48" y="22" fontFamily="'Outfit', sans-serif" fontWeight="800" fontSize="16" fill="#27AE60" letterSpacing="0.8">RENAISSANCE</text>
+                  <text x="48" y="32" fontFamily="'Outfit', sans-serif" fontSize="6.5" fill="#7F8C8D" letterSpacing="0.3">AFRICA ENERGY COMPANY LIMITED</text>
+                </g>
+              </svg>
+            </div>
+
+            {/* Baker Hughes */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 200 50" className="max-h-12 w-auto object-contain">
+                <g transform="translate(5, 5)">
+                  <path d="M 5,8 L 22,20 L 5,32 L 12,32 L 29,20 L 12,8 Z" fill="#00A86B" />
+                  <path d="M 18,8 L 35,20 L 18,32 L 25,32 L 42,20 L 25,8 Z" fill="#00A86B" fillOpacity="0.7" />
+                  <text x="50" y="22" fontFamily="'Outfit', sans-serif" fontWeight="900" fontSize="20" fill="#004B23">Baker</text>
+                  <text x="50" y="38" fontFamily="'Outfit', sans-serif" fontWeight="700" fontSize="18" fill="#004B23">Hughes</text>
+                </g>
+              </svg>
+            </div>
+
+            {/* Seplat Energy */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 160 50" className="max-h-12 w-auto object-contain">
+                <g transform="translate(5, 5)">
+                  <text x="5" y="30" fontFamily="'Outfit', sans-serif" fontWeight="900" fontSize="30" fill="#C62828">Seplat</text>
+                  <text x="90" y="30" fontFamily="'Outfit', sans-serif" fontWeight="300" fontSize="28" fill="#2E7D32">nergy</text>
+                  <path d="M 10,38 C 45,38 75,34 140,32" stroke="#2E7D32" strokeWidth="4.5" fill="none" strokeLinecap="round" />
+                </g>
+              </svg>
+            </div>
+
+            {/* ExxonMobil */}
+            <div className="flex items-center justify-center h-16 w-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <svg viewBox="0 0 180 50" className="max-h-12 w-auto object-contain">
+                <g transform="translate(5, 5)">
+                  <text x="0" y="32" fontFamily="'Outfit', sans-serif" fontWeight="900" fontSize="30" fill="#E21B23" letterSpacing="-1.5">ExxonMobil</text>
+                </g>
+              </svg>
+            </div>
+          </div>
         </div>
       </section>
 

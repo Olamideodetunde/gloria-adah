@@ -16,10 +16,10 @@ export function WhatsAppFAB() {
             <div className="text-xs text-muted-foreground space-y-1">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span>Typically responds within 1 hour</span>
+                <span>Typically responds within 1 hour during business hours.</span>
               </div>
               <div className="text-[11px] text-muted-foreground/70">
-                Mon-Fri: 9:00 AM - 6:00 PM WAT
+                Mon-Fri: 8:00 AM - 6:00 PM WAT
               </div>
             </div>
             {/* Arrow */}
