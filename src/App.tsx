@@ -31,15 +31,35 @@ declare global {
 const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
 
 export default function App() {
-  const [route, setRoute] = useState(window.location.hash || '#/');
+  const [route, setRoute] = useState(window.location.pathname || '/');
 
   useEffect(() => {
-    const handleHashChange = () => {
-      setRoute(window.location.hash || '#/');
+    const handlePopState = () => {
+      setRoute(window.location.pathname || '/');
       window.scrollTo(0, 0);
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+
+    const handleLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        if (href && href.startsWith('/') && !href.startsWith('//')) {
+          e.preventDefault();
+          window.history.pushState(null, '', href);
+          setRoute(href);
+          window.scrollTo(0, 0);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    document.addEventListener('click', handleLinkClick);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      document.removeEventListener('click', handleLinkClick);
+    };
   }, []);
 
   useEffect(() => {
@@ -65,27 +85,27 @@ export default function App() {
   }, [route]);
 
   const renderRoute = () => {
-    if (route === '#/' || route === '') return <Home />;
-    if (route === '#/about') return <About />;
-    if (route === '#/practice-areas') return <PracticeAreas />;
-    if (route.startsWith('#/practice/')) return <PracticeDetail slug={route.replace('#/practice/', '')} />;
-    if (route === '#/attorneys/gloria-ondah') return <Attorney />;
-    if (route === '#/insights') return <Insights />;
-    if (route.startsWith('#/insights/')) return <InsightsSingle slug={route.replace('#/insights/', '')} />;
-    if (route === '#/case-studies') return <CaseStudies />;
-    if (route === '#/faq') return <Faq />;
-    if (route === '#/contact') return <Contact />;
-    if (route === '#/booking') return <Booking />;
-    if (route === '#/privacy') return <Privacy />;
-    if (route === '#/terms') return <Terms />;
-    if (route === '#/disclaimer') return <Disclaimer />;
-    if (route === '#/admin') return <Admin />;
+    if (route === '/' || route === '') return <Home />;
+    if (route === '/about') return <About />;
+    if (route === '/practice-areas') return <PracticeAreas />;
+    if (route.startsWith('/practice/')) return <PracticeDetail slug={route.replace('/practice/', '')} />;
+    if (route === '/attorneys/gloria-ondah') return <Attorney />;
+    if (route === '/insights') return <Insights />;
+    if (route.startsWith('/insights/')) return <InsightsSingle slug={route.replace('/insights/', '')} />;
+    if (route === '/case-studies') return <CaseStudies />;
+    if (route === '/faq') return <Faq />;
+    if (route === '/contact') return <Contact />;
+    if (route === '/booking') return <Booking />;
+    if (route === '/privacy') return <Privacy />;
+    if (route === '/terms') return <Terms />;
+    if (route === '/disclaimer') return <Disclaimer />;
+    if (route === '/admin') return <Admin />;
     return <Home />;
   };
 
   return (
     <div className="min-h-screen bg-background selection:bg-secondary selection:text-white flex flex-col overflow-x-hidden">
-      <Nav currentRoute={route} darkHero={route === '#/' || route === ''} />
+      <Nav currentRoute={route} darkHero={route === '/' || route === ''} />
       <main className="flex-grow">
         <AnimatePresence mode="wait">
           <motion.div

@@ -7,9 +7,10 @@ const BREVO_API = 'https://api.brevo.com/v3/smtp/email';
 
 const SERVICE_DURATIONS = {
   'Initial Consultation': 30,
-  'Strategy Session': 60,
-  'Document Review': 45,
-  'Retainer Discovery': 15
+  'Legal Advisory Session': 60,
+  'Contract Review Consultation': 45,
+  'Business Compliance Consultation': 45,
+  'Retainership Consultation': 15
 };
 
 export function isConfigured() {

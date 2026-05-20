@@ -13,10 +13,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { practiceAreas } from '../shared/practiceAreas';
 
 const serviceTypes = [
-  { id: 'initial', name: 'Initial Consultation', duration: 30, price: 15000 },
-  { id: 'strategy', name: 'Strategy Session', duration: 60, price: 35000 },
-  { id: 'document', name: 'Document Review', duration: 45, price: 25000 },
-  { id: 'retainer', name: 'Retainer Discovery', duration: 15, price: 0 }
+  { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
+  { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 20000 },
+  { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 50000 },
+  { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 75000 },
+  { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 }
 ];
 
 const ALL_TIME_SLOTS = ["09:00 AM", "10:00 AM", "11:30 AM", "01:00 PM", "02:30 PM", "04:00 PM"];

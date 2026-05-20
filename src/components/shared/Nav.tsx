@@ -36,7 +36,7 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
             {[
               { href: routes.about, label: 'About', active: currentRoute === routes.about },
               { href: routes.caseStudies, label: 'Case Studies', active: currentRoute === routes.caseStudies },
-              { href: routes.insights, label: 'Insights', active: currentRoute.startsWith('#/insight') },
+              { href: routes.insights, label: 'Insights', active: currentRoute.startsWith('/insight') },
               { href: routes.contact, label: 'Contact', active: currentRoute === routes.contact },
             ].map(link => (
               <a key={link.href} href={link.href}
@@ -46,7 +46,7 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
             ))}
 
             <div className="relative group">
-              <a href={routes.practiceAreas} className={`flex items-center gap-1 text-sm font-semibold hover:text-secondary transition-colors ${currentRoute.startsWith('#/practice') ? 'text-secondary' : 'text-foreground'}`}>
+              <a href={routes.practiceAreas} className={`flex items-center gap-1 text-sm font-semibold hover:text-secondary transition-colors ${currentRoute.startsWith('/practice') ? 'text-secondary' : 'text-foreground'}`}>
                 Practice Areas <ChevronDown className="h-3 w-3" />
               </a>
               <div className="absolute top-full left-0 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">

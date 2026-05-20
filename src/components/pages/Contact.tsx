@@ -215,7 +215,7 @@ export function Contact() {
                         <FormItem className="flex flex-row items-start space-x-3 space-y-0 border border-border p-4 bg-background">
                           <FormControl><input type="checkbox" className="mt-1 w-4 h-4" checked={field.value} onChange={field.onChange} /></FormControl>
                           <div className="space-y-1 leading-none">
-                            <FormLabel className="text-xs text-muted-foreground font-normal">I consent to Gloria Ondah & Associates collecting and processing my data in accordance with the NDPR and the <a href="#/privacy" className="text-secondary hover:underline">Privacy Policy</a>.</FormLabel>
+                            <FormLabel className="text-xs text-muted-foreground font-normal">I consent to Gloria Ondah & Associates collecting and processing my data in accordance with the NDPR and the <a href="/privacy" className="text-secondary hover:underline">Privacy Policy</a>.</FormLabel>
                             <FormMessage />
                           </div>
                         </FormItem>

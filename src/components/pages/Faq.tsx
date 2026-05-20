@@ -8,7 +8,7 @@ const faqs = [
   {
     category: "Consultations & Fees",
     questions: [
-      { q: "Do you charge for initial consultations?", a: "Yes. Our standard Initial Consultation (30 mins) is ₦15,000, and an in-depth Strategy Session (60 mins) is ₦35,000. However, we offer a free Retainer Discovery call for businesses looking to engage us on a monthly retainer basis." },
+      { q: "Do you charge for initial consultations?", a: "No. We offer a Complimentary Initial Consultation (15–30 minutes) to understand your legal issue, determine if we can assist, and provide preliminary guidance. Detailed legal advisory sessions, document reviews, compliance audits, and contract drafting are billable. You can view all options on our Booking page." },
       { q: "How do you structure your legal fees?", a: "Depending on the matter, we charge flat fees for specific transactions (e.g., company registration, contract drafting), hourly rates for ongoing advisory, or monthly retainer fees for businesses requiring continuous legal support." },
       { q: "Do you offer virtual consultations?", a: "Absolutely. We conduct consultations via Google Meet, Zoom, or WhatsApp video, making our services accessible to clients nationwide and internationally." },
       { q: "What payment methods do you accept?", a: "We accept bank transfers, card payments via our secure online portal, and USSD payments." }
@@ -59,7 +59,7 @@ export function Faq() {
             <div className="mt-20 p-8 bg-muted text-center border border-border">
               <h4 className="text-xl font-serif text-primary mb-4">Still have questions?</h4>
               <p className="text-muted-foreground mb-6">We're here to help clarify any legal requirements for your business.</p>
-              <a href="#/contact" className="inline-block px-8 py-3 bg-primary text-white font-medium hover:bg-primary/90 transition-colors">Contact Us</a>
+              <a href="/contact" className="inline-block px-8 py-3 bg-primary text-white font-medium hover:bg-primary/90 transition-colors">Contact Us</a>
             </div>
           </div>
         </section>

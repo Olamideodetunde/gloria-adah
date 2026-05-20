@@ -230,7 +230,7 @@ export function Admin() {
             </Button>
           </form>
           <p className="text-xs text-muted-foreground text-center mt-6">
-            <a href="#/" className="hover:text-primary transition-colors">← Back to website</a>
+            <a href="/" className="hover:text-primary transition-colors">← Back to website</a>
           </p>
         </motion.div>
       </div>
@@ -275,7 +275,7 @@ export function Admin() {
                 <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
                 <span className="hidden sm:inline text-xs">Refresh</span>
               </Button>
-              <a href="#/"><Button variant="ghost" size="sm" className="gap-2 text-muted-foreground text-xs"><Globe className="h-3.5 w-3.5" />View Site</Button></a>
+              <a href="/"><Button variant="ghost" size="sm" className="gap-2 text-muted-foreground text-xs"><Globe className="h-3.5 w-3.5" />View Site</Button></a>
               <Button variant="ghost" size="sm" onClick={clearToken} className="gap-2 text-muted-foreground text-xs">
                 <LogOut className="h-3.5 w-3.5" />Sign Out
               </Button>
@@ -573,7 +573,7 @@ export function Admin() {
                               <p className="mb-2"><strong>Excerpt:</strong> {post.excerpt || '—'}</p>
                               <p><strong>Slug:</strong> <code className="bg-muted px-1.5 py-0.5 text-xs font-mono">{post.slug}</code></p>
                               {post.is_published && (
-                                <a href={`#/insights/${post.slug}`} className="inline-flex items-center gap-1 mt-3 text-xs text-secondary font-medium hover:underline">
+                                <a href={`/insights/${post.slug}`} className="inline-flex items-center gap-1 mt-3 text-xs text-secondary font-medium hover:underline">
                                   <Eye className="h-3 w-3" /> Preview on site
                                 </a>
                               )}
