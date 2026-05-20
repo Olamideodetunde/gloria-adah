@@ -271,34 +271,6 @@ export function Home() {
 
       <TestimonialsSection />
 
-      {/* Middle CTA Section */}
-      <section className="py-16 sm:py-20 bg-white border-y border-border">
-        <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
-            Need Legal Support? Let's Talk.
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
-            Start with a free consultation. No pressure, no obligation—just expert guidance.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href={routes.booking} className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto h-14 px-8 rounded-full font-bold text-white bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl">
-                Schedule a Call
-                <ArrowRight className="inline-block ml-2 h-5 w-5" />
-              </button>
-            </a>
-            <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto h-14 px-8 rounded-full font-bold text-primary border-2 border-primary hover:bg-primary hover:text-white transition-all duration-300">
-                <FaWhatsapp className="inline-block mr-2 h-5 w-5" />
-                Send a Message
-              </button>
-            </a>
-          </div>
-        </div>
-      </section>
-
-
-
       <CTABand />
     </>
   );
