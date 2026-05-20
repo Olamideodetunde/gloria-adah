@@ -1,24 +1,34 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { FaWhatsapp } from 'react-icons/fa';
 import { routes } from './routes';
 
 export function CTABand() {
   return (
     <section className="bg-primary text-primary-foreground py-20">
       <div className="container mx-auto px-6 text-center max-w-3xl">
-        <h2 className="text-4xl font-serif mb-8">Ready to Get Started? Book Your Consultation Today.</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          <a href={routes.booking}>
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 rounded-none h-14 px-8 text-base">
-              Book Consultation
+        <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-4">
+          Ready to Secure Your Business Interests?
+        </h2>
+        <p className="text-lg text-white/90 mb-8 leading-relaxed">
+          Start with a free consultation. No commitment required.
+        </p>
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-6">
+          <a href={routes.booking} className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 rounded-full h-14 px-8 text-base font-bold">
+              Book Free Consultation
             </Button>
           </a>
-          <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer">
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-none h-14 px-8 text-base">
-              Message on WhatsApp
+          <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto border-2 border-white text-white bg-transparent hover:bg-white hover:text-primary rounded-full h-14 px-8 text-base font-bold transition-all duration-300">
+              <FaWhatsapp className="inline-block mr-2 h-5 w-5" />
+              Request Legal Support
             </Button>
           </a>
         </div>
+        <p className="text-sm text-white/70">
+          Typically respond within 1 hour • Mon-Fri: 9AM - 6PM WAT
+        </p>
       </div>
     </section>
   );

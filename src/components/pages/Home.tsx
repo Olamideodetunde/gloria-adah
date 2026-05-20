@@ -7,6 +7,9 @@ import { fadeInUp, staggerContainer } from '../shared/motion';
 import { routes, getPracticeRoute, practiceIcons } from '../shared/routes';
 import { practiceAreas } from '../shared/practiceAreas';
 import { CTABand } from '../shared/CTABand';
+import { TrustSignals } from '../shared/TrustSignals';
+import { HowItWorks } from '../shared/HowItWorks';
+import { PricingTable } from '../shared/PricingTable';
 
 export function Home() {
   return (
@@ -91,7 +94,7 @@ export function Home() {
                       boxShadow: '0 16px 30px rgba(235,159,36,0.22)'
                     }}
                   >
-                    Book a Consultation
+                    Book Free Consultation
                     <ArrowRight className="inline-block ml-2 h-[18px] w-[18px]" />
                   </button>
                 </a>
@@ -126,6 +129,14 @@ export function Home() {
         </div>
       </section>
 
+      {/* Trust Signals Section */}
+      <TrustSignals />
+
+      {/* How It Works Section */}
+      <HowItWorks />
+
+      {/* Pricing Table Section */}
+      <PricingTable />
 
       <section className="py-20 sm:py-28 lg:py-32 bg-white">
         <div className="container mx-auto px-6 max-w-7xl">
@@ -215,6 +226,32 @@ export function Home() {
       </section>
 
       <TestimonialsSection />
+
+      {/* Middle CTA Section */}
+      <section className="py-16 sm:py-20 bg-white border-y border-border">
+        <div className="container mx-auto px-6 max-w-4xl text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
+            Need Legal Support? Let's Talk.
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
+            Start with a free consultation. No pressure, no obligation—just expert guidance.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href={routes.booking} className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto h-14 px-8 rounded-full font-bold text-white bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl">
+                Schedule a Call
+                <ArrowRight className="inline-block ml-2 h-5 w-5" />
+              </button>
+            </a>
+            <a href="https://wa.me/2347054588490" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto h-14 px-8 rounded-full font-bold text-primary border-2 border-primary hover:bg-primary hover:text-white transition-all duration-300">
+                <FaWhatsapp className="inline-block mr-2 h-5 w-5" />
+                Send a Message
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
 
 
 

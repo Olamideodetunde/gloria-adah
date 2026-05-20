@@ -33,13 +33,18 @@ export function Footer() {
             <a href={routes.home} className="flex items-center gap-3 mb-6">
               <img src="/images/goa-logo.png" alt="GOA" className="h-12 w-auto" />
               <div>
-                <div className="font-serif font-bold text-lg leading-tight text-primary">Gloria Ondah</div>
-                <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">& Associates</div>
+                <div className="font-serif font-bold text-lg leading-tight text-primary">Gloria Ondah & Associates</div>
+                <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Legal Practitioners</div>
               </div>
             </a>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               Providing comprehensive legal services that drive growth, compliance, and business success for startups, SMEs, and foreign investors in Nigeria.
             </p>
+            <div className="text-xs text-muted-foreground space-y-1 mb-6">
+              <div><span className="font-semibold text-foreground">Founded:</span> 2015</div>
+              <div><span className="font-semibold text-foreground">Registered:</span> 2020 (CAC: BN-3068204)</div>
+              <div><span className="font-semibold text-foreground">Experience:</span> 9+ Years</div>
+            </div>
 
             <div className="border-t border-border pt-6">
               <h5 className="text-xs font-bold tracking-widest uppercase text-primary mb-3">Legal Updates & Insights</h5>
