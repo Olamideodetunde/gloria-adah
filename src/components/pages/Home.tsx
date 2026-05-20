@@ -202,38 +202,41 @@ export function Home() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto items-center justify-items-center">
             {/* CIKDP */}
-            <div className="flex items-center justify-center h-20 w-full opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
               <img 
                 src="/images/cikdp.png" 
                 alt="CIKDP" 
-                className="max-h-16 max-w-full w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
+                className="max-h-16 max-w-full w-auto object-contain" 
               />
             </div>
 
             {/* Mirak */}
-            <div className="flex items-center justify-center h-20 w-full opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
               <img 
                 src="/images/mirak.jpeg" 
                 alt="Mirak" 
-                className="max-h-14 max-w-full w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
+                className="max-h-14 max-w-full w-auto object-contain" 
               />
             </div>
 
             {/* Stelog */}
-            <div className="flex items-center justify-center h-20 w-full opacity-75 hover:opacity-100 transition-opacity duration-300">
-              <img 
-                src="/images/stelog.webp" 
-                alt="Stelog" 
-                className="max-h-12 max-w-full w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
+            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
+              <div className="flex items-center gap-3">
+                <img 
+                  src="/images/stelog.webp" 
+                  alt="Stelog" 
+                  className="max-h-12 w-auto object-contain" 
+                />
+                <span className="font-serif font-bold text-xl tracking-wider text-[#1C2D37]">STELOG</span>
+              </div>
             </div>
 
             {/* Zain Global */}
-            <div className="flex items-center justify-center h-20 w-full opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
               <img 
                 src="/images/zain global.jpg" 
                 alt="Zain Global" 
-                className="max-h-14 max-w-full w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
+                className="max-h-14 max-w-full w-auto object-contain" 
               />
             </div>
           </div>
