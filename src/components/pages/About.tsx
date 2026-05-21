@@ -134,13 +134,13 @@ export function About() {
                 {
                   name: 'Corporate Affairs Commission',
                   acronym: 'CAC',
-                  logo: '/images/cac.webp',
+                  logo: '/images/cac.jpg',
                   desc: 'The regulatory body governing company incorporation and corporate affairs in Nigeria. We are fully accredited agents in good standing.'
                 },
                 {
                   name: 'International Bar Association',
                   acronym: 'IBA',
-                  logo: '/images/iba logo.png',
+                  logo: '/images/iba.png',
                   desc: 'The global forum for the legal profession, connecting practitioners worldwide to promote justice, human rights, and the rule of law.'
                 }
               ].map((aff, index) => (
