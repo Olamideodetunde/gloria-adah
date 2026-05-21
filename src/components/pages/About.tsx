@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ShieldCheck, Target, Eye, HeartHandshake, Scale, Sparkles, Zap, Users, Brain } from 'lucide-react';
+import { Award, ShieldCheck, Target, Eye, HeartHandshake, Scale, Sparkles, Zap, Users, Brain, ArrowRight } from 'lucide-react';
 import { PageShell } from '../shared/PageShell';
 import { CTABand } from '../shared/CTABand';
+import { routes } from '../shared/routes';
 import { fadeInUp, staggerContainer } from '../shared/motion';
 
 export function About() {
@@ -107,6 +108,89 @@ export function About() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Leadership Section */}
+        <section id="attorneys" className="py-24 bg-muted/30 border-t border-border scroll-mt-20">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="text-center max-w-3xl mx-auto mb-20">
+              <h2 className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">OUR LEADERSHIP</h2>
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary">Experienced Legal Partners</h3>
+              <p className="text-muted-foreground mt-4 leading-relaxed">
+                Our partners combine deep regulatory insights, commercial acumen, and legal excellence to deliver the highest standards of legal representation and business protection.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+              {/* Partner Card 1: Gloria Ondah */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                  <img
+                    src="/images/gloria.png"
+                    alt="Gloria Ondah"
+                    className="w-full h-full object-cover grayscale-[20%] sepia-[10%] contrast-[110%] transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Gloria Ondah, Esq.</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Principal Partner</p>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Gloria Ondah is the founder and Principal Partner of Gloria Ondah & Associates. With over eight years of experience, she specializes in corporate law, commercial negotiations, and dispute resolution, guiding startups and foreign investors through the complex Nigerian business landscape.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorney}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Partner Card 2: Frederick Adino */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                  <img
+                    src="/images/frederick.jpg"
+                    alt="Frederick Adino"
+                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Frederick Adino, Esq.</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Senior Partner</p>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Frederick Adino is a seasoned legal practitioner and Senior Partner at the firm. He possesses extensive expertise in corporate governance, regulatory compliance, taxation, and commercial litigation, helping businesses achieve sustainable growth and robust legal protection.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorneyFrederick}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>

@@ -10,6 +10,7 @@ import { About } from './components/pages/About';
 import { PracticeAreas } from './components/pages/PracticeAreas';
 import { PracticeDetail } from './components/pages/PracticeDetail';
 import { Attorney } from './components/pages/Attorney';
+import { AttorneyFrederick } from './components/pages/AttorneyFrederick';
 import { Insights } from './components/pages/Insights';
 import { InsightsSingle } from './components/pages/InsightsSingle';
 import { CaseStudies } from './components/pages/CaseStudies';
@@ -90,6 +91,7 @@ export default function App() {
     if (route === '/practice-areas') return <PracticeAreas />;
     if (route.startsWith('/practice/')) return <PracticeDetail slug={route.replace('/practice/', '')} />;
     if (route === '/attorneys/gloria-ondah') return <Attorney />;
+    if (route === '/attorneys/frederick-adino') return <AttorneyFrederick />;
     if (route === '/insights') return <Insights />;
     if (route.startsWith('/insights/')) return <InsightsSingle slug={route.replace('/insights/', '')} />;
     if (route === '/case-studies') return <CaseStudies />;
