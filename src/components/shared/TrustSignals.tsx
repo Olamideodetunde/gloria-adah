@@ -1,26 +1,8 @@
 import React from 'react';
-import { Award, Users, Briefcase, TrendingUp } from 'lucide-react';
+import { Award } from 'lucide-react';
 
 export function TrustSignals() {
   const stats = [
-    {
-      icon: Users,
-      value: '200+',
-      label: 'Clients Served',
-      description: 'Across multiple sectors'
-    },
-    {
-      icon: Briefcase,
-      value: '500+',
-      label: 'Cases Handled',
-      description: 'Successfully resolved'
-    },
-    {
-      icon: TrendingUp,
-      value: '98%',
-      label: 'Success Rate',
-      description: 'Client satisfaction'
-    },
     {
       icon: Award,
       value: 'NBA',
@@ -30,9 +12,18 @@ export function TrustSignals() {
   ];
 
   const affiliations = [
-    'Nigerian Bar Association (NBA)',
-    'Corporate Affairs Commission (CAC)',
-    'International Bar Association (IBA)'
+    {
+      name: 'Nigerian Bar Association (NBA)',
+      logo: '/images/nba-logo.svg',
+    },
+    {
+      name: 'Corporate Affairs Commission (CAC)',
+      logo: '/images/cac.webp',
+    },
+    {
+      name: 'International Bar Association (IBA)',
+      logo: '/images/iba logo.png',
+    }
   ];
 
   return (
@@ -48,7 +39,7 @@ export function TrustSignals() {
           <h2 className="text-xs font-bold tracking-widest text-secondary uppercase mb-4">
             TRUSTED LEGAL PARTNER
           </h2>
-          <h3 className="text-4xl sm:text-5xl font-serif font-bold mb-4">
+          <h3 className="text-4xl sm:text-5xl font-serif font-bold mb-4 text-white">
             Gloria Ondah & Associates
           </h3>
           <p className="text-lg text-white/90 leading-relaxed mb-2">
@@ -59,36 +50,48 @@ export function TrustSignals() {
           </p>
         </div>
 
-        {/* Statistics Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Statistics Grid - Single Prominent Centered Badge */}
+        <div className="flex justify-center mb-16">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center hover:bg-white/15 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 text-center hover:bg-white/15 transition-all duration-300 max-w-sm w-full shadow-xl"
               >
-                <Icon className="h-10 w-10 text-secondary mx-auto mb-4" />
-                <div className="text-4xl font-bold mb-2">{stat.value}</div>
-                <div className="text-lg font-semibold mb-1">{stat.label}</div>
-                <div className="text-sm text-white/70">{stat.description}</div>
+                <Icon className="h-12 w-12 text-secondary mx-auto mb-4" />
+                <div className="text-5xl font-extrabold mb-2 tracking-tight text-white">{stat.value}</div>
+                <div className="text-lg font-bold mb-1 uppercase tracking-wider text-secondary">{stat.label}</div>
+                <div className="text-sm text-white/80">{stat.description}</div>
               </div>
             );
           })}
         </div>
 
-        {/* Professional Affiliations */}
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 max-w-4xl mx-auto">
-          <h4 className="text-xl font-serif font-bold text-center mb-6">
+        {/* Professional Affiliations with Logos */}
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 sm:p-10 max-w-4xl mx-auto">
+          <h4 className="text-2xl font-serif font-bold text-center mb-8">
             Professional Affiliations
           </h4>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {affiliations.map((affiliation, index) => (
+          <div className="grid sm:grid-cols-3 gap-6">
+            {affiliations.map((aff, index) => (
               <div
                 key={index}
-                className="text-center py-3 px-4 bg-white/5 border border-white/10 text-sm font-medium"
+                className="flex flex-col items-center justify-center p-6 bg-white border border-white/10 shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 group"
               >
-                {affiliation}
+                <div className="h-16 w-full flex items-center justify-center mb-4">
+                  <img
+                    src={aff.logo}
+                    alt={aff.name}
+                    className="max-h-full max-w-full object-contain filter group-hover:brightness-105 transition-all"
+                  />
+                </div>
+                <div className="text-center text-xs font-bold text-primary uppercase tracking-wider mt-2 line-clamp-2">
+                  {aff.name.split(' (')[0]}
+                </div>
+                <div className="text-center text-[10px] text-secondary font-extrabold uppercase mt-0.5">
+                  {aff.name.includes('(') ? aff.name.split(' (')[1].replace(')', '') : ''}
+                </div>
               </div>
             ))}
           </div>
