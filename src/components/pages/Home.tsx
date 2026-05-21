@@ -187,51 +187,113 @@ export function Home() {
       </section>
 
       <section className="py-20 bg-white border-y border-border">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-16">
+            <h2 className="text-xs font-bold tracking-widest text-secondary uppercase mb-3">
+              TRUSTED BY LEADING ORGANIZATIONS
+            </h2>
             <h3 className="text-3xl md:text-4xl font-serif font-bold text-primary">
-              Clients
+              Our Clients
             </h3>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto items-center justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 items-stretch justify-center">
             {/* CIKDP */}
-            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
-              <img 
-                src="/images/cikdp.png" 
-                alt="CIKDP" 
-                className="max-h-16 max-w-full w-auto object-contain" 
-              />
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
+                <img 
+                  src="/images/cikdp.png" 
+                  alt="CIKDP" 
+                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                CIKDP
+              </span>
             </div>
 
             {/* Mirak */}
-            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
-              <img 
-                src="/images/mirak.jpeg" 
-                alt="Mirak" 
-                className="max-h-14 max-w-full w-auto object-contain" 
-              />
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
+                <img 
+                  src="/images/mirak.jpeg" 
+                  alt="Mirak" 
+                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                Mirak
+              </span>
             </div>
 
             {/* Stelog */}
-            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
                 <img 
                   src="/images/stelog.webp" 
                   alt="Stelog" 
-                  className="max-h-12 w-auto object-contain" 
+                  className="max-h-10 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
                 />
-                <span className="font-serif font-bold text-xl tracking-wider text-[#1C2D37]">STELOG</span>
               </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                Stelog Energy
+              </span>
             </div>
 
             {/* Zain Global */}
-            <div className="flex items-center justify-center h-20 w-full opacity-90 hover:opacity-100 transition-opacity duration-300">
-              <img 
-                src="/images/zain global.jpg" 
-                alt="Zain Global" 
-                className="max-h-14 max-w-full w-auto object-contain" 
-              />
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
+                <img 
+                  src="/images/zain global.jpg" 
+                  alt="Zain Global" 
+                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                Zain Global
+              </span>
+            </div>
+
+            {/* DC Premium Logistics */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
+                <img 
+                  src="/images/dcpremium.jpg" 
+                  alt="DC Premium Logistics & Solutions Ltd" 
+                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                DC Premium
+              </span>
+            </div>
+
+            {/* NIRSAL Microfinance Bank */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
+                <img 
+                  src="/images/nirsal.png" 
+                  alt="NIRSAL MICROFINANCE BANK LTD" 
+                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                NIRSAL MFB
+              </span>
+            </div>
+
+            {/* UBJ Microfinance Bank */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center mb-3">
+                <img 
+                  src="/images/ubj.png" 
+                  alt="UBJ Microfinance Bank Ltd" 
+                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </div>
+              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
+                UBJ MFB
+              </span>
             </div>
           </div>
         </div>
