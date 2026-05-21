@@ -204,7 +204,7 @@ export function Home() {
                 <img 
                   src="/images/cikdp.png" 
                   alt="CIKDP" 
-                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
@@ -218,7 +218,7 @@ export function Home() {
                 <img 
                   src="/images/mirak.jpeg" 
                   alt="Mirak" 
-                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
@@ -232,7 +232,7 @@ export function Home() {
                 <img 
                   src="/images/stelog.webp" 
                   alt="Stelog" 
-                  className="max-h-10 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-10 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
@@ -246,7 +246,7 @@ export function Home() {
                 <img 
                   src="/images/zain global.jpg" 
                   alt="Zain Global" 
-                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
@@ -260,7 +260,7 @@ export function Home() {
                 <img 
                   src="/images/dcpremium.jpg" 
                   alt="DC Premium Logistics & Solutions Ltd" 
-                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
@@ -274,7 +274,7 @@ export function Home() {
                 <img 
                   src="/images/nirsal.png" 
                   alt="NIRSAL MICROFINANCE BANK LTD" 
-                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
@@ -288,7 +288,7 @@ export function Home() {
                 <img 
                   src="/images/ubj.png" 
                   alt="UBJ Microfinance Bank Ltd" 
-                  className="max-h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                  className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
               <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
