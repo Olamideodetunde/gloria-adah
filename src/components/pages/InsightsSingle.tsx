@@ -156,11 +156,11 @@ export function InsightsSingle({ slug }: { slug: string }) {
               <div className="mt-16 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden bg-muted border-2 border-border">
-                    <img src="/images/gloria.png" alt={post.author} className="w-full h-full object-cover" style={{ objectPosition: 'center 22%' }} />
+                    <img src="/images/gloria.jpg" alt={post.author} className="w-full h-full object-cover" style={{ objectPosition: 'center 22%' }} />
                   </div>
                   <div>
                     <div className="font-bold text-primary">{post.author}</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-widest">Principal Partner, GOA</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-widest">Managing Partner, GOA</div>
                   </div>
                 </div>
                 <a href={routes.insights}>

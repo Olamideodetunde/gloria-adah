@@ -123,7 +123,7 @@ export function CaseStudies() {
               <p className="font-serif text-2xl md:text-3xl leading-relaxed max-w-3xl mx-auto mb-6">
                 "We are committed to maintaining the highest standards of professionalism, integrity, and ethical conduct in all our engagements."
               </p>
-              <div className="text-xs tracking-[0.3em] uppercase text-secondary">— Gloria Ondah, Principal Partner</div>
+              <div className="text-xs tracking-[0.3em] uppercase text-secondary">— Gloria Ondah, Managing Partner</div>
             </div>
 
             <div className="mt-16 text-center">

@@ -39,7 +39,7 @@ export function About() {
                 className="relative w-full"
               >
                 <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4 pointer-events-none"></div>
-                <img src="/images/gloria.png" alt="Gloria Ondah, Principal" className="relative w-full h-auto block grayscale-[20%] sepia-[10%] contrast-[110%]" />
+                <img src="/images/gloria.jpg" alt="Gloria Ondah, Managing Partner" className="relative w-full h-auto block grayscale-[20%] sepia-[10%] contrast-[110%]" />
               </motion.div>
             </div>
           </div>
@@ -124,7 +124,6 @@ export function About() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* Partner Card 1: Gloria Ondah */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -134,7 +133,7 @@ export function About() {
               >
                 <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
                   <img
-                    src="/images/gloria.png"
+                    src="/images/gloria.jpg"
                     alt="Gloria Ondah"
                     className="w-full h-full object-cover grayscale-[20%] sepia-[10%] contrast-[110%] transition-transform duration-500 group-hover:scale-105"
                   />
@@ -142,10 +141,10 @@ export function About() {
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="mb-4">
                     <h4 className="text-2xl font-serif font-bold text-primary">Gloria Ondah, Esq.</h4>
-                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Principal Partner</p>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Managing Partner</p>
                   </div>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
-                    Gloria Ondah is the founder and Principal Partner of Gloria Ondah & Associates. With over eight years of experience, she specializes in corporate law, commercial negotiations, and dispute resolution, guiding startups and foreign investors through the complex Nigerian business landscape.
+                    Gloria Ondah is the Managing Partner of Gloria Ondah & Associates. With over a decade of legal practice and professional experience, she provides strategic legal counsel to individuals, startups, corporate organizations, and multinational clients across diverse sectors.
                   </p>
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
