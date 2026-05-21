@@ -53,14 +53,18 @@ export function TrustSignals() {
                 <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-secondary/40" />
 
                 {/* Centered Crest/Award Icon Container */}
-                <div className="relative w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                <div className="relative w-28 h-28 mx-auto mb-6 flex items-center justify-center">
                   {/* Decorative rotating gold ring */}
                   <div className="absolute inset-0 border-2 border-dashed border-secondary/40 rounded-full animate-[spin_40s_linear_infinite]" />
-                  <div className="absolute inset-1.5 border border-secondary/20 rounded-full" />
+                  <div className="absolute inset-2 border border-secondary/20 rounded-full" />
                   
-                  {/* Inner gold seal badge */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-secondary via-secondary/80 to-secondary/95 text-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-                    <Award className="h-8 w-8 stroke-[1.5]" />
+                  {/* Inner gold seal badge with the official NBA Logo */}
+                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-secondary/30 group-hover:scale-105 transition-transform duration-300 overflow-hidden p-2">
+                    <img 
+                      src="/images/nba-logo.svg" 
+                      alt="Nigerian Bar Association (NBA)" 
+                      className="w-full h-full object-contain filter group-hover:brightness-105 transition-all" 
+                    />
                   </div>
                 </div>
 
