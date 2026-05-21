@@ -128,7 +128,7 @@ export function About() {
                 {
                   name: 'Nigerian Bar Association',
                   acronym: 'NBA',
-                  logo: '/images/nba-logo.svg',
+                  logo: '/images/nba-logo.jpg',
                   desc: 'The official regulatory and professional body for legal practitioners in Nigeria. All our attorneys are certified members in good standing.'
                 },
                 {

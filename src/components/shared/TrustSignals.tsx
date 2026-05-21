@@ -61,7 +61,7 @@ export function TrustSignals() {
                   {/* Inner gold seal badge with the official NBA Logo */}
                   <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-secondary/30 group-hover:scale-105 transition-transform duration-300 overflow-hidden p-2">
                     <img 
-                      src="/images/nba-logo.svg" 
+                      src="/images/nba-logo.jpg" 
                       alt="Nigerian Bar Association (NBA)" 
                       className="w-full h-full object-contain filter group-hover:brightness-105 transition-all" 
                     />
