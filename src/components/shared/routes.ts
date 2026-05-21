@@ -6,6 +6,7 @@ export const routes = {
   practiceAreas: "/practice-areas",
   attorney: "/attorneys/gloria-ondah",
   attorneyFrederick: "/attorneys/frederick-adino",
+  attorneyEunice: "/attorneys/eunice-egwuche",
   insights: "/insights",
   caseStudies: "/case-studies",
   faq: "/faq",

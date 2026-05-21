@@ -114,16 +114,16 @@ export function About() {
 
         {/* Our Leadership Section */}
         <section id="attorneys" className="py-24 bg-muted/30 border-t border-border scroll-mt-20">
-          <div className="container mx-auto px-6 max-w-6xl">
+          <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center max-w-3xl mx-auto mb-20">
               <h2 className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">OUR LEADERSHIP</h2>
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary">Experienced Legal Partners</h3>
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary">Experienced Legal Team</h3>
               <p className="text-muted-foreground mt-4 leading-relaxed">
-                Our partners combine deep regulatory insights, commercial acumen, and legal excellence to deliver the highest standards of legal representation and business protection.
+                Our legal practitioners combine deep regulatory insights, commercial acumen, and legal excellence to deliver the highest standards of legal representation and business protection.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {/* Partner Card 1: Gloria Ondah */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -184,6 +184,40 @@ export function About() {
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
                       href={routes.attorneyFrederick}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 3: Eunice Egwuche */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                  <img
+                    src="/images/eunice.jpg"
+                    alt="Eunice Egwuche"
+                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Eunice Egwuche, Esq.</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Senior Associate</p>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Eunice Egwuche is a seasoned legal practitioner with over a decade of experience. She specializes in corporate law, civil and criminal litigation, regulatory compliance, and dispute resolution, delivering commercially practical legal solutions.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorneyEunice}
                       className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
                     >
                       View Full Profile <ArrowRight className="h-4 w-4" />
