@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Check } from 'lucide-react';
+import { routes } from './routes';
 
 export function PricingTable() {
-  const [revealedTiers, setRevealedTiers] = useState<Record<number, boolean>>({});
-
-  const toggleReveal = (index: number) => {
-    setRevealedTiers(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
-  };
-
   const pricingTiers = [
     {
+      id: 'initial',
       name: 'Initial Consultation',
       price: 'FREE',
       duration: '15–30 Minutes',
@@ -26,6 +19,7 @@ export function PricingTable() {
       highlight: true
     },
     {
+      id: 'advisory',
       name: 'Legal Advisory Session',
       price: '₦20,000 – ₦50,000',
       duration: 'Per session',
@@ -38,6 +32,7 @@ export function PricingTable() {
       ]
     },
     {
+      id: 'contract',
       name: 'Contract Review Consultation',
       price: 'From ₦50,000',
       duration: 'Per document',
@@ -50,6 +45,7 @@ export function PricingTable() {
       ]
     },
     {
+      id: 'compliance',
       name: 'Business Compliance Consultation',
       price: 'From ₦75,000',
       duration: 'Per consultation',
@@ -62,6 +58,7 @@ export function PricingTable() {
       ]
     },
     {
+      id: 'retainer',
       name: 'Retainership Consultation',
       price: 'Custom Pricing',
       duration: 'Tailored Retainer',
@@ -94,9 +91,9 @@ export function PricingTable() {
           {pricingTiers.map((tier, index) => (
             <div
               key={index}
-              className={`bg-white border-2 p-8 relative ${
+              className={`bg-white border-2 p-8 relative flex flex-col h-full ${
                 tier.highlight
-                  ? 'border-secondary shadow-lg scale-105'
+                  ? 'border-secondary shadow-lg scale-105 z-10'
                   : 'border-border hover:border-secondary/50'
               } transition-all duration-300`}
             >
@@ -106,23 +103,14 @@ export function PricingTable() {
                 </div>
               )}
               
-              <div className="mb-6">
+              <div className="mb-6 flex-grow">
                 <h4 className="text-xl font-serif font-bold text-primary mb-2">
                   {tier.name}
                 </h4>
                 <div className="min-h-[48px] flex items-center mb-2">
-                  {revealedTiers[index] ? (
-                    <div className="text-3xl font-bold text-secondary animate-in fade-in zoom-in-95 duration-200">
-                      {tier.price}
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => toggleReveal(index)}
-                      className="text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary/90 px-4 py-2.5 rounded-none transition-all duration-300 cursor-pointer shadow-sm hover:shadow"
-                    >
-                      Click to View Fee
-                    </button>
-                  )}
+                  <div className="text-3xl font-bold text-secondary">
+                    {tier.price}
+                  </div>
                 </div>
                 <div className="text-sm text-muted-foreground mb-3">
                   {tier.duration}
@@ -132,7 +120,7 @@ export function PricingTable() {
                 </p>
               </div>
 
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-8">
                 {tier.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-sm">
                     <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
@@ -140,6 +128,17 @@ export function PricingTable() {
                   </li>
                 ))}
               </ul>
+
+              <a
+                href={`${routes.booking}?service=${tier.id}`}
+                className={`block text-center w-full py-3.5 px-6 font-bold uppercase tracking-wider text-xs transition-all duration-300 rounded-none mt-auto ${
+                  tier.highlight
+                    ? 'bg-secondary hover:bg-secondary/95 text-white shadow-md'
+                    : 'bg-primary hover:bg-primary/95 text-white shadow-sm'
+                }`}
+              >
+                {tier.name === 'Initial Consultation' ? 'Book Free Session' : 'Book Consultation'}
+              </a>
             </div>
           ))}
         </div>
@@ -153,3 +152,4 @@ export function PricingTable() {
     </section>
   );
 }
+

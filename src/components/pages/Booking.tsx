@@ -129,7 +129,16 @@ type DetailsValues = z.infer<typeof detailsSchema>;
 
 export function Booking() {
   const [step, setStep] = useState(1);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedService, setSelectedService] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get('service');
+      if (serviceParam && serviceTypes.some(s => s.id === serviceParam)) {
+        return serviceParam;
+      }
+    }
+    return null;
+  });
   const [selectedPractice, setSelectedPractice] = useState<string>("general");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
