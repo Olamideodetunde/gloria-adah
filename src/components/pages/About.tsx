@@ -112,6 +112,68 @@ export function About() {
           </div>
         </section>
 
+        {/* Professional Credentials & Affiliations Section */}
+        <section className="py-24 bg-background border-t border-border">
+          <div className="container mx-auto px-6 max-w-7xl">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">Credentials & Trust</h2>
+              <h3 className="text-3xl sm:text-4xl font-serif font-bold text-primary">Professional Accreditations</h3>
+              <p className="text-muted-foreground mt-4 leading-relaxed">
+                Gloria Ondah & Associates and its legal practitioners are fully accredited and hold active memberships with premier local and international regulatory and professional bodies.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {[
+                {
+                  name: 'Nigerian Bar Association',
+                  acronym: 'NBA',
+                  logo: '/images/nba-logo.svg',
+                  desc: 'The official regulatory and professional body for legal practitioners in Nigeria. All our attorneys are certified members in good standing.'
+                },
+                {
+                  name: 'Corporate Affairs Commission',
+                  acronym: 'CAC',
+                  logo: '/images/cac.webp',
+                  desc: 'The regulatory body governing company incorporation and corporate affairs in Nigeria. We are fully accredited agents in good standing.'
+                },
+                {
+                  name: 'International Bar Association',
+                  acronym: 'IBA',
+                  logo: '/images/iba logo.png',
+                  desc: 'The global forum for the legal profession, connecting practitioners worldwide to promote justice, human rights, and the rule of law.'
+                }
+              ].map((aff, index) => (
+                <motion.div
+                  key={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeInUp}
+                  className="bg-muted/10 border border-border/80 p-8 flex flex-col items-center text-center group hover:border-secondary/40 hover:bg-background hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="h-20 w-full flex items-center justify-center mb-6 bg-white p-4 border border-border/40 shadow-sm group-hover:shadow-md transition-shadow">
+                    <img
+                      src={aff.logo}
+                      alt={aff.name}
+                      className="max-h-full max-w-full object-contain filter transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <span className="text-xs font-extrabold text-secondary uppercase tracking-widest mb-2">
+                    {aff.acronym}
+                  </span>
+                  <h4 className="text-lg font-serif font-bold text-primary mb-3">
+                    {aff.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {aff.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Our Leadership Section */}
         <section id="attorneys" className="py-24 bg-muted/30 border-t border-border scroll-mt-20">
           <div className="container mx-auto px-6 max-w-7xl">
