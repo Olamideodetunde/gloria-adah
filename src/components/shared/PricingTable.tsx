@@ -89,13 +89,14 @@ export function PricingTable() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {pricingTiers.map((tier, index) => (
-            <div
+            <a
               key={index}
-              className={`bg-white border-2 p-8 relative flex flex-col h-full ${
+              href={routes.booking}
+              className={`bg-white border-2 p-8 relative flex flex-col h-full group ${
                 tier.highlight
-                  ? 'border-secondary shadow-lg scale-105 z-10'
+                  ? 'border-secondary shadow-lg md:scale-105 z-10'
                   : 'border-border hover:border-secondary/50'
-              } transition-all duration-300`}
+              } transition-all duration-300 hover:shadow-xl block`}
             >
               {tier.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-white px-4 py-1 text-xs font-bold uppercase tracking-wider">
@@ -104,7 +105,7 @@ export function PricingTable() {
               )}
               
               <div className="mb-6 flex-grow">
-                <h4 className="text-xl font-serif font-bold text-primary mb-2">
+                <h4 className="text-xl font-serif font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
                   {tier.name}
                 </h4>
                 <div className="min-h-[48px] flex items-center mb-2">
@@ -129,17 +130,16 @@ export function PricingTable() {
                 ))}
               </ul>
 
-              <a
-                href={`${routes.booking}?service=${tier.id}`}
+              <div
                 className={`block text-center w-full py-3.5 px-6 font-bold uppercase tracking-wider text-xs transition-all duration-300 rounded-none mt-auto ${
                   tier.highlight
-                    ? 'bg-secondary hover:bg-secondary/95 text-white shadow-md'
-                    : 'bg-primary hover:bg-primary/95 text-white shadow-sm'
+                    ? 'bg-secondary group-hover:bg-secondary/90 text-white shadow-md'
+                    : 'bg-primary group-hover:bg-primary/90 text-white shadow-sm'
                 }`}
               >
                 {tier.name === 'Initial Consultation' ? 'Book Free Session' : 'Book Consultation'}
-              </a>
-            </div>
+              </div>
+            </a>
           ))}
         </div>
 
