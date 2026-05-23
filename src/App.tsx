@@ -12,6 +12,7 @@ import { PracticeDetail } from './components/pages/PracticeDetail';
 import { Attorney } from './components/pages/Attorney';
 import { AttorneyFrederick } from './components/pages/AttorneyFrederick';
 import { AttorneyEunice } from './components/pages/AttorneyEunice';
+import { AttorneyAyodele } from './components/pages/AttorneyAyodele';
 import { Insights } from './components/pages/Insights';
 import { InsightsSingle } from './components/pages/InsightsSingle';
 import { CaseStudies } from './components/pages/CaseStudies';
@@ -94,6 +95,7 @@ export default function App() {
     if (route === '/attorneys/gloria-ondah') return <Attorney />;
     if (route === '/attorneys/frederick-adino') return <AttorneyFrederick />;
     if (route === '/attorneys/eunice-egwuche') return <AttorneyEunice />;
+    if (route === '/attorneys/ayodele-liman') return <AttorneyAyodele />;
     if (route === '/insights') return <Insights />;
     if (route.startsWith('/insights/')) return <InsightsSingle slug={route.replace('/insights/', '')} />;
     if (route === '/case-studies') return <CaseStudies />;

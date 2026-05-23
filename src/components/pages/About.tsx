@@ -185,7 +185,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -279,6 +279,40 @@ export function About() {
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
                       href={routes.attorneyEunice}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 4: Ayodele Liman */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                  <img
+                    src="/images/ayodele.jpg"
+                    alt="Ayodele Liman"
+                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Ayodele Liman, Esq.</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Senior Associate</p>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Ayodele Liman is a seasoned legal practitioner and Intellectual Property Specialist. She specializes in property and real estate, intellectual property law, and structured property management.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorneyAyodele}
                       className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
                     >
                       View Full Profile <ArrowRight className="h-4 w-4" />
