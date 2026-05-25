@@ -151,7 +151,7 @@ export function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white p-8 sm:p-10 border border-border hover:border-secondary transition-colors group block"
+                  className="bg-white p-8 sm:p-10 border border-border hover:border-secondary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group block"
                 >
                   <Icon className="h-8 sm:h-10 w-8 sm:w-10 text-secondary mb-5 sm:mb-6 group-hover:scale-105 transition-transform" />
                   <h4 className="text-base sm:text-lg font-serif font-bold text-primary mb-2 sm:mb-3 leading-snug">{area.title}</h4>
