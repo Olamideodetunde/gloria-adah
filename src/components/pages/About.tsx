@@ -103,9 +103,9 @@ export function About() {
             <div className="text-center mb-16">
               <h2 className="text-3xl font-serif text-primary">Our Approach</h2>
             </div>
-            <div className="relative">
-              <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border -translate-y-1/2 hidden md:block"></div>
-              <div className="grid md:grid-cols-5 gap-8">
+            
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-5 gap-8 lg:gap-12">
                 {[
                   { step: "01", title: "Consultation", desc: "Understanding your unique needs." },
                   { step: "02", title: "Strategy", desc: "Developing a tailored legal roadmap." },
@@ -113,10 +113,33 @@ export function About() {
                   { step: "04", title: "Execution", desc: "Filing, representation, or negotiation." },
                   { step: "05", title: "Support", desc: "Continuous advisory and compliance." }
                 ].map((step, i) => (
-                  <div key={i} className="relative z-10 flex flex-col items-center text-center bg-background py-4">
-                    <div className="w-12 h-12 rounded-full bg-muted border-2 border-primary flex items-center justify-center text-primary font-serif font-bold mb-4">{step.step}</div>
-                    <h4 className="text-primary font-bold mb-2">{step.title}</h4>
-                    <p className="text-sm text-muted-foreground">{step.desc}</p>
+                  <div key={i} className="relative flex flex-col items-center md:items-start text-center md:text-left py-4">
+                    {/* Step Number */}
+                    <span className="text-xs font-bold tracking-wider text-secondary uppercase mb-3">
+                      Step {step.step}
+                    </span>
+                    <h4 className="text-xl font-serif font-bold text-primary mb-2">
+                      {step.title}
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {step.desc}
+                    </p>
+                    
+                    {/* Pointer arrow to the next step */}
+                    {i < 4 && (
+                      <>
+                        {/* Desktop Arrow */}
+                        <div className="hidden md:block absolute -right-6 top-10 translate-x-1/2 text-secondary/40 z-20">
+                          <ArrowRight className="h-5 w-5" />
+                        </div>
+                        {/* Mobile Arrow */}
+                        <div className="block md:hidden mt-6 text-secondary/40">
+                          <svg className="h-5 w-5 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
