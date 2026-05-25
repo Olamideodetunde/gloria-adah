@@ -1,51 +1,42 @@
-import React from 'react';
-import { Calendar, FileSearch, Handshake, Briefcase, HeadphonesIcon } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { routes } from './routes';
 
 export function HowItWorks() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   const steps = [
     {
-      number: '01',
       title: 'Book a Consultation',
-      description: 'Schedule your free initial consultation online or via WhatsApp',
-      icon: Calendar
+      description: 'Schedule your free initial consultation online or via WhatsApp'
     },
     {
-      number: '02',
       title: 'Initial Assessment',
-      description: 'We understand your legal needs and determine how we can help',
-      icon: FileSearch
+      description: 'We understand your legal needs and determine how we can help'
     },
     {
-      number: '03',
       title: 'Engagement & Quotation',
-      description: 'Receive a clear proposal with scope of work and transparent pricing',
-      icon: Handshake
+      description: 'Receive a clear proposal with scope of work and transparent pricing'
     },
     {
-      number: '04',
       title: 'Legal Work Begins',
-      description: 'Our team starts working on your case with full dedication',
-      icon: Briefcase
+      description: 'Our team starts working on your case with full dedication'
     },
     {
-      number: '05',
       title: 'Ongoing Support & Updates',
-      description: 'Regular updates and continuous support throughout the process',
-      icon: HeadphonesIcon
+      description: 'Regular updates and continuous support throughout the process'
     }
   ];
 
   return (
     <section className="py-24 sm:py-28 lg:py-32 bg-[#FCFAF6] border-y border-border/50 relative overflow-hidden">
-      {/* Decorative subtle background shapes */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+      <div className="container mx-auto px-6 max-w-4xl relative z-10">
+        <div className="text-center mb-16 sm:mb-20">
           <h2 className="text-xs font-bold tracking-[0.24em] text-secondary uppercase mb-4">
             OUR STRUCTURED PROCESS
           </h2>
@@ -58,43 +49,31 @@ export function HowItWorks() {
           </p>
         </div>
 
-        {/* Process Timeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 xl:gap-8">
+        <div className="bg-white border border-border/50 shadow-sm">
           {steps.map((step, index) => {
-            const Icon = step.icon;
+            const isOpen = openIndex === index;
             return (
-              <div 
-                key={index} 
-                className="bg-white border-t-2 border-secondary hover:border-primary shadow-sm hover:shadow-xl p-8 rounded-none relative overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1.5"
-              >
-                {/* Number Watermark in Background */}
-                <div className="absolute top-4 right-4 text-7xl font-serif font-bold text-secondary/[0.07] group-hover:text-secondary/[0.12] transition-colors duration-300 pointer-events-none select-none">
-                  {step.number}
-                </div>
-
-                <div>
-                  {/* Icon with beautiful gold container */}
-                  <div className="w-12 h-12 rounded-full bg-secondary/5 border border-secondary/20 flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-all duration-300">
-                    <Icon className="h-5 w-5 text-secondary group-hover:text-white transition-colors duration-300" />
-                  </div>
-
-                  {/* Title */}
-                  <h4 className="text-lg font-serif font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors duration-300">
+              <div key={index} className="border-b border-border/50 last:border-b-0">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="w-full flex items-center justify-between p-6 sm:p-8 text-left focus:outline-none hover:bg-muted/30 transition-colors"
+                >
+                  <span className="text-xl font-serif font-bold text-primary">
+                    <span className="text-secondary/70 mr-4 font-mono text-sm">{String(index + 1).padStart(2, '0')}</span>
                     {step.title}
-                  </h4>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Progress arrow indicator for desktop (except last item) */}
-                {index < 4 && (
-                  <div className="hidden lg:block absolute top-[50%] -translate-y-1/2 -right-4 z-20 text-secondary/30 transform group-hover:translate-x-1 transition-transform">
-                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                    </svg>
+                  </span>
+                  {isOpen ? (
+                    <ChevronUp className="h-5 w-5 text-secondary flex-shrink-0 ml-4" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-muted-foreground flex-shrink-0 ml-4" />
+                  )}
+                </button>
+                
+                {isOpen && (
+                  <div className="px-6 sm:px-8 pb-8 pt-0 animate-in slide-in-from-top-2 fade-in duration-200">
+                    <p className="text-muted-foreground text-lg leading-relaxed pl-10">
+                      {step.description}
+                    </p>
                   </div>
                 )}
               </div>
@@ -102,7 +81,6 @@ export function HowItWorks() {
           })}
         </div>
 
-        {/* Dynamic Action Trigger */}
         <div className="mt-16 sm:mt-20 text-center">
           <a href={routes.booking} className="inline-block group">
             <button className="h-14 px-8 rounded-full font-bold text-[#17202d] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"

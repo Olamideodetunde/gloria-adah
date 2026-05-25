@@ -66,22 +66,21 @@ export function About() {
             <div className="text-center mb-12">
               <h3 className="text-3xl font-serif text-primary mb-4">Core Values</h3>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              {[
-                { title: "Professionalism", desc: "Highest standards in every engagement", icon: Award },
-                { title: "Transparency", desc: "Clear communication and honest billing", icon: Sparkles },
-                { title: "Efficiency", desc: "Timely delivery without compromising quality", icon: Zap },
-                { title: "Integrity", desc: "Ethical practice above all else", icon: ShieldCheck },
-                { title: "Responsiveness", desc: "Accessible and attentive to client needs", icon: Users }
-              ].map((value, i) => (
-                <div key={i} className="text-center p-6 bg-background border border-border">
-                  <div className="w-10 h-10 mx-auto mb-3 bg-secondary/10 text-secondary flex items-center justify-center">
-                    <value.icon className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-bold text-primary mb-2">{value.title}</h4>
-                  <p className="text-xs text-muted-foreground">{value.desc}</p>
-                </div>
-              ))}
+            <div className="max-w-4xl mx-auto">
+              <ul className="space-y-4">
+                {[
+                  { title: "Professionalism", desc: "Highest standards in every engagement" },
+                  { title: "Transparency", desc: "Clear communication and honest billing" },
+                  { title: "Efficiency", desc: "Timely delivery without compromising quality" },
+                  { title: "Integrity", desc: "Ethical practice above all else" },
+                  { title: "Responsiveness", desc: "Accessible and attentive to client needs" }
+                ].map((value, i) => (
+                  <li key={i} className="bg-background border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 hover:border-secondary/50 transition-colors">
+                    <span className="font-serif font-bold text-primary text-xl min-w-[160px]">{value.title}</span>
+                    <span className="text-muted-foreground text-base leading-relaxed">{value.desc}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
@@ -203,10 +202,16 @@ export function About() {
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="mb-4">
                     <h4 className="text-2xl font-serif font-bold text-primary">Gloria Ondah, Esq.</h4>
-                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1">Managing Partner</p>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">CEO / Managing Partner</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.M</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.B</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">BL</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">Certified Mediator</span>
+                    </div>
                   </div>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
-                    Gloria Ondah is the Managing Partner of Gloria Ondah & Associates. With over a decade of legal practice and professional experience, she provides strategic legal counsel to individuals, startups, corporate organizations, and multinational clients across diverse sectors.
+                    Gloria Ondah is an accomplished legal practitioner and the CEO / Managing Partner of Gloria Ondah & Associates, with over a decade of legal practice and professional experience spanning litigation, corporate advisory, dispute resolution, employment law, regulatory compliance, and commercial transactions. She provides strategic legal counsel to individuals, startups, corporate organizations, and multinational clients across diverse sectors.
                   </p>
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
