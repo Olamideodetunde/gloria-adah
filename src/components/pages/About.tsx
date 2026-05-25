@@ -40,6 +40,19 @@ export function About() {
               >
                 <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4 pointer-events-none"></div>
                 <img src="/images/gloria.jpg" alt="Gloria Ondah, Managing Partner" className="relative w-full h-auto block grayscale-[20%] sepia-[10%] contrast-[110%]" />
+                
+                {/* Modern overlay card with position and qualifications */}
+                <div className="absolute bottom-4 left-4 right-4 bg-[#17202d]/90 backdrop-blur-sm border border-white/10 p-5 shadow-xl">
+                  <h4 className="text-lg md:text-xl font-serif font-bold text-white leading-tight">Gloria Ondah, Esq.</h4>
+                  <p className="text-secondary text-xs font-semibold uppercase tracking-widest mt-1 mb-3">CEO / Managing Partner</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {['LL.M', 'LL.B', 'BL', 'Certified Mediator'].map((qual, idx) => (
+                      <span key={idx} className="text-[10px] font-bold px-2.5 py-1 bg-white/10 border border-white/5 text-white rounded-none tracking-wide">
+                        {qual}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
