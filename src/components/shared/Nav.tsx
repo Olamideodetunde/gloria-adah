@@ -24,11 +24,11 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
     <>
       <header className="fixed top-0 w-full z-50 bg-white border-b border-border transition-all duration-300">
         <div className="container mx-auto px-6 py-5 flex items-center justify-between max-w-7xl">
-          <a href={routes.home} className="flex items-center gap-4">
-            <img src="/images/goa-logo.png" alt="GOA" className="h-14 w-auto" />
-            <div className="hidden sm:block">
-              <div className="font-serif font-bold text-xl leading-tight text-primary">Gloria Ondah</div>
-              <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">& Associates</div>
+          <a href={routes.home} className="flex items-center gap-3">
+            <img src="/images/goa-logo.png" alt="GOA" className="h-10 sm:h-14 w-auto" />
+            <div className="flex flex-col">
+              <div className="font-serif font-bold text-base sm:text-xl leading-tight text-primary">Gloria Ondah</div>
+              <div className="text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-muted-foreground">& Associates</div>
             </div>
           </a>
 

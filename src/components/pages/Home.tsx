@@ -130,15 +130,10 @@ export function Home() {
         </div>
       </section>
 
-      {/* Trust Signals Section */}
+      {/* Trust Signals / Firm Introduction Section */}
       <TrustSignals />
 
-      {/* How It Works Section */}
-      <HowItWorks />
-
-      {/* Pricing Table Section */}
-      <PricingTable />
-
+      {/* Areas of Expertise / Services Section */}
       <section className="py-20 sm:py-28 lg:py-32 bg-white">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
@@ -185,6 +180,12 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* How It Works Section */}
+      <HowItWorks />
+
+      {/* Pricing Table Section */}
+      <PricingTable />
 
       <section className="py-20 bg-white border-y border-border">
         <div className="container mx-auto px-6 max-w-7xl">
