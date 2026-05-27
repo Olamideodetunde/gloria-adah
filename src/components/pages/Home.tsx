@@ -318,8 +318,8 @@ export function Home() {
 }
 
 const testimonials = [
-  { text: "Gloria Ondah & Associates handled our complex regulatory filings and corporate compliance with absolute precision. Their deep regulatory insight saved our organization from massive administrative delays and ensured seamless operations.", author: "Gabriel Ayomide Mosaku", role: "Institute of Knowledge, Development and Productivity" },
-  { text: "Finding a legal partner who understands the energy sector's nuances is rare. GOA has been instrumental in our NUPRC compliance and contract negotiations.", author: "Engr. (Dr. Stella Okene)", role: "Founder, Stelog Energy Group" },
+  { text: "Gloria Ondah & Associates handled our complex regulatory filings and corporate compliance with absolute precision. Their deep regulatory insight saved our organization from massive administrative delays and ensured seamless operations.", author: "Gabriel Ayomide Mosaku", role: "Canada Institute of Knowledge Development and Productivity" },
+  { text: "Finding a legal partner who understands the energy sector's nuances is rare. GOA has been instrumental in our NUPRC compliance and contract negotiations.", author: "Engr. (Dr.) Stella Okene", role: "Founder, Stelog Energy Group" },
   { text: "From due diligence to final acquisition, their real estate advisory is top-tier. They don't just point out risks; they provide viable business solutions.", author: "Gbenga Tayo Shokefun", role: "Pacific Luxury Homes" },
   { text: "Their legal advisory on complex corporate restructures and contract management has been exceptional. GOA is more than an external counsel — they are a strategic growth partner.", author: "Frederick Ijewere", role: "DCPL" },
 ];
