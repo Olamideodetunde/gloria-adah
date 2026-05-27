@@ -379,7 +379,7 @@ export function About() {
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="mb-4">
-                    <h4 className="text-2xl font-serif font-bold text-primary">Mirabel Ngremeh</h4>
+                    <h4 className="text-2xl font-serif font-bold text-primary">Mirabel Ngremeh, Esq.</h4>
                     <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">Senior Associate</p>
                     <div className="flex flex-wrap gap-2">
                       <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.B</span>

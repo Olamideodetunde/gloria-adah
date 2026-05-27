@@ -34,7 +34,7 @@ export function AttorneyMirabel() {
               <div className="lg:col-span-8">
                 <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
                   <motion.div variants={fadeInUp} className="mb-8">
-                    <h2 className="text-4xl md:text-5xl font-serif text-primary mb-2">Mirabel Ngremeh</h2>
+                    <h2 className="text-4xl md:text-5xl font-serif text-primary mb-2">Mirabel Ngremeh, Esq.</h2>
                     <p className="text-secondary font-medium tracking-widest uppercase text-sm">Senior Associate</p>
                   </motion.div>
 
