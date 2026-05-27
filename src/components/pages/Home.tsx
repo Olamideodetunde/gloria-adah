@@ -278,19 +278,23 @@ export function Home() {
 
             {/* Pacific Luxury Homes */}
             <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center text-center px-2">
-                <span className="font-serif font-bold text-[10px] sm:text-[11px] tracking-wider text-primary group-hover:text-secondary transition-colors duration-300">
-                  PACIFIC LUXURY HOMES
-                </span>
+              <div className="h-16 flex items-center justify-center">
+                <img 
+                  src="/images/pacific.jpg" 
+                  alt="Pacific Luxury Homes" 
+                  className="max-h-16 w-auto object-contain transition-all duration-300" 
+                />
               </div>
             </div>
 
             {/* Nokkies */}
             <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center text-center px-2">
-                <span className="font-sans font-black text-xs sm:text-sm tracking-[0.2em] text-[#d7a24b] group-hover:text-primary transition-colors duration-300">
-                  NOKKIES
-                </span>
+              <div className="h-16 flex items-center justify-center">
+                <img 
+                  src="/images/nokkies.jpg" 
+                  alt="Nokkies" 
+                  className="max-h-16 w-auto object-contain transition-all duration-300" 
+                />
               </div>
             </div>
 
