@@ -152,7 +152,7 @@ export function About() {
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">Credentials & Trust</h2>
-              <h3 className="text-3xl sm:text-4xl font-serif font-bold text-primary">Professional Accreditations</h3>
+              <h3 className="text-3xl sm:text-4xl font-serif font-bold text-primary">Accreditations and Memberships</h3>
               <p className="text-muted-foreground mt-4 leading-relaxed">
                 Gloria Ondah & Associates and its legal practitioners are fully accredited and hold active memberships with premier local and international regulatory and professional bodies.
               </p>
@@ -228,11 +228,11 @@ export function About() {
                 transition={{ duration: 0.5 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
                   <img
                     src="/images/gloria.jpg"
                     alt="Gloria Ondah"
-                    className="w-full h-full object-cover grayscale-[20%] sepia-[10%] contrast-[110%] transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top grayscale-[20%] sepia-[10%] contrast-[110%] transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
@@ -268,11 +268,11 @@ export function About() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
                   <img
                     src="/images/frederick.jpg"
                     alt="Frederick Adino"
-                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
@@ -302,11 +302,11 @@ export function About() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
                   <img
                     src="/images/eunice.jpg"
                     alt="Eunice Egwuche"
-                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
@@ -336,11 +336,11 @@ export function About() {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
                   <img
                     src="/images/ayodele.jpg"
                     alt="Ayodele Liman"
-                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top grayscale-[20%] transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
@@ -370,11 +370,11 @@ export function About() {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
                   <img
                     src="/images/mirabel.jpg"
                     alt="Mirabel Ngremeh"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
