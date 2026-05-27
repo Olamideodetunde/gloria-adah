@@ -14,9 +14,9 @@ import { practiceAreas } from '../shared/practiceAreas';
 
 const serviceTypes = [
   { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
-  { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 20000 },
-  { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 50000 },
-  { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 75000 },
+  { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 0 },
+  { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
+  { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
   { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 }
 ];
 
@@ -269,11 +269,10 @@ export function Booking() {
                   {serviceTypes.map(srv => (
                     <div key={srv.id} onClick={() => setSelectedService(srv.id)}
                       className={`cursor-pointer p-6 border transition-all ${selectedService === srv.id ? 'border-secondary bg-secondary/5 ring-1 ring-secondary/50' : 'border-border hover:border-primary/30 bg-background'}`}>
-                      <div className="flex justify-between items-start mb-4">
+                      <div className="flex justify-between items-start">
                         <h3 className="font-bold text-primary">{srv.name}</h3>
                         <span className="text-xs bg-muted px-2 py-1 rounded font-medium">{srv.duration} min</span>
                       </div>
-                      <div className="text-xl font-serif text-primary mb-1">{srv.price === 0 ? 'Free' : `₦${srv.price.toLocaleString()}`}</div>
                     </div>
                   ))}
                 </div>
@@ -411,7 +410,7 @@ export function Booking() {
                     {apiError && <div className="text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3">{apiError}</div>}
                     <div className="flex justify-end pt-6 border-t border-border">
                       <Button type="submit" disabled={isProcessing} className="bg-primary text-white rounded-none px-8">
-                        {isProcessing ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing...</> : <>{serviceObj?.price === 0 ? "Complete Booking" : "Proceed to Payment"} <ChevronRight className="ml-2 h-4 w-4" /></>}
+                        {isProcessing ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing...</> : <>Complete Booking <ChevronRight className="ml-2 h-4 w-4" /></>}
                       </Button>
                     </div>
                   </form>

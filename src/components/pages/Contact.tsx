@@ -80,8 +80,8 @@ export function Contact() {
             className="grid sm:grid-cols-3 gap-6 mb-16"
           >
             {[
-              { icon: Phone, label: 'Call Us', value: '09029633193', href: 'tel:+2349029633193', sub: 'Mon–Fri, 8am–6pm WAT' },
-              { icon: MessageCircle, label: 'WhatsApp', value: '07054588490', href: 'https://wa.me/2347054588490', sub: 'Typically responds within 1 hour during business hours.' },
+              { icon: Phone, label: 'Call Us', value: '09029633913', href: 'tel:+2349029633913', sub: 'Mon–Fri, 8am–6pm WAT' },
+              { icon: MessageCircle, label: 'WhatsApp', value: '07054588490', href: 'https://wa.me/2347054588490', sub: 'Typically responds within an hour' },
               { icon: Mail, label: 'Email Us', value: 'G.ondahlawoffice@gmail.com', href: 'mailto:G.ondahlawoffice@gmail.com', sub: 'Response within 1 business day' }
             ].map((card) => {
               const Icon = card.icon;

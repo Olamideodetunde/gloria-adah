@@ -198,103 +198,109 @@ export function Home() {
             </h3>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 items-stretch justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-5xl mx-auto items-stretch justify-center">
             {/* CIKDP */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/cikdp.png" 
                   alt="CIKDP" 
                   className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                CIKDP
-              </span>
             </div>
 
             {/* Mirak */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/mirak.jpeg" 
                   alt="Mirak" 
                   className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                Mirak
-              </span>
             </div>
 
             {/* Stelog */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/stelog.webp" 
                   alt="Stelog" 
                   className="max-h-10 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                Stelog Energy
-              </span>
             </div>
 
             {/* Zain Global */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/zain global.jpg" 
                   alt="Zain Global" 
                   className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                Zain Global
-              </span>
             </div>
 
-            {/* DC Premium Logistics */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            {/* DC Premium */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/dcpremium.jpg" 
-                  alt="DC Premium Logistics & Solutions Ltd" 
+                  alt="DC Premium Logistics" 
                   className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                DC Premium
-              </span>
             </div>
 
             {/* NIRSAL Microfinance Bank */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/nirsal.png" 
-                  alt="NIRSAL MICROFINANCE BANK LTD" 
+                  alt="NIRSAL MFB" 
                   className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                NIRSAL MFB
-              </span>
             </div>
 
             {/* UBJ Microfinance Bank */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[140px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center mb-3">
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center">
                 <img 
                   src="/images/ubj.png" 
-                  alt="UBJ Microfinance Bank Ltd" 
+                  alt="UBJ MFB" 
                   className="max-h-12 w-auto object-contain transition-all duration-300" 
                 />
               </div>
-              <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase text-center group-hover:text-primary transition-colors duration-300">
-                UBJ MFB
-              </span>
+            </div>
+
+            {/* Pacific Luxury Homes */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center text-center px-2">
+                <span className="font-serif font-bold text-[10px] sm:text-[11px] tracking-wider text-primary group-hover:text-secondary transition-colors duration-300">
+                  PACIFIC LUXURY HOMES
+                </span>
+              </div>
+            </div>
+
+            {/* Nokkies */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center text-center px-2">
+                <span className="font-sans font-black text-xs sm:text-sm tracking-[0.2em] text-[#d7a24b] group-hover:text-primary transition-colors duration-300">
+                  NOKKIES
+                </span>
+              </div>
+            </div>
+
+            {/* DCPL */}
+            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
+              <div className="h-16 flex items-center justify-center text-center px-2">
+                <span className="font-serif font-semibold text-sm sm:text-base tracking-widest text-primary group-hover:text-secondary transition-colors duration-300">
+                  DCPL
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -308,9 +314,10 @@ export function Home() {
 }
 
 const testimonials = [
-  { text: "Gloria Ondah & Associates handled our complex regulatory filings with absolute precision. Their attention to detail saved us months of potential delays.", author: "Adaeze Okeke", role: "MD, Magma Oil and Gas" },
-  { text: "Finding a legal partner who understands the energy sector's nuances is rare. GOA has been instrumental in our NUPRC compliance and contract negotiations.", author: "Tunde Bakare", role: "Founder, Stelog Energy" },
-  { text: "From due diligence to final acquisition, their real estate advisory is top-tier. They don't just point out risks; they provide viable business solutions.", author: "Chiamaka Eze", role: "Director, Pacific Luxury Homes" },
+  { text: "Gloria Ondah & Associates handled our complex regulatory filings and corporate compliance with absolute precision. Their deep regulatory insight saved our organization from massive administrative delays and ensured seamless operations.", author: "Gabriel Ayomide Mosaku", role: "Institute of Knowledge, Development and Productivity" },
+  { text: "Finding a legal partner who understands the energy sector's nuances is rare. GOA has been instrumental in our NUPRC compliance and contract negotiations.", author: "Engr. (Dr. Stella Okene)", role: "Founder, Stelog Energy Group" },
+  { text: "From due diligence to final acquisition, their real estate advisory is top-tier. They don't just point out risks; they provide viable business solutions.", author: "Gbenga Tayo Shokefun", role: "Pacific Luxury Homes" },
+  { text: "Their legal advisory on complex corporate restructures and contract management has been exceptional. GOA is more than an external counsel — they are a strategic growth partner.", author: "Frederick Ijewere", role: "DCPL" },
 ];
 
 function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[number] }) {
@@ -348,7 +355,7 @@ function TestimonialsSection() {
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary">Trusted by Industry Leaders</h3>
         </div>
         
-        <div className="hidden md:grid md:grid-cols-3 gap-1">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((t, i) => (
             <TestimonialCard key={i} testimonial={t} />
           ))}

@@ -57,7 +57,7 @@ export function generateICS({ refCode, serviceName, clientName, clientEmail, dat
     `DTSTART:${dtStart}`,
     `DTEND:${dtEnd}`,
     `SUMMARY:Legal Consultation – ${serviceName}`,
-    `DESCRIPTION:Booking Reference: ${refCode}\\nService: ${serviceName}\\nClient: ${clientName}\\n\\n${FIRM_NAME}\\nPhone: +234 902 963 3193\\nEmail: ${FIRM_EMAIL}`,
+    `DESCRIPTION:Booking Reference: ${refCode}\\nService: ${serviceName}\\nClient: ${clientName}\\n\\n${FIRM_NAME}\\nPhone: +234 902 963 3913\\nEmail: ${FIRM_EMAIL}`,
     `LOCATION:No. 28\\, 3rd Avenue\\, Gwarinpa Estate\\, Abuja / Virtual`,
     `ORGANIZER;CN=${FIRM_NAME}:mailto:${FIRM_EMAIL}`,
     `ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=${FIRM_NAME}:mailto:${FIRM_EMAIL}`,
@@ -157,7 +157,7 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
         </table>
         <p style="font-size:14px;color:#555;">Our team will confirm meeting details before your appointment. For any questions:</p>
         <p style="font-size:14px;">
-          <strong>Phone:</strong> 09029633193 &nbsp;|&nbsp; <strong>WhatsApp:</strong> 07054588490<br/>
+          <strong>Phone:</strong> 09029633913 &nbsp;|&nbsp; <strong>WhatsApp:</strong> 07054588490<br/>
           <strong>Email:</strong> G.ondahlawoffice@gmail.com
         </p>
         <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
@@ -232,7 +232,7 @@ export async function sendContactNotification({ name, email, phone, subject, mes
           <div style="padding:40px;border:1px solid #e8e0dc;border-top:none;">
             <p>Dear ${name},</p>
             <p>Thank you for contacting Gloria Ondah &amp; Associates. We have received your enquiry (Ref: <strong>${refCode}</strong>) and a member of our team will respond within one business day.</p>
-            <p style="font-size:14px;color:#555;">If your matter is urgent, please call us directly at <strong>09029633193</strong> or send a WhatsApp message to <strong>07054588490</strong>.</p>
+            <p style="font-size:14px;color:#555;">If your matter is urgent, please call us directly at <strong>09029633913</strong> or send a WhatsApp message to <strong>07054588490</strong>.</p>
             <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
               Gloria Ondah &amp; Associates &nbsp;|&nbsp; CAC Reg: BN-3068204
             </p>

@@ -13,6 +13,7 @@ import { Attorney } from './components/pages/Attorney';
 import { AttorneyFrederick } from './components/pages/AttorneyFrederick';
 import { AttorneyEunice } from './components/pages/AttorneyEunice';
 import { AttorneyAyodele } from './components/pages/AttorneyAyodele';
+import { AttorneyMirabel } from './components/pages/AttorneyMirabel';
 import { Insights } from './components/pages/Insights';
 import { InsightsSingle } from './components/pages/InsightsSingle';
 import { CaseStudies } from './components/pages/CaseStudies';
@@ -51,7 +52,9 @@ export default function App() {
           e.preventDefault();
           window.history.pushState(null, '', href);
           setRoute(href);
-          window.scrollTo(0, 0);
+          if (!href.includes('#')) {
+            window.scrollTo(0, 0);
+          }
         }
       }
     };
@@ -79,6 +82,19 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+    }
+  }, [route]);
+
+  useEffect(() => {
     if (!GA_ID || typeof window.gtag !== 'function') return;
     window.gtag('event', 'page_view', {
       page_path: route,
@@ -89,13 +105,14 @@ export default function App() {
 
   const renderRoute = () => {
     if (route === '/' || route === '') return <Home />;
-    if (route === '/about') return <About />;
+    if (route.startsWith('/about')) return <About />;
     if (route === '/practice-areas') return <PracticeAreas />;
     if (route.startsWith('/practice/')) return <PracticeDetail slug={route.replace('/practice/', '')} />;
     if (route === '/attorneys/gloria-ondah') return <Attorney />;
     if (route === '/attorneys/frederick-adino') return <AttorneyFrederick />;
     if (route === '/attorneys/eunice-egwuche') return <AttorneyEunice />;
     if (route === '/attorneys/ayodele-liman') return <AttorneyAyodele />;
+    if (route === '/attorneys/mirabel-ngremeh') return <AttorneyMirabel />;
     if (route === '/insights') return <Insights />;
     if (route.startsWith('/insights/')) return <InsightsSingle slug={route.replace('/insights/', '')} />;
     if (route === '/case-studies') return <CaseStudies />;

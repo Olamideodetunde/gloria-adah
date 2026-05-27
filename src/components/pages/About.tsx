@@ -41,13 +41,13 @@ export function About() {
                 <div className="absolute inset-0 bg-secondary/10 -translate-x-4 -translate-y-4 pointer-events-none"></div>
                 <img src="/images/gloria.jpg" alt="Gloria Ondah, Managing Partner" className="relative w-full h-auto block grayscale-[20%] sepia-[10%] contrast-[110%]" />
                 
-                {/* Modern overlay card with position and qualifications */}
-                <div className="absolute bottom-4 left-4 right-4 bg-[#17202d]/90 backdrop-blur-sm border border-white/10 p-5 shadow-xl">
-                  <h4 className="text-lg md:text-xl font-serif font-bold text-white leading-tight">Gloria Ondah, Esq.</h4>
-                  <p className="text-secondary text-xs font-semibold uppercase tracking-widest mt-1 mb-3">CEO / Managing Partner</p>
-                  <div className="flex flex-wrap gap-1.5">
+                {/* Information rendered elegantly below the picture, not as an overlay on her chest */}
+                <div className="mt-6 text-left">
+                  <h4 className="text-2xl font-serif font-bold text-primary leading-tight">Gloria Ondah, Esq.</h4>
+                  <p className="text-secondary text-sm font-semibold uppercase tracking-widest mt-2 mb-3">Managing Partner</p>
+                  <div className="flex flex-wrap gap-1.5 mt-2">
                     {['LL.M', 'LL.B', 'BL', 'Certified Mediator'].map((qual, idx) => (
-                      <span key={idx} className="text-[10px] font-bold px-2.5 py-1 bg-white/10 border border-white/5 text-white rounded-none tracking-wide">
+                      <span key={idx} className="text-[10px] font-bold px-2.5 py-1 bg-muted border border-border text-primary rounded-none tracking-wide">
                         {qual}
                       </span>
                     ))}
@@ -220,7 +220,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -238,7 +238,7 @@ export function About() {
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="mb-4">
                     <h4 className="text-2xl font-serif font-bold text-primary">Gloria Ondah, Esq.</h4>
-                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">CEO / Managing Partner</p>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">Managing Partner</p>
                     <div className="flex flex-wrap gap-2">
                       <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.M</span>
                       <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.B</span>
@@ -247,7 +247,7 @@ export function About() {
                     </div>
                   </div>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
-                    Gloria Ondah is an accomplished legal practitioner and the CEO / Managing Partner of Gloria Ondah & Associates, with over a decade of legal practice and professional experience spanning litigation, corporate advisory, dispute resolution, employment law, regulatory compliance, and commercial transactions. She provides strategic legal counsel to individuals, startups, corporate organizations, and multinational clients across diverse sectors.
+                    Gloria Ondah is an accomplished legal practitioner and the Managing Partner of Gloria Ondah & Associates, with over a decade of legal practice and professional experience spanning litigation, corporate advisory, dispute resolution, employment law, regulatory compliance, and commercial transactions. She provides strategic legal counsel to individuals, startups, corporate organizations, and multinational clients across diverse sectors.
                   </p>
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
@@ -354,6 +354,44 @@ export function About() {
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
                       href={routes.attorneyAyodele}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 5: Mirabel Ngremeh */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[4/3] bg-muted border-b border-border">
+                  <img
+                    src="/images/mirabel.jpg"
+                    alt="Mirabel Ngremeh"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Mirabel Ngremeh</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">Senior Associate</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.B</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">BL</span>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Mirabel Ngremeh is a results-driven Legal, Sales, and Business Development Professional with over 12 years of experience in the upstream sector of the Nigerian Oil & Gas industry.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorneyMirabel}
                       className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
                     >
                       View Full Profile <ArrowRight className="h-4 w-4" />
