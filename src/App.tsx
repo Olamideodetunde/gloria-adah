@@ -105,26 +105,28 @@ export default function App() {
   }, [route]);
 
   const renderRoute = () => {
-    if (route === '/' || route === '') return <Home />;
-    if (route.startsWith('/about')) return <About />;
-    if (route === '/practice-areas') return <PracticeAreas />;
-    if (route === '/services') return <ServicesPackages />;
-    if (route.startsWith('/practice/')) return <PracticeDetail slug={route.replace('/practice/', '')} />;
-    if (route === '/attorneys/gloria-ondah') return <Attorney />;
-    if (route === '/attorneys/frederick-adino') return <AttorneyFrederick />;
-    if (route === '/attorneys/eunice-egwuche') return <AttorneyEunice />;
-    if (route === '/attorneys/ayodele-liman') return <AttorneyAyodele />;
-    if (route === '/attorneys/mirabel-ngremeh') return <AttorneyMirabel />;
-    if (route === '/insights') return <Insights />;
-    if (route.startsWith('/insights/')) return <InsightsSingle slug={route.replace('/insights/', '')} />;
-    if (route === '/case-studies') return <CaseStudies />;
-    if (route === '/faq') return <Faq />;
-    if (route === '/contact') return <Contact />;
-    if (route === '/booking') return <Booking />;
-    if (route === '/privacy') return <Privacy />;
-    if (route === '/terms') return <Terms />;
-    if (route === '/disclaimer') return <Disclaimer />;
-    if (route === '/admin') return <Admin />;
+    const pathname = route.split('?')[0].split('#')[0];
+
+    if (pathname === '/' || pathname === '') return <Home />;
+    if (pathname.startsWith('/about')) return <About />;
+    if (pathname === '/practice-areas') return <PracticeAreas />;
+    if (pathname === '/services') return <ServicesPackages />;
+    if (pathname.startsWith('/practice/')) return <PracticeDetail slug={pathname.replace('/practice/', '')} />;
+    if (pathname === '/attorneys/gloria-ondah') return <Attorney />;
+    if (pathname === '/attorneys/frederick-adino') return <AttorneyFrederick />;
+    if (pathname === '/attorneys/eunice-egwuche') return <AttorneyEunice />;
+    if (pathname === '/attorneys/ayodele-liman') return <AttorneyAyodele />;
+    if (pathname === '/attorneys/mirabel-ngremeh') return <AttorneyMirabel />;
+    if (pathname === '/insights') return <Insights />;
+    if (pathname.startsWith('/insights/')) return <InsightsSingle slug={pathname.replace('/insights/', '')} />;
+    if (pathname === '/case-studies') return <CaseStudies />;
+    if (pathname === '/faq') return <Faq />;
+    if (pathname === '/contact') return <Contact />;
+    if (pathname === '/booking') return <Booking />;
+    if (pathname === '/privacy') return <Privacy />;
+    if (pathname === '/terms') return <Terms />;
+    if (pathname === '/disclaimer') return <Disclaimer />;
+    if (pathname === '/admin') return <Admin />;
     return <Home />;
   };
 
