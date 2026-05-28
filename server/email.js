@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const FROM_EMAIL = 'G.ondahlawoffice@gmail.com';
-const FIRM_EMAIL = 'G.ondahlawoffice@gmail.com';
+const FROM_EMAIL = 'info@gloriaadah.com';
+const FIRM_EMAIL = 'info@gloriaadah.com';
 const FIRM_NAME = 'Gloria Ondah & Associates';
 const BREVO_API = 'https://api.brevo.com/v3/smtp/email';
 
@@ -158,7 +158,7 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
         <p style="font-size:14px;color:#555;">Our team will confirm meeting details before your appointment. For any questions:</p>
         <p style="font-size:14px;">
           <strong>Phone:</strong> 09029633913 &nbsp;|&nbsp; <strong>WhatsApp:</strong> 07054588490<br/>
-          <strong>Email:</strong> G.ondahlawoffice@gmail.com
+          <strong>Email:</strong> info@gloriaadah.com
         </p>
         <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
           Gloria Ondah &amp; Associates &nbsp;|&nbsp; CAC Reg: BN-3068204 &nbsp;|&nbsp; No. 28, 3rd Avenue, Gwarinpa Estate, Abuja

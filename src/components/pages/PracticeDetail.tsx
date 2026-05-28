@@ -62,7 +62,7 @@ export function PracticeDetail({ slug }: { slug: string }) {
                   <div className="space-y-4 mb-8">
                     <a href="tel:+2349029633913" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><Phone className="h-4 w-4 text-secondary" />09029633913</a>
                     <a href="https://wa.me/2347054588490" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><MessageCircle className="h-4 w-4 text-secondary" />07054588490 (Typically responds within an hour)</a>
-                    <a href="mailto:G.ondahlawoffice@gmail.com" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><Mail className="h-4 w-4 text-secondary" />G.ondahlawoffice@gmail.com</a>
+                    <a href="mailto:info@gloriaadah.com" className="flex items-center gap-3 text-sm hover:text-secondary transition-colors"><Mail className="h-4 w-4 text-secondary" />info@gloriaadah.com</a>
                   </div>
                   <a href={routes.booking} className="block w-full">
                     <Button className="w-full bg-white text-primary hover:bg-white/90 rounded-none h-12">Book Consultation</Button>

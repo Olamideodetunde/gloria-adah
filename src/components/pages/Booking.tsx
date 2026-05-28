@@ -65,7 +65,7 @@ function downloadICS(opts: {
     `DTSTART:${startUTC}`,
     `DTEND:${endUTC}`,
     `SUMMARY:Legal Consultation – ${opts.serviceName}`,
-    `DESCRIPTION:Booking Reference: ${opts.refCode}\\nService: ${opts.serviceName}\\nClient: ${opts.clientName}\\n\\nGloria Ondah & Associates\\nPhone: +234 902 963 3193\\nEmail: G.ondahlawoffice@gmail.com`,
+    `DESCRIPTION:Booking Reference: ${opts.refCode}\\nService: ${opts.serviceName}\\nClient: ${opts.clientName}\\n\\nGloria Ondah & Associates\\nPhone: +234 902 963 3193\\nEmail: info@gloriaadah.com`,
     'LOCATION:No. 28, 3rd Avenue, Gwarinpa Estate, Abuja',
     'STATUS:CONFIRMED',
     'END:VEVENT',
