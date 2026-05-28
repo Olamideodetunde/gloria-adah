@@ -35,6 +35,7 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
           <nav className="hidden lg:flex items-center gap-8">
             {[
               { href: routes.about, label: 'About', active: currentRoute === routes.about },
+              { href: routes.servicesPackages, label: 'Services & Packages', active: currentRoute === routes.servicesPackages },
               { href: routes.caseStudies, label: 'Case Studies', active: currentRoute === routes.caseStudies },
               { href: routes.insights, label: 'Insights', active: currentRoute.startsWith('/insight') },
               { href: routes.contact, label: 'Contact', active: currentRoute === routes.contact },
@@ -95,6 +96,7 @@ export function Nav({ currentRoute, darkHero = false }: { currentRoute: string; 
                 <a key={pa.slug} href={getPracticeRoute(pa.slug)} onClick={() => setMobileMenuOpen(false)} className="text-muted-foreground hover:text-secondary transition-colors">{pa.title}</a>
               ))}
             </div>
+            <a href={routes.servicesPackages} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Services & Packages</a>
             <a href={routes.caseStudies} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Case Studies</a>
             <a href={routes.insights} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">Insights</a>
             <a href={routes.faq} onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors">FAQ</a>

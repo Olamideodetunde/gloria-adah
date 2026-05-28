@@ -24,6 +24,7 @@ import { Privacy } from './components/pages/Privacy';
 import { Terms } from './components/pages/Terms';
 import { Disclaimer } from './components/pages/Disclaimer';
 import { Admin } from './components/pages/Admin';
+import { ServicesPackages } from './components/pages/ServicesPackages';
 
 declare global {
   interface Window {
@@ -107,6 +108,7 @@ export default function App() {
     if (route === '/' || route === '') return <Home />;
     if (route.startsWith('/about')) return <About />;
     if (route === '/practice-areas') return <PracticeAreas />;
+    if (route === '/services') return <ServicesPackages />;
     if (route.startsWith('/practice/')) return <PracticeDetail slug={route.replace('/practice/', '')} />;
     if (route === '/attorneys/gloria-ondah') return <Attorney />;
     if (route === '/attorneys/frederick-adino') return <AttorneyFrederick />;
