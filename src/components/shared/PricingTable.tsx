@@ -10,11 +10,14 @@ export function PricingTable() {
           TRANSPARENT PRICING
         </h2>
         <h3 className="text-4xl sm:text-5xl font-serif font-bold text-primary mb-6">
-          Consultation & Pricing Structure
+          Consultation & Professional Fees
         </h3>
         
-        <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-          Initial consultations under 30 minutes are free. Consultations extending to 30 minutes and above will attract a fee.
+        <p className="text-lg text-primary font-medium leading-relaxed mb-4">
+          An initial consultation of up to 30 minutes is complimentary.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto">
+          Professional fees for extended consultations and legal services are determined based on the scope, complexity, urgency, and nature of the matter. A tailored fee estimate or engagement proposal will be provided following the initial assessment.
         </p>
 
         <a href={routes.booking} className="inline-block group">
