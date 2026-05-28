@@ -118,7 +118,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-secondary shrink-0" />
-                <a href="mailto:info@gloriaadah.com" className="hover:text-secondary transition-colors break-all">info@gloriaadah.com</a>
+                <a href="mailto:info@gloriaondah.com" className="hover:text-secondary transition-colors break-all">info@gloriaondah.com</a>
               </li>
             </ul>
             <div className="mt-6 text-xs text-muted-foreground">
