@@ -12,14 +12,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { practiceAreas } from '../shared/practiceAreas';
 
-const serviceTypes = [
-  { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
-  { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 0 },
-  { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
-  { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
-  { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 }
-];
-
 const ALL_TIME_SLOTS = ["09:00 AM", "10:00 AM", "11:30 AM", "01:00 PM", "02:30 PM", "04:00 PM"];
 
 type SlotAvailability = { time: string; available: boolean; reason: 'past' | 'booked' | null };
@@ -58,36 +50,33 @@ function downloadICS(opts: {
   const startUTC = toICSDateUTC(opts.date, hours, minutes);
   const totalEndMinutes = minutes + opts.durationMins;
   const endHours = hours + Math.floor(totalEndMinutes / 60);
-  const endMins = totalEndMinutes % 60;
-  const endUTC = toICSDateUTC(opts.date, endHours, endMins);
-  const now = new Date();
-  const stamp = now.toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+  const endMinutes = totalEndMinutes % 60;
+  const endUTC = toICSDateUTC(opts.date, endHours, endMinutes);
 
-  const ics = [
+  const icsLines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Gloria Ondah & Associates//GOA Booking//EN',
+    'PRODID:-//Gloria Ondah & Associates//Calendar Booking//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:${opts.refCode}@goa-law.ng`,
-    `DTSTAMP:${stamp}`,
+    `UID:${opts.refCode}-${startUTC}`,
+    `DTSTAMP:${startUTC}`,
     `DTSTART:${startUTC}`,
     `DTEND:${endUTC}`,
     `SUMMARY:Legal Consultation – ${opts.serviceName}`,
     `DESCRIPTION:Booking Reference: ${opts.refCode}\\nService: ${opts.serviceName}\\nClient: ${opts.clientName}\\n\\nGloria Ondah & Associates\\nPhone: +234 902 963 3193\\nEmail: G.ondahlawoffice@gmail.com`,
-    'LOCATION:No. 28\\, 3rd Avenue\\, Gwarinpa Estate\\, Abuja / Virtual',
+    'LOCATION:No. 28, 3rd Avenue, Gwarinpa Estate, Abuja',
     'STATUS:CONFIRMED',
-    'TRANSP:OPAQUE',
     'END:VEVENT',
     'END:VCALENDAR'
-  ].join('\r\n');
+  ];
 
-  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const blob = new Blob([icsLines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `GOA-${opts.refCode}.ics`;
+  a.download = `booking-${opts.refCode}.ics`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -98,21 +87,22 @@ function googleCalendarUrl(opts: {
   durationMins: number;
   serviceName: string;
   refCode: string;
-}): string {
+}) {
   const { hours, minutes } = parseTimeSlot(opts.timeStr);
   const startUTC = toICSDateUTC(opts.date, hours, minutes);
   const totalEndMinutes = minutes + opts.durationMins;
   const endHours = hours + Math.floor(totalEndMinutes / 60);
-  const endMins = totalEndMinutes % 60;
-  const endUTC = toICSDateUTC(opts.date, endHours, endMins);
+  const endMinutes = totalEndMinutes % 60;
+  const endUTC = toICSDateUTC(opts.date, endHours, endMinutes);
 
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: `Legal Consultation – ${opts.serviceName}`,
     dates: `${startUTC}/${endUTC}`,
     details: `Booking Reference: ${opts.refCode}\nService: ${opts.serviceName}\n\nGloria Ondah & Associates\nPhone: +234 902 963 3193`,
-    location: 'No. 28, 3rd Avenue, Gwarinpa Estate, Abuja / Virtual'
+    location: 'No. 28, 3rd Avenue, Gwarinpa Estate, Abuja'
   });
+
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
@@ -129,16 +119,58 @@ type DetailsValues = z.infer<typeof detailsSchema>;
 
 export function Booking() {
   const [step, setStep] = useState(1);
+  const [serviceTypes, setServiceTypes] = useState([
+    { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
+    { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 0 },
+    { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
+    { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
+    { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 },
+    { id: 'starter_package', name: 'Starter Registration Package', duration: 30, price: 95000 },
+    { id: 'growth_package', name: 'Growth Registration Package', duration: 45, price: 175000 },
+    { id: 'premium_package', name: 'Premium Registration Package', duration: 60, price: 295000 },
+    { id: 'custom_package', name: 'Custom Registration Setup', duration: 45, price: 0 }
+  ]);
+
   const [selectedService, setSelectedService] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const serviceParam = params.get('service');
-      if (serviceParam && serviceTypes.some(s => s.id === serviceParam)) {
-        return serviceParam;
+      const baseServices = [
+        { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
+        { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 0 },
+        { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
+        { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
+        { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 },
+        { id: 'starter_package', name: 'Starter Registration Package', duration: 30, price: 95000 },
+        { id: 'growth_package', name: 'Growth Registration Package', duration: 45, price: 175000 },
+        { id: 'premium_package', name: 'Premium Registration Package', duration: 60, price: 295000 },
+        { id: 'custom_package', name: 'Custom Registration Setup', duration: 45, price: 0 }
+      ];
+      if (serviceParam) {
+        const found = baseServices.find(s => 
+          s.id === serviceParam || 
+          s.name === serviceParam || 
+          s.name.toLowerCase().startsWith(serviceParam.toLowerCase().split(' ')[0])
+        );
+        if (found) return found.id;
       }
     }
     return null;
   });
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const estFeeStr = params.get('estimatedFee');
+    if (estFeeStr) {
+      const numericFee = parseInt(estFeeStr.replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(numericFee)) {
+        setServiceTypes(prev => prev.map(s => 
+          s.id === 'custom_package' ? { ...s, price: numericFee } : s
+        ));
+      }
+    }
+  }, []);
+
   const [selectedPractice, setSelectedPractice] = useState<string>("general");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
