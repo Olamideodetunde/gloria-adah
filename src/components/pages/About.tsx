@@ -105,7 +105,7 @@ export function About() {
             </div>
             
             <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-5 gap-8 lg:gap-12">
+              <div className="grid md:grid-cols-5 gap-y-4 md:gap-8 lg:gap-12">
                 {[
                   { step: "01", title: "Consultation", desc: "Understanding your unique needs." },
                   { step: "02", title: "Strategy", desc: "Developing a tailored legal roadmap." },
@@ -113,7 +113,7 @@ export function About() {
                   { step: "04", title: "Execution", desc: "Filing, representation, or negotiation." },
                   { step: "05", title: "Support", desc: "Continuous advisory and compliance." }
                 ].map((step, i) => (
-                  <div key={i} className="relative flex flex-col items-center md:items-start text-center md:text-left py-4">
+                  <div key={i} className="relative flex flex-col items-center md:items-start text-center md:text-left pt-2 pb-2 md:py-4">
                     {/* Step Number */}
                     <span className="text-xs font-bold tracking-wider text-secondary uppercase mb-3">
                       Step {step.step}
@@ -133,7 +133,7 @@ export function About() {
                           <ArrowRight className="h-5 w-5" />
                         </div>
                         {/* Mobile Arrow */}
-                        <div className="block md:hidden mt-6 text-secondary/40">
+                        <div className="block md:hidden mt-3 text-secondary/40">
                           <svg className="h-5 w-5 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
