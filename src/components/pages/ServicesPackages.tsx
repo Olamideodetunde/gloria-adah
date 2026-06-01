@@ -19,7 +19,7 @@ import { routes } from '../shared/routes';
 import { Button } from '@/components/ui/button';
 
 type EntityType = 'business_name' | 'limited_liability' | 'ngo_association' | 'holding_company';
-type ShareCapitalOption = 1000000 | 5000000 | 10000000 | 20000000;
+type ShareCapitalOption = 1000000 | 10000000 | 50000000 | 100000000;
 
 export function ServicesPackages() {
   const [activeTab, setActiveTab] = useState<'packages' | 'calculator' | 'bespoke'>('packages');
@@ -53,9 +53,9 @@ export function ServicesPackages() {
 
     let capitalInc = 0;
     if (entityType === 'limited_liability' || entityType === 'holding_company') {
-      if (shareCapital === 5000000) capitalInc = 60000;
-      else if (shareCapital === 10000000) capitalInc = 120000;
-      else if (shareCapital === 20000000) capitalInc = 250000;
+      if (shareCapital === 10000000) capitalInc = 80000;
+      else if (shareCapital === 50000000) capitalInc = 180000;
+      else if (shareCapital === 100000000) capitalInc = 350000;
     }
 
     const additionalDirectors = Math.max(0, directorsCount - 2);
@@ -178,7 +178,7 @@ export function ServicesPackages() {
                         </div>
                         <div className="mb-6">
                           <span className="text-sm font-medium text-muted-foreground">Starting from</span>
-                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦95,000</div>
+                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦80,000</div>
                           <span className="text-[10px] text-muted-foreground leading-none mt-1 block">*Excludes statutory government filing fees</span>
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-8">
@@ -193,7 +193,7 @@ export function ServicesPackages() {
                               'Standard Company Registration (1M Shares)',
                               'Official CAC Status Report & Incorporation Documents',
                               'Digital Certified True Copies (CTC) delivery',
-                              'Basic Corporate Bank Account Support Letter'
+                              'Tax Identification Number (TIN) Registration'
                             ].map((inc, i) => (
                               <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-tight">
                                 <CheckCircle2 className="h-4.5 w-4.5 text-secondary shrink-0 mt-0.5" />
@@ -383,11 +383,11 @@ export function ServicesPackages() {
                           <div className="grid grid-cols-4 gap-2">
                             {[
                               { val: 1000000, label: '1 Million' },
-                              { val: 5000000, label: '5 Million' },
-                              { val: 1000000, label: '10 Million' },
-                              { val: 2000000, label: '20 Million+' }
+                              { val: 10000000, label: '10 Million' },
+                              { val: 50000000, label: '50 Million' },
+                              { val: 100000000, label: '100 Million+' }
                             ].map((opt, i) => {
-                              const value = i === 2 ? 10000000 : i === 3 ? 20000000 : opt.val;
+                              const value = opt.val;
                               return (
                                 <button
                                   key={i}
@@ -405,7 +405,7 @@ export function ServicesPackages() {
                             })}
                           </div>
                           <span className="text-[10px] text-muted-foreground mt-2 block leading-snug">
-                            Private Private Companies in Nigeria generally require a minimum share capital of 1 Million. Foreign-participated entities require a minimum of 10 Million shares.
+                            Private Private Companies in Nigeria generally require a minimum share capital of 1 Million. Foreign-participated entities require a minimum of 100 Million share capital.
                           </span>
                         </div>
                       )}

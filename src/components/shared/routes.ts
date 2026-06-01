@@ -10,6 +10,8 @@ export const routes = {
   attorneyEunice: "/attorneys/eunice-egwuche",
   attorneyAyodele: "/attorneys/ayodele-liman",
   attorneyMirabel: "/attorneys/mirabel-ngremeh",
+  attorneyAdedayo: "/attorneys/adedayo-okunlola",
+  attorneyOmoghene: "/attorneys/fredrick-omoghene",
   insights: "/insights",
   caseStudies: "/case-studies",
   faq: "/faq",

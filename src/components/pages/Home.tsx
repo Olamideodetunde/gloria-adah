@@ -225,7 +225,7 @@ export function Home() {
             <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
               <div className="h-16 flex items-center justify-center">
                 <img 
-                  src="/images/stelog.webp" 
+                  src="/images/stelog_new.jpg" 
                   alt="Stelog" 
                   className="max-h-10 w-auto object-contain transition-all duration-300" 
                 />
@@ -295,15 +295,6 @@ export function Home() {
                   alt="Nokkies" 
                   className="max-h-16 w-auto object-contain transition-all duration-300" 
                 />
-              </div>
-            </div>
-
-            {/* DCPL */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/10 border border-border/40 rounded-none w-full min-h-[120px] opacity-90 hover:opacity-100 hover:border-secondary/40 hover:shadow-md transition-all duration-300 group">
-              <div className="h-16 flex items-center justify-center text-center px-2">
-                <span className="font-serif font-semibold text-sm sm:text-base tracking-widest text-primary group-hover:text-secondary transition-colors duration-300">
-                  DCPL
-                </span>
               </div>
             </div>
           </div>

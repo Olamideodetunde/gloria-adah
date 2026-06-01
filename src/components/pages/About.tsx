@@ -220,7 +220,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -265,7 +265,7 @@ export function About() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
                 <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
@@ -294,12 +294,52 @@ export function About() {
                 </div>
               </motion.div>
 
-              {/* Card 3: Eunice Egwuche */}
+              {/* Partner Card 3: Dr. Adedayo Stephen Okunlola */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
+                  <img
+                    src="/images/adedayo.jpg"
+                    alt="Dr. Adedayo Stephen Okunlola"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Dr. Adedayo Stephen Okunlola</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">Partner</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">MBA</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.B</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">BL</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">ACarb</span>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Dr. Adedayo Stephen Okunlola is a highly accomplished multidisciplinary professional with extensive expertise spanning accounting, taxation, law, arbitration, and corporate administration. He is a Chartered Accountant, Tax Consultant, Legal Practitioner, and Arbitrator.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorneyAdedayo}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 4: Eunice Egwuche */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
                 <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
@@ -328,12 +368,12 @@ export function About() {
                 </div>
               </motion.div>
 
-              {/* Card 4: Ayodele Liman */}
+              {/* Card 5: Ayodele Liman */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
                 <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
@@ -362,12 +402,12 @@ export function About() {
                 </div>
               </motion.div>
 
-              {/* Card 5: Mirabel Ngremeh */}
+              {/* Card 6: Mirabel Ngremeh */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
                 className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
               >
                 <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
@@ -392,6 +432,45 @@ export function About() {
                   <div className="border-t border-border pt-6 mt-auto">
                     <a
                       href={routes.attorneyMirabel}
+                      className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
+                    >
+                      View Full Profile <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 7: Fredrick Oluchukwu Omoghene */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="bg-background border border-border group hover:border-secondary transition-all flex flex-col h-full shadow-sm hover:shadow-md"
+              >
+                <div className="relative overflow-hidden aspect-[3/4] bg-muted border-b border-border">
+                  <img
+                    src="/images/fredrick_omoghene.jpg"
+                    alt="Fredrick Oluchukwu Omoghene"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-serif font-bold text-primary">Fredrick Omoghene, Esq.</h4>
+                    <p className="text-secondary text-sm font-semibold tracking-wider uppercase mt-1 mb-3">Associate & Tax Expert</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">ACTI</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">LL.B</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 bg-muted border border-border text-primary rounded-sm">BL</span>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+                    Fredrick is a chartered Tax practitioner with practical experience in Tax practice, Banking and Financial litigation, Consumer Protection, and Technology Law. He is an Associate of the Nigerian Chartered Institute of Taxation.
+                  </p>
+                  <div className="border-t border-border pt-6 mt-auto">
+                    <a
+                      href={routes.attorneyOmoghene}
                       className="text-xs font-bold uppercase tracking-wider text-primary group-hover:text-secondary inline-flex items-center gap-2 transition-colors font-semibold"
                     >
                       View Full Profile <ArrowRight className="h-4 w-4" />

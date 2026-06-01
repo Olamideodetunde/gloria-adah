@@ -125,7 +125,7 @@ export function Booking() {
     { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
     { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
     { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 },
-    { id: 'starter_package', name: 'Starter Registration Package', duration: 30, price: 95000 },
+    { id: 'starter_package', name: 'Starter Registration Package', duration: 30, price: 80000 },
     { id: 'growth_package', name: 'Growth Registration Package', duration: 45, price: 175000 },
     { id: 'premium_package', name: 'Premium Registration Package', duration: 60, price: 295000 },
     { id: 'custom_package', name: 'Custom Registration Setup', duration: 45, price: 0 }
@@ -141,7 +141,7 @@ export function Booking() {
         { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
         { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
         { id: 'retainer', name: 'Retainership Consultation', duration: 15, price: 0 },
-        { id: 'starter_package', name: 'Starter Registration Package', duration: 30, price: 95000 },
+        { id: 'starter_package', name: 'Starter Registration Package', duration: 30, price: 80000 },
         { id: 'growth_package', name: 'Growth Registration Package', duration: 45, price: 175000 },
         { id: 'premium_package', name: 'Premium Registration Package', duration: 60, price: 295000 },
         { id: 'custom_package', name: 'Custom Registration Setup', duration: 45, price: 0 }

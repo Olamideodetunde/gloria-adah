@@ -14,6 +14,8 @@ import { AttorneyFrederick } from './components/pages/AttorneyFrederick';
 import { AttorneyEunice } from './components/pages/AttorneyEunice';
 import { AttorneyAyodele } from './components/pages/AttorneyAyodele';
 import { AttorneyMirabel } from './components/pages/AttorneyMirabel';
+import { AttorneyAdedayo } from './components/pages/AttorneyAdedayo';
+import { AttorneyOmoghene } from './components/pages/AttorneyOmoghene';
 import { Insights } from './components/pages/Insights';
 import { InsightsSingle } from './components/pages/InsightsSingle';
 import { CaseStudies } from './components/pages/CaseStudies';
@@ -117,6 +119,8 @@ export default function App() {
     if (pathname === '/attorneys/eunice-egwuche') return <AttorneyEunice />;
     if (pathname === '/attorneys/ayodele-liman') return <AttorneyAyodele />;
     if (pathname === '/attorneys/mirabel-ngremeh') return <AttorneyMirabel />;
+    if (pathname === '/attorneys/adedayo-okunlola') return <AttorneyAdedayo />;
+    if (pathname === '/attorneys/fredrick-omoghene') return <AttorneyOmoghene />;
     if (pathname === '/insights') return <Insights />;
     if (pathname.startsWith('/insights/')) return <InsightsSingle slug={pathname.replace('/insights/', '')} />;
     if (pathname === '/case-studies') return <CaseStudies />;
