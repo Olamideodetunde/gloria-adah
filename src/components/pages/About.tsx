@@ -16,17 +16,26 @@ export function About() {
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
                 <motion.h2 variants={fadeInUp} className="text-sm font-bold tracking-widest text-secondary uppercase mb-4">Firm Story</motion.h2>
                 <motion.h3 variants={fadeInUp} className="text-3xl md:text-4xl font-serif text-primary mb-6 leading-tight">
-                  Founded in 2015, registered in 2020.
+                  About Gloria Ondah & Associates
                 </motion.h3>
                 <div className="space-y-6 text-muted-foreground leading-relaxed">
                   <motion.p variants={fadeInUp}>
-                    Gloria Ondah & Associates was established with a clear mandate: to provide premium, business-focused legal solutions that drive success for individuals, startups, SMEs, and foreign investors operating in Nigeria.
+                    Gloria Ondah & Associates is a full service law firm dedicated to providing practical and commercially driven legal solutions to individuals, entrepreneurs, startups, SMEs, established businesses, and foreign investors operating in Nigeria.
                   </motion.p>
                   <motion.p variants={fadeInUp}>
-                    We understand that the Nigerian business and regulatory environment can be complex. That is why we act as more than just legal advisors—we serve as strategic partners. From ensuring seamless corporate registration and drafting bulletproof contracts to navigating regulatory compliance and resolving disputes, our practice covers the full spectrum of your commercial needs.
+                    Our firm was established with a clear vision: to help clients navigate legal and regulatory challenges while creating opportunities for growth, investment, and long term success. We understand that the Nigerian business environment can be complex, which is why we go beyond traditional legal representation to provide strategic guidance tailored to our clients' objectives.
                   </motion.p>
                   <motion.p variants={fadeInUp}>
-                    Our commitment to excellence has earned us the trust of numerous organizations across sectors, including energy, real estate, and technology.
+                    Our services span business registration, corporate governance, contract drafting and negotiation, regulatory compliance, employment and labour matters, property transactions, commercial advisory, dispute resolution, and litigation. We represent clients before courts, tribunals, and regulatory bodies while also providing proactive legal support designed to prevent disputes and protect business interests.
+                  </motion.p>
+                  <motion.p variants={fadeInUp}>
+                    At Gloria Ondah & Associates, we are committed to delivering exceptional service, practical solutions, and trusted legal counsel. Our reputation is built on professionalism, integrity, responsiveness, and a genuine commitment to our clients' success.
+                  </motion.p>
+                  <motion.p variants={fadeInUp}>
+                    Over the years, we have earned the trust of clients across a wide range of industries, including energy, real estate, technology, finance, logistics, professional services, and emerging enterprises. Whether you are starting a business, expanding your operations, protecting your rights, resolving disputes, or seeking reliable legal guidance, we are dedicated to helping you achieve your goals with confidence.
+                  </motion.p>
+                  <motion.p variants={fadeInUp}>
+                    At Gloria Ondah & Associates, we do not simply provide legal services; we build lasting relationships and serve as trusted partners in our clients' personal and business journeys.
                   </motion.p>
                 </div>
               </motion.div>

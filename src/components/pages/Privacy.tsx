@@ -32,7 +32,7 @@ export function Privacy() {
               <h2>5. Data Security</h2>
               <p>We have implemented appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way, altered, or disclosed.</p>
               <h2>6. Your Legal Rights</h2>
-              <p>Under the NDPR, you have the right to request access, correction, or deletion of your personal data. To exercise these rights, please contact us at info@gloriaondah.com.</p>
+              <p>Under the NDPR, you have the right to request access, correction, or deletion of your personal data. To exercise these rights, please contact us at info@gloriaondahlaw.com.</p>
             </div>
           </div>
         </section>

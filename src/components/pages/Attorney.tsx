@@ -22,7 +22,7 @@ export function Attorney() {
                   <h3 className="font-serif text-primary text-xl mb-6">Contact Info</h3>
                   <div className="space-y-4 text-sm text-muted-foreground">
                     <a href="tel:+2349029633913" className="flex items-center gap-3 hover:text-secondary"><Phone className="h-4 w-4 text-secondary" />09029633913</a>
-                    <a href="mailto:info@gloriaondah.com" className="flex items-center gap-3 hover:text-secondary break-all"><Mail className="h-4 w-4 text-secondary shrink-0" />info@gloriaondah.com</a>
+                    <a href="mailto:info@gloriaondahlaw.com" className="flex items-center gap-3 hover:text-secondary break-all"><Mail className="h-4 w-4 text-secondary shrink-0" />info@gloriaondahlaw.com</a>
                     <div className="flex items-start gap-3"><MapPin className="h-4 w-4 text-secondary shrink-0 mt-0.5" /><span>Abuja, Nigeria</span></div>
                   </div>
                   <a href={routes.booking} className="block mt-8">
