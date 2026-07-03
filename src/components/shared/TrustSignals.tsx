@@ -22,7 +22,7 @@ export function TrustSignals() {
           Gloria Ondah & Associates
         </h3>
         <div className="text-sm sm:text-base font-serif text-secondary font-medium border-y border-secondary/20 py-2 inline-block px-6 mb-8 uppercase tracking-widest">
-          Founded in 2015 | Officially Registered in 2020
+          Founded in 2015
         </div>
         <p className="text-white/85 leading-relaxed text-lg sm:text-xl max-w-3xl mx-auto mb-10 font-light">
           A trusted name in Nigerian legal practice, delivering excellence and integrity in every case. We provide practical, commercially sound, and result-oriented legal solutions tailored to the business and regulatory needs of startups, corporations, and multinational clients.
