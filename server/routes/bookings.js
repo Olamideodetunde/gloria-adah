@@ -178,13 +178,17 @@ router.get('/verify', async (req, res) => {
       const { rows } = await pool.query('SELECT * FROM bookings WHERE ref_code=$1', [reference]);
       const booking = rows[0];
       if (booking) {
+        const dateStr = booking.appointment_date instanceof Date
+          ? booking.appointment_date.toISOString().split('T')[0]
+          : booking.appointment_date;
+
         await Promise.all([
           sendBookingConfirmation({
             clientEmail: booking.client_email,
             clientName: booking.client_name,
             refCode: booking.ref_code,
             serviceName: booking.service_type,
-            date: booking.appointment_date,
+            date: dateStr,
             time: booking.appointment_time,
             price: booking.service_price
           }),
@@ -196,7 +200,7 @@ router.get('/verify', async (req, res) => {
             clientCompany: booking.client_company,
             serviceName: booking.service_type,
             practiceArea: booking.practice_area,
-            date: booking.appointment_date,
+            date: dateStr,
             time: booking.appointment_time,
             price: booking.service_price
           })
@@ -228,13 +232,17 @@ router.post('/verify-inline', async (req, res) => {
       const { rows } = await pool.query('SELECT * FROM bookings WHERE ref_code=$1', [reference]);
       const booking = rows[0];
       if (booking) {
+        const dateStr = booking.appointment_date instanceof Date
+          ? booking.appointment_date.toISOString().split('T')[0]
+          : booking.appointment_date;
+
         await Promise.all([
           sendBookingConfirmation({
             clientEmail: booking.client_email,
             clientName: booking.client_name,
             refCode: booking.ref_code,
             serviceName: booking.service_type,
-            date: booking.appointment_date,
+            date: dateStr,
             time: booking.appointment_time,
             price: booking.service_price
           }),
@@ -246,7 +254,7 @@ router.post('/verify-inline', async (req, res) => {
             clientCompany: booking.client_company,
             serviceName: booking.service_type,
             practiceArea: booking.practice_area,
-            date: booking.appointment_date,
+            date: dateStr,
             time: booking.appointment_time,
             price: booking.service_price
           })
