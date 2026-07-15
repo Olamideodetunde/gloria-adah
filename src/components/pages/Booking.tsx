@@ -120,7 +120,7 @@ type DetailsValues = z.infer<typeof detailsSchema>;
 export function Booking() {
   const [step, setStep] = useState(1);
   const [serviceTypes, setServiceTypes] = useState([
-    { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
+    { id: 'initial', name: 'Initial Consultation', duration: 30, price: 100 },
     { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 0 },
     { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
     { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
@@ -136,7 +136,7 @@ export function Booking() {
       const params = new URLSearchParams(window.location.search);
       const serviceParam = params.get('service');
       const baseServices = [
-        { id: 'initial', name: 'Initial Consultation', duration: 30, price: 0 },
+        { id: 'initial', name: 'Initial Consultation', duration: 30, price: 100 },
         { id: 'advisory', name: 'Legal Advisory Session', duration: 60, price: 0 },
         { id: 'contract', name: 'Contract Review Consultation', duration: 45, price: 0 },
         { id: 'compliance', name: 'Business Compliance Consultation', duration: 45, price: 0 },
