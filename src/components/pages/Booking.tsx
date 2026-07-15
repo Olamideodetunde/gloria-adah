@@ -131,6 +131,29 @@ export function Booking() {
     { id: 'custom_package', name: 'Custom Registration Setup', duration: 45, price: 0 }
   ]);
 
+  useEffect(() => {
+    fetch('/api/services')
+      .then(res => res.json())
+      .then(data => {
+        if (data.services && data.services.length > 0) {
+          const params = new URLSearchParams(window.location.search);
+          const estFeeStr = params.get('estimatedFee');
+          let customFeeOverride: number | null = null;
+          if (estFeeStr) {
+            const numericFee = parseInt(estFeeStr.replace(/[^0-9]/g, ''), 10);
+            if (!isNaN(numericFee)) customFeeOverride = numericFee;
+          }
+
+          setServiceTypes(data.services.map((s: any) => 
+            (s.id === 'custom_package' && customFeeOverride !== null) 
+              ? { ...s, price: customFeeOverride } 
+              : s
+          ));
+        }
+      })
+      .catch(err => console.error('[Booking] Failed to fetch live services:', err));
+  }, []);
+
   const [selectedService, setSelectedService] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -305,7 +328,10 @@ export function Booking() {
                       className={`cursor-pointer p-6 border transition-all ${selectedService === srv.id ? 'border-secondary bg-secondary/5 ring-1 ring-secondary/50' : 'border-border hover:border-primary/30 bg-background'}`}>
                       <div className="flex justify-between items-start">
                         <h3 className="font-bold text-primary">{srv.name}</h3>
-                        <span className="text-xs bg-muted px-2 py-1 rounded font-medium">{srv.duration} min</span>
+                        <div className="flex flex-col items-end gap-1">
+                          <span className="text-xs bg-muted px-2 py-1 rounded font-medium">{srv.duration} min</span>
+                          {srv.price > 0 && <span className="text-xs font-mono font-bold text-secondary">₦{srv.price.toLocaleString()}</span>}
+                        </div>
                       </div>
                     </div>
                   ))}

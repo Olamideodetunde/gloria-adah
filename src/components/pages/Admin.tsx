@@ -4,7 +4,7 @@ import {
   LayoutDashboard, FileText, CalendarCheck, MessageSquare,
   LogOut, Eye, EyeOff, Pencil, Trash2, Plus, Save,
   X, CheckCircle, Clock, BarChart3, Globe, GlobeLock,
-  RefreshCw, ChevronDown, ChevronUp, Lock, Upload, ImageIcon
+  RefreshCw, ChevronDown, ChevronUp, Lock, Upload, ImageIcon, DollarSign
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -43,6 +43,9 @@ interface Contact {
   id: number; ref_code: string; name: string; email: string; phone: string;
   subject: string; message: string; status: string; created_at: string;
 }
+interface Service {
+  id: string; name: string; duration: number; price: number;
+}
 interface Stats {
   bookings: { total: number; confirmed: number };
   contacts: { total: number; unread: number };
@@ -60,12 +63,13 @@ export function Admin() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
-  const [tab, setTab] = useState<'dashboard' | 'posts' | 'bookings' | 'contacts'>('dashboard');
+  const [tab, setTab] = useState<'dashboard' | 'posts' | 'bookings' | 'contacts' | 'services'>('dashboard');
 
   const [stats, setStats] = useState<Stats | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(false);
 
   const [editorOpen, setEditorOpen] = useState(false);
@@ -75,6 +79,7 @@ export function Admin() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
+  const [editingService, setEditingService] = useState<Service | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const login = async () => {
@@ -96,18 +101,20 @@ export function Admin() {
     if (!token) return;
     setLoading(true);
     try {
-      const [sRes, pRes, bRes, cRes] = await Promise.all([
+      const [sRes, pRes, bRes, cRes, svcRes] = await Promise.all([
         fetch(`${API}/admin/stats`, { headers: authHeaders(token) }),
         fetch(`${API}/posts/all`, { headers: authHeaders(token) }),
         fetch(`${API}/admin/bookings`, { headers: authHeaders(token) }),
-        fetch(`${API}/admin/contacts`, { headers: authHeaders(token) })
+        fetch(`${API}/admin/contacts`, { headers: authHeaders(token) }),
+        fetch(`${API}/services`)
       ]);
       if (sRes.status === 401) { clearToken(); return; }
-      const [s, p, b, c] = await Promise.all([sRes.json(), pRes.json(), bRes.json(), cRes.json()]);
+      const [s, p, b, c, svc] = await Promise.all([sRes.json(), pRes.json(), bRes.json(), cRes.json(), svcRes.json()]);
       setStats(s);
       setPosts(p.posts || []);
       setBookings(b.bookings || []);
       setContacts(c.contacts || []);
+      setServices(svc.services || []);
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
   }, [token]);
@@ -186,6 +193,20 @@ export function Admin() {
     setUploadError('');
   };
 
+  const saveService = async () => {
+    if (!editingService) return;
+    try {
+      const res = await fetch(`${API}/services/${editingService.id}`, {
+        method: 'PATCH', headers: authHeaders(token),
+        body: JSON.stringify({ price: editingService.price, duration: editingService.duration })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setServices(ss => ss.map(s => s.id === editingService.id ? { ...s, ...editingService } : s));
+      setEditingService(null);
+    } catch (e: any) { alert(e.message); }
+  };
+
   function formatDate(iso: string) {
     return new Date(iso).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' });
   }
@@ -241,7 +262,8 @@ export function Admin() {
     { id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
     { id: 'posts', label: 'Blog Posts', icon: FileText },
     { id: 'bookings', label: 'Bookings', icon: CalendarCheck },
-    { id: 'contacts', label: 'Inquiries', icon: MessageSquare }
+    { id: 'contacts', label: 'Inquiries', icon: MessageSquare },
+    { id: 'services', label: 'Services & Pricing', icon: DollarSign }
   ] as const;
 
   return (
@@ -699,6 +721,67 @@ export function Admin() {
                     <p>No inquiries yet.</p>
                   </div>
                 )}
+              </div>
+            </motion.div>
+          )}
+
+          {tab === 'services' && (
+            <motion.div key="services" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <h2 className="text-2xl font-serif text-primary mb-8">Services & Pricing</h2>
+              
+              <AnimatePresence>
+                {editingService && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+                    className="bg-background border-2 border-primary/20 p-6 mb-8 shadow-lg"
+                  >
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-xl font-serif text-primary">Edit {editingService.name}</h3>
+                      <Button variant="ghost" size="icon" onClick={() => setEditingService(null)}><X className="h-4 w-4" /></Button>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-6 mb-6">
+                      <div>
+                        <label className="text-sm font-medium text-foreground block mb-2">Price (₦)</label>
+                        <Input
+                          type="number"
+                          value={editingService.price}
+                          onChange={e => setEditingService(s => s ? { ...s, price: parseInt(e.target.value) || 0 } : null)}
+                          className="rounded-none h-11"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium text-foreground block mb-2">Duration (minutes)</label>
+                        <Input
+                          type="number"
+                          value={editingService.duration}
+                          onChange={e => setEditingService(s => s ? { ...s, duration: parseInt(e.target.value) || 0 } : null)}
+                          className="rounded-none h-11"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-end gap-3">
+                      <Button variant="outline" onClick={() => setEditingService(null)} className="rounded-none border-border">Cancel</Button>
+                      <Button onClick={saveService} className="bg-primary text-white rounded-none gap-2"><Save className="h-4 w-4" /> Save Changes</Button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="bg-background border border-border">
+                {services.map(s => (
+                  <div key={s.id} className="flex items-center justify-between p-5 border-b border-border last:border-0 hover:bg-muted/20 transition-colors">
+                    <div>
+                      <h4 className="font-medium text-primary text-sm">{s.name}</h4>
+                      <p className="text-xs text-muted-foreground mt-1">{s.duration} minutes</p>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <div className="font-mono font-medium text-sm">₦{s.price.toLocaleString()}</div>
+                      <Button variant="outline" size="sm" onClick={() => setEditingService(s)} className="text-xs rounded-none gap-1">
+                        <Pencil className="h-3 w-3" /> Edit
+                      </Button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           )}

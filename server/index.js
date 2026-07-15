@@ -11,6 +11,7 @@ import contactRouter from './routes/contact.js';
 import postsRouter from './routes/posts.js';
 import adminRouter from './routes/admin.js';
 import uploadRouter from './routes/upload.js';
+import servicesRouter from './routes/services.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === 'production';
@@ -43,6 +44,7 @@ app.use('/api/contact', formLimiter, contactRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/admin', adminLimiter, adminRouter);
 app.use('/api/upload', adminLimiter, uploadRouter);
+app.use('/api/services', servicesRouter);
 
 async function startServer() {
   if (isProd) {
