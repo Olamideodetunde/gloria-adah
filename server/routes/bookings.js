@@ -209,7 +209,7 @@ router.get('/verify', async (req, res) => {
     }
   } catch (err) {
     console.error('[Bookings] Verify error:', err.message);
-    res.status(500).json({ error: 'Verification failed' });
+    res.status(500).json({ error: 'Verification failed', details: err.message, stack: err.stack });
   }
 });
 

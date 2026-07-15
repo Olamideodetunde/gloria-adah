@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const FROM_EMAIL = 'info@gloriaondahlaw.com';
-const FIRM_EMAIL = 'info@gloriaondahlaw.com';
+const FROM_EMAIL = process.env.BREVO_SENDER_EMAIL || 'info@gloriaondahlaw.com';
+const FIRM_EMAIL = process.env.BREVO_SENDER_EMAIL || 'info@gloriaondahlaw.com';
 const FIRM_NAME = 'Gloria Ondah & Associates';
 const BREVO_API = 'https://api.brevo.com/v3/smtp/email';
 
