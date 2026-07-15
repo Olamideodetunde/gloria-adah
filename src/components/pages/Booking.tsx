@@ -169,6 +169,17 @@ export function Booking() {
         ));
       }
     }
+    
+    const status = params.get('status');
+    const ref = params.get('refCode');
+    if (status === 'success' && ref) {
+      setRefCode(ref);
+      setStep(4);
+      window.history.replaceState({}, '', '/booking');
+    } else if (status === 'failed') {
+      setApiError('Payment was not successful. Please try again.');
+      window.history.replaceState({}, '', '/booking');
+    }
   }, []);
 
   const [selectedPractice, setSelectedPractice] = useState<string>("general");
@@ -245,10 +256,9 @@ export function Booking() {
       if (!res.ok) throw new Error(json.error || 'Booking failed');
       setRefCode(json.refCode);
       if (!json.requiresPayment) {
-        setStep(5);
+        setStep(4);
       } else if (json.paystackConfigured && json.authorizationUrl) {
-        setPaystackUrl(json.authorizationUrl);
-        nextStep();
+        window.location.href = json.authorizationUrl;
       } else {
         if (json.paystackError) setApiError(json.paystackError);
         nextStep();
@@ -260,15 +270,7 @@ export function Booking() {
     }
   };
 
-  const processPayment = async () => {
-    if (paystackUrl) {
-      window.open(paystackUrl, '_blank');
-      setStep(5);
-      return;
-    }
-    setIsProcessing(true);
-    setTimeout(() => { setIsProcessing(false); setStep(5); }, 2000);
-  };
+
 
   return (
     <PageShell title="Book Consultation" breadcrumbs={[{ label: 'Booking' }]}>
@@ -451,51 +453,12 @@ export function Booking() {
             )}
 
             {step === 4 && (
-              <div className="space-y-8 animate-in fade-in slide-in-from-right-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-4 mb-6">
-                  <Button variant="ghost" size="icon" onClick={prevStep} className="h-8 w-8 rounded-full"><ArrowLeft className="h-4 w-4" /></Button>
-                  <div>
-                    <h2 className="text-2xl font-serif text-primary mb-2">Checkout</h2>
-                    <p className="text-muted-foreground">Complete your booking securely.</p>
-                  </div>
-                </div>
-                <div className="bg-[#f9f9f9] border border-[#e4e4e4] rounded-lg overflow-hidden shadow-sm">
-                  <div className="bg-white p-6 border-b border-[#e4e4e4] text-center">
-                    <div className="text-sm text-gray-500 mb-1">{details?.email}</div>
-                    <div className="text-3xl font-bold text-[#1c1d1f]">₦{serviceObj?.price.toLocaleString()}</div>
-                  </div>
-                  <div className="p-6 bg-[#fcfcfc] border-b border-[#e4e4e4] space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-gray-500">Service:</span><span className="font-medium">{serviceObj?.name}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Date:</span><span className="font-medium">{selectedDate ? format(selectedDate, 'MMM do, yyyy') : ''}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Time:</span><span className="font-medium">{selectedTime}</span></div>
-                  </div>
-                  <div className="p-6 bg-white">
-                    <div className="mb-4">
-                      <label className="text-xs font-semibold text-gray-500 uppercase">Card Number</label>
-                      <Input placeholder="0000 0000 0000 0000" className="mt-1 font-mono tracking-widest bg-gray-50 border-gray-200" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div><label className="text-xs font-semibold text-gray-500 uppercase">Valid Till</label><Input placeholder="MM/YY" className="mt-1 bg-gray-50 border-gray-200" /></div>
-                      <div><label className="text-xs font-semibold text-gray-500 uppercase">CVV</label><Input placeholder="123" className="mt-1 bg-gray-50 border-gray-200" type="password" maxLength={3} /></div>
-                    </div>
-                    <Button onClick={processPayment} disabled={isProcessing} className="w-full bg-[#3bb75e] hover:bg-[#2fa350] text-white h-12 text-lg font-medium shadow-sm transition-colors">
-                      {isProcessing ? <Loader2 className="h-5 w-5 animate-spin" /> : (paystackUrl ? `Pay ₦${serviceObj?.price.toLocaleString()} via Paystack` : `Pay ₦${serviceObj?.price.toLocaleString()}`)}
-                    </Button>
-                  </div>
-                  <div className="p-4 bg-[#f9f9f9] flex justify-center items-center gap-2 text-xs text-gray-500">
-                    <Lock className="h-3 w-3" /> Secured by <strong>Paystack</strong>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step === 5 && (
               <div className="text-center py-12 animate-in zoom-in-95 space-y-6 max-w-xl mx-auto">
                 <div className="w-24 h-24 bg-[#e8f5e9] text-[#2e7d32] rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm ring-8 ring-[#e8f5e9]/50">
                   <CheckCircle2 className="h-12 w-12" />
                 </div>
                 <h2 className="text-3xl font-serif text-primary">Booking Confirmed</h2>
-                <p className="text-muted-foreground text-lg">Your {serviceObj?.name} has been scheduled successfully.</p>
+                <p className="text-muted-foreground text-lg">Your {serviceObj?.name || 'consultation'} has been scheduled successfully.</p>
 
                 <div className="bg-muted p-6 text-left border border-border mt-8 mb-8 space-y-4">
                   <div className="flex justify-between border-b border-border pb-4">
@@ -517,7 +480,7 @@ export function Booking() {
                 </div>
 
                 <p className="text-sm text-muted-foreground mb-8">
-                  A confirmation email will be sent to <strong>{details?.email}</strong>.
+                  A confirmation email and calendar invite have been sent with your booking details.
                 </p>
 
                 <div className="bg-muted/50 border border-border p-5 text-left space-y-3 mb-6">

@@ -164,7 +164,8 @@ router.post('/', async (req, res) => {
 
 router.get('/verify', async (req, res) => {
   const { reference } = req.query;
-  if (!reference) return res.status(400).json({ error: 'Reference required' });
+  const siteUrl = process.env.FRONTEND_URL || process.env.SITE_URL || '';
+  if (!reference) return res.redirect(`${siteUrl}/booking?status=failed`);
 
   try {
     const result = await verifyPayment(reference);
@@ -202,9 +203,9 @@ router.get('/verify', async (req, res) => {
         ]);
       }
 
-      res.json({ status: 'success', refCode: reference });
+      res.redirect(`${siteUrl}/booking?status=success&refCode=${reference}`);
     } else {
-      res.json({ status: 'failed', message: 'Payment not successful' });
+      res.redirect(`${siteUrl}/booking?status=failed`);
     }
   } catch (err) {
     console.error('[Bookings] Verify error:', err.message);
