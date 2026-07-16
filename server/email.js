@@ -118,67 +118,106 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
 
   const formattedDate = date.split('-').reverse().join('/');
   const bookingRows = `
-    <tr style="border-bottom:1px solid #e8e0dc;">
-      <td style="padding:12px 0;color:#888;font-size:14px;width:40%;">Reference</td>
-      <td style="padding:12px 0;font-weight:bold;font-family:monospace;">${refCode}</td>
+    <tr style="border-bottom:1px solid #e5e7eb;">
+      <td style="padding:14px 0;color:#6b7280;font-size:14px;width:35%;font-weight:500;">Reference</td>
+      <td style="padding:14px 0;color:#111827;font-size:14px;font-weight:600;font-family:monospace;letter-spacing:1px;">${refCode}</td>
     </tr>
-    <tr style="border-bottom:1px solid #e8e0dc;">
-      <td style="padding:12px 0;color:#888;font-size:14px;">Service</td>
-      <td style="padding:12px 0;">${serviceName}</td>
+    <tr style="border-bottom:1px solid #e5e7eb;">
+      <td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Service</td>
+      <td style="padding:14px 0;color:#111827;font-size:14px;font-weight:600;">${serviceName}</td>
     </tr>
-    <tr style="border-bottom:1px solid #e8e0dc;">
-      <td style="padding:12px 0;color:#888;font-size:14px;">Date</td>
-      <td style="padding:12px 0;">${formattedDate}</td>
+    <tr style="border-bottom:1px solid #e5e7eb;">
+      <td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Date</td>
+      <td style="padding:14px 0;color:#111827;font-size:14px;font-weight:600;">${formattedDate}</td>
     </tr>
-    <tr style="border-bottom:1px solid #e8e0dc;">
-      <td style="padding:12px 0;color:#888;font-size:14px;">Time</td>
-      <td style="padding:12px 0;">${time} (West Africa Time)</td>
+    <tr style="border-bottom:1px solid #e5e7eb;">
+      <td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Time</td>
+      <td style="padding:14px 0;color:#111827;font-size:14px;font-weight:600;">${time} <span style="color:#9ca3af;font-weight:normal;">(WAT)</span></td>
     </tr>
     ${isPaid
-      ? `<tr><td style="padding:12px 0;color:#888;font-size:14px;">Amount Paid</td><td style="padding:12px 0;font-weight:bold;color:#2e7d32;">&#8358;${price.toLocaleString()}</td></tr>`
-      : `<tr><td style="padding:12px 0;color:#888;font-size:14px;">Fee</td><td style="padding:12px 0;color:#2e7d32;font-weight:bold;">Complimentary</td></tr>`}
+      ? `<tr><td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Amount Paid</td><td style="padding:14px 0;font-weight:bold;color:#059669;font-size:14px;">&#8358;${price.toLocaleString()}</td></tr>`
+      : `<tr><td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Fee</td><td style="padding:14px 0;color:#059669;font-weight:bold;font-size:14px;">Complimentary</td></tr>`}
   `;
 
   const clientHtml = `
-    <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
-      <div style="background:#440a18;padding:32px 40px;">
-        <h1 style="color:#c28741;font-size:22px;margin:0;letter-spacing:1px;">GLORIA ONDAH &amp; ASSOCIATES</h1>
-        <p style="color:#fefefe;font-size:13px;margin:6px 0 0;">Your Trusted Partner for Legal Solutions and Representation</p>
-      </div>
-      <div style="padding:40px;border:1px solid #e8e0dc;border-top:none;">
-        <h2 style="color:#440a18;font-size:24px;margin-top:0;">Booking Confirmed</h2>
-        <p>Dear ${clientName},</p>
-        <p>Your consultation has been successfully scheduled. Please find your booking details below.</p>
-        <p style="background:#fff8f0;border-left:3px solid #b87d39;padding:12px 16px;font-size:14px;color:#6b4c1e;">
-          📅 A Google Calendar invitation has been sent directly to your inbox. You can also use the attached <strong>.ics</strong> file to manually add this appointment to your preferred calendar (Apple Calendar, Outlook, etc.).
-        </p>
-        <table style="width:100%;border-collapse:collapse;margin:24px 0;">
-          ${bookingRows}
-        </table>
-        <p style="font-size:14px;color:#555;">Our team will confirm meeting details before your appointment. For any questions:</p>
-        <p style="font-size:14px;">
-          <strong>Phone:</strong> 09029633913 &nbsp;|&nbsp; <strong>WhatsApp:</strong> 07054588490<br/>
-          <strong>Email:</strong> info@gloriaondahlaw.com
-        </p>
-        <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
-          Gloria Ondah &amp; Associates &nbsp;|&nbsp; CAC Reg: BN-3068204 &nbsp;|&nbsp; No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
-        </p>
+    <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+        <div style="background-color:#17202d;padding:40px;text-align:center;">
+          <h1 style="color:#eb9f24;font-family:Georgia,serif;font-size:22px;margin:0;letter-spacing:1.5px;text-transform:uppercase;">Gloria Ondah &amp; Associates</h1>
+          <p style="color:#9ca3af;font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Legal Solutions &amp; Representation</p>
+        </div>
+        
+        <div style="padding:48px 40px;">
+          <h2 style="color:#111827;font-size:24px;margin:0 0 24px 0;font-family:Georgia,serif;font-weight:normal;">Booking Confirmed</h2>
+          <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Dear ${clientName},</p>
+          <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 32px 0;">Your consultation has been successfully scheduled. We look forward to speaking with you. Please review your booking details below.</p>
+          
+          <div style="background-color:#fef3c7;border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 6px 6px 0;margin-bottom:32px;">
+            <p style="color:#92400e;font-size:14px;line-height:1.5;margin:0;">
+              <strong style="color:#b45309;">&#128197; Calendar Invite:</strong> A Google Calendar invitation has been sent to your inbox. You can also use the attached <strong>.ics</strong> file to manually add this appointment to your preferred calendar.
+            </p>
+          </div>
+
+          <div style="background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px 24px;margin-bottom:32px;">
+            <table style="width:100%;border-collapse:collapse;">
+              ${bookingRows}
+            </table>
+          </div>
+
+          <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px 0;">Our team will confirm any final meeting details with you shortly. If you have any immediate questions, feel free to reach out:</p>
+          
+          <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+            <tr>
+              <td style="padding:6px 0;color:#374151;font-size:15px;"><strong>Phone:</strong> 0902 963 3913</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;color:#374151;font-size:15px;"><strong>WhatsApp:</strong> 0705 458 8490</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;color:#374151;font-size:15px;"><strong>Email:</strong> <a href="mailto:info@gloriaondahlaw.com" style="color:#2563eb;text-decoration:none;">info@gloriaondahlaw.com</a></td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background-color:#f3f4f6;padding:32px 40px;text-align:center;border-top:1px solid #e5e7eb;">
+          <p style="color:#6b7280;font-size:12px;line-height:1.5;margin:0;">
+            <strong>Gloria Ondah &amp; Associates</strong><br>
+            CAC Reg: BN-3068204<br>
+            No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
+          </p>
+        </div>
       </div>
     </div>
   `;
 
   const firmHtml = `
-    <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
-      <div style="background:#440a18;padding:24px 32px;">
-        <h2 style="color:#c28741;margin:0;font-size:18px;">New Booking — ${refCode}</h2>
-      </div>
-      <div style="padding:32px;border:1px solid #e8e0dc;border-top:none;">
-        <p><strong>A new consultation has been booked. The calendar invite is attached.</strong></p>
-        <table style="width:100%;border-collapse:collapse;margin:16px 0;">
-          ${bookingRows}
-        </table>
-        <p style="font-size:14px;"><strong>Client:</strong> ${clientName}</p>
-        <p style="font-size:14px;"><strong>Client Email:</strong> ${clientEmail}</p>
+    <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;box-shadow:0 1px 3px 0 rgba(0,0,0,0.1);">
+        <div style="background-color:#17202d;padding:24px 32px;border-bottom:3px solid #eb9f24;">
+          <h2 style="color:#ffffff;margin:0;font-size:18px;font-weight:500;letter-spacing:0.5px;">New Booking Alert <span style="color:#9ca3af;font-size:14px;margin-left:8px;font-family:monospace;">${refCode}</span></h2>
+        </div>
+        <div style="padding:32px;">
+          <div style="background-color:#ecfdf5;border-left:4px solid #10b981;padding:16px;border-radius:0 6px 6px 0;margin-bottom:24px;">
+            <p style="margin:0;color:#065f46;font-size:15px;"><strong>A new consultation has been booked!</strong> The calendar invite is attached.</p>
+          </div>
+          
+          <h3 style="color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;border-bottom:1px solid #e5e7eb;padding-bottom:8px;">Booking Details</h3>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:32px;">
+            ${bookingRows}
+          </table>
+          
+          <h3 style="color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;border-bottom:1px solid #e5e7eb;padding-bottom:8px;">Client Information</h3>
+          <table style="width:100%;border-collapse:collapse;">
+            <tr>
+              <td style="padding:8px 0;color:#6b7280;font-size:14px;width:35%;font-weight:500;">Name</td>
+              <td style="padding:8px 0;color:#111827;font-size:14px;font-weight:600;">${clientName}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#6b7280;font-size:14px;font-weight:500;">Email</td>
+              <td style="padding:8px 0;color:#2563eb;font-size:14px;font-weight:600;"><a href="mailto:${clientEmail}" style="color:#2563eb;text-decoration:none;">${clientEmail}</a></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   `;
@@ -205,18 +244,35 @@ export async function sendContactNotification({ name, email, phone, subject, mes
       to: [{ email: FIRM_EMAIL, name: FIRM_NAME }],
       subject: `New Contact Submission [${refCode}]: ${subject}`,
       html: `
-        <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
-          <div style="background:#440a18;padding:24px 32px;">
-            <h2 style="color:#c28741;margin:0;font-size:18px;">New Website Enquiry</h2>
-          </div>
-          <div style="padding:32px;border:1px solid #e8e0dc;border-top:none;">
-            <p><strong>Reference:</strong> ${refCode}</p>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Subject:</strong> ${subject}</p>
-            <p><strong>Message:</strong></p>
-            <div style="background:#f7f5f6;padding:16px;border-left:3px solid #b87d39;">${message}</div>
+        <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+          <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;box-shadow:0 1px 3px 0 rgba(0,0,0,0.1);">
+            <div style="background-color:#17202d;padding:24px 32px;border-bottom:3px solid #eb9f24;">
+              <h2 style="color:#ffffff;margin:0;font-size:18px;font-weight:500;letter-spacing:0.5px;">New Website Enquiry <span style="color:#9ca3af;font-size:14px;margin-left:8px;font-family:monospace;">${refCode}</span></h2>
+            </div>
+            <div style="padding:32px;">
+              <h3 style="color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;border-bottom:1px solid #e5e7eb;padding-bottom:8px;">Contact Details</h3>
+              <table style="width:100%;border-collapse:collapse;margin-bottom:32px;">
+                <tr style="border-bottom:1px solid #f3f4f6;">
+                  <td style="padding:12px 0;color:#6b7280;font-size:14px;width:30%;font-weight:500;">Name</td>
+                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">${name}</td>
+                </tr>
+                <tr style="border-bottom:1px solid #f3f4f6;">
+                  <td style="padding:12px 0;color:#6b7280;font-size:14px;font-weight:500;">Email</td>
+                  <td style="padding:12px 0;color:#2563eb;font-size:14px;font-weight:600;"><a href="mailto:${email}" style="color:#2563eb;text-decoration:none;">${email}</a></td>
+                </tr>
+                <tr style="border-bottom:1px solid #f3f4f6;">
+                  <td style="padding:12px 0;color:#6b7280;font-size:14px;font-weight:500;">Phone</td>
+                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">${phone}</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 0;color:#6b7280;font-size:14px;font-weight:500;">Subject</td>
+                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">${subject}</td>
+                </tr>
+              </table>
+              
+              <h3 style="color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;border-bottom:1px solid #e5e7eb;padding-bottom:8px;">Message</h3>
+              <div style="background-color:#f9fafb;border:1px solid #e5e7eb;padding:20px;border-radius:6px;color:#374151;font-size:15px;line-height:1.6;white-space:pre-wrap;">${message}</div>
+            </div>
           </div>
         </div>
       `
@@ -225,17 +281,29 @@ export async function sendContactNotification({ name, email, phone, subject, mes
       to: email,
       subject: `We received your message — ${FIRM_NAME}`,
       html: `
-        <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#2e060f;">
-          <div style="background:#440a18;padding:32px 40px;">
-            <h1 style="color:#c28741;font-size:22px;margin:0;">GLORIA ONDAH &amp; ASSOCIATES</h1>
-          </div>
-          <div style="padding:40px;border:1px solid #e8e0dc;border-top:none;">
-            <p>Dear ${name},</p>
-            <p>Thank you for contacting Gloria Ondah &amp; Associates. We have received your enquiry (Ref: <strong>${refCode}</strong>) and a member of our team will respond within one business day.</p>
-            <p style="font-size:14px;color:#555;">If your matter is urgent, please call us directly at <strong>09029633913</strong> or send a WhatsApp message to <strong>07054588490</strong>.</p>
-            <p style="font-size:12px;color:#888;border-top:1px solid #e8e0dc;padding-top:16px;margin-top:32px;">
-              Gloria Ondah &amp; Associates &nbsp;|&nbsp; CAC Reg: BN-3068204
-            </p>
+        <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+          <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+            <div style="background-color:#17202d;padding:40px;text-align:center;">
+              <h1 style="color:#eb9f24;font-family:Georgia,serif;font-size:22px;margin:0;letter-spacing:1.5px;text-transform:uppercase;">Gloria Ondah &amp; Associates</h1>
+              <p style="color:#9ca3af;font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Legal Solutions &amp; Representation</p>
+            </div>
+            <div style="padding:48px 40px;">
+              <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Dear ${name},</p>
+              <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Thank you for contacting Gloria Ondah &amp; Associates. We have received your enquiry (Ref: <strong style="color:#111827;font-family:monospace;">${refCode}</strong>) and a member of our team will respond within one business day.</p>
+              
+              <div style="background-color:#f3f4f6;border-left:4px solid #9ca3af;padding:16px 20px;border-radius:0 6px 6px 0;margin-bottom:32px;">
+                <p style="color:#4b5563;font-size:14px;line-height:1.5;margin:0;">
+                  If your matter is urgent, please call us directly at <strong style="color:#111827;">0902 963 3913</strong> or send a WhatsApp message to <strong style="color:#111827;">0705 458 8490</strong>.
+                </p>
+              </div>
+            </div>
+            <div style="background-color:#f3f4f6;padding:32px 40px;text-align:center;border-top:1px solid #e5e7eb;">
+              <p style="color:#6b7280;font-size:12px;line-height:1.5;margin:0;">
+                <strong>Gloria Ondah &amp; Associates</strong><br>
+                CAC Reg: BN-3068204<br>
+                No. 28, 3rd Avenue, Gwarinpa Estate, Abuja
+              </p>
+            </div>
           </div>
         </div>
       `
