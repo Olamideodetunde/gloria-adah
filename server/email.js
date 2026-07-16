@@ -135,16 +135,16 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
       <td style="padding:14px 0;color:#111827;font-size:14px;font-weight:600;">${time} <span style="color:#9ca3af;font-weight:normal;">(WAT)</span></td>
     </tr>
     ${isPaid
-      ? `<tr><td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Amount Paid</td><td style="padding:14px 0;font-weight:bold;color:#059669;font-size:14px;">&#8358;${price.toLocaleString()}</td></tr>`
-      : `<tr><td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Fee</td><td style="padding:14px 0;color:#059669;font-weight:bold;font-size:14px;">Complimentary</td></tr>`}
+      ? \`<tr><td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Amount Paid</td><td style="padding:14px 0;font-weight:bold;color:#059669;font-size:14px;">&#8358;\${price.toLocaleString()}</td></tr>\`
+      : \`<tr><td style="padding:14px 0;color:#6b7280;font-size:14px;font-weight:500;">Fee</td><td style="padding:14px 0;color:#059669;font-weight:bold;font-size:14px;">Complimentary</td></tr>\`}
   `;
 
   const clientHtml = `
     <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
       <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-        <div style="background-color:#17202d;padding:40px;text-align:center;">
-          <h1 style="color:#eb9f24;font-family:Georgia,serif;font-size:22px;margin:0;letter-spacing:1.5px;text-transform:uppercase;">Gloria Ondah &amp; Associates</h1>
-          <p style="color:#9ca3af;font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Legal Solutions &amp; Representation</p>
+        <div style="background-color:#440a18;padding:40px;text-align:center;">
+          <h1 style="color:#c28741;font-family:Georgia,serif;font-size:22px;margin:0;letter-spacing:1.5px;text-transform:uppercase;">Gloria Ondah &amp; Associates</h1>
+          <p style="color:#e8e0dc;font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Legal Solutions &amp; Representation</p>
         </div>
         
         <div style="padding:48px 40px;">
@@ -152,9 +152,9 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
           <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Dear ${clientName},</p>
           <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 32px 0;">Your consultation has been successfully scheduled. We look forward to speaking with you. Please review your booking details below.</p>
           
-          <div style="background-color:#fef3c7;border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 6px 6px 0;margin-bottom:32px;">
-            <p style="color:#92400e;font-size:14px;line-height:1.5;margin:0;">
-              <strong style="color:#b45309;">&#128197; Calendar Invite:</strong> A Google Calendar invitation has been sent to your inbox. You can also use the attached <strong>.ics</strong> file to manually add this appointment to your preferred calendar.
+          <div style="background-color:#fff8f0;border-left:4px solid #c28741;padding:16px 20px;border-radius:0 6px 6px 0;margin-bottom:32px;">
+            <p style="color:#6b4c1e;font-size:14px;line-height:1.5;margin:0;">
+              <strong style="color:#b87d39;">&#128197; Calendar Invite:</strong> A Google Calendar invitation has been sent to your inbox. You can also use the attached <strong>.ics</strong> file to manually add this appointment to your preferred calendar.
             </p>
           </div>
 
@@ -193,8 +193,8 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
   const firmHtml = `
     <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
       <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;box-shadow:0 1px 3px 0 rgba(0,0,0,0.1);">
-        <div style="background-color:#17202d;padding:24px 32px;border-bottom:3px solid #eb9f24;">
-          <h2 style="color:#ffffff;margin:0;font-size:18px;font-weight:500;letter-spacing:0.5px;">New Booking Alert <span style="color:#9ca3af;font-size:14px;margin-left:8px;font-family:monospace;">${refCode}</span></h2>
+        <div style="background-color:#440a18;padding:24px 32px;border-bottom:3px solid #c28741;">
+          <h2 style="color:#ffffff;margin:0;font-size:18px;font-weight:500;letter-spacing:0.5px;">New Booking Alert <span style="color:#e8e0dc;font-size:14px;margin-left:8px;font-family:monospace;">${refCode}</span></h2>
         </div>
         <div style="padding:32px;">
           <div style="background-color:#ecfdf5;border-left:4px solid #10b981;padding:16px;border-radius:0 6px 6px 0;margin-bottom:24px;">
@@ -225,13 +225,13 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
   await Promise.allSettled([
     sendEmail({
       to: clientEmail,
-      subject: `Booking Confirmed — ${refCode} | ${FIRM_NAME}`,
+      subject: \`Booking Confirmed — \${refCode} | \${FIRM_NAME}\`,
       html: clientHtml,
       attachment: icsAttachment
     }),
     sendEmail({
       to: FIRM_EMAIL,
-      subject: `[New Booking] ${refCode} — ${serviceName} on ${formattedDate}`,
+      subject: \`[New Booking] \${refCode} — \${serviceName} on \${formattedDate}\`,
       html: firmHtml,
       attachment: icsAttachment
     })
@@ -242,54 +242,54 @@ export async function sendContactNotification({ name, email, phone, subject, mes
   await Promise.allSettled([
     sendEmail({
       to: [{ email: FIRM_EMAIL, name: FIRM_NAME }],
-      subject: `New Contact Submission [${refCode}]: ${subject}`,
-      html: `
+      subject: \`New Contact Submission [\${refCode}]: \${subject}\`,
+      html: \`
         <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
           <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;box-shadow:0 1px 3px 0 rgba(0,0,0,0.1);">
-            <div style="background-color:#17202d;padding:24px 32px;border-bottom:3px solid #eb9f24;">
-              <h2 style="color:#ffffff;margin:0;font-size:18px;font-weight:500;letter-spacing:0.5px;">New Website Enquiry <span style="color:#9ca3af;font-size:14px;margin-left:8px;font-family:monospace;">${refCode}</span></h2>
+            <div style="background-color:#440a18;padding:24px 32px;border-bottom:3px solid #c28741;">
+              <h2 style="color:#ffffff;margin:0;font-size:18px;font-weight:500;letter-spacing:0.5px;">New Website Enquiry <span style="color:#e8e0dc;font-size:14px;margin-left:8px;font-family:monospace;">\${refCode}</span></h2>
             </div>
             <div style="padding:32px;">
               <h3 style="color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;border-bottom:1px solid #e5e7eb;padding-bottom:8px;">Contact Details</h3>
               <table style="width:100%;border-collapse:collapse;margin-bottom:32px;">
                 <tr style="border-bottom:1px solid #f3f4f6;">
                   <td style="padding:12px 0;color:#6b7280;font-size:14px;width:30%;font-weight:500;">Name</td>
-                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">${name}</td>
+                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">\${name}</td>
                 </tr>
                 <tr style="border-bottom:1px solid #f3f4f6;">
                   <td style="padding:12px 0;color:#6b7280;font-size:14px;font-weight:500;">Email</td>
-                  <td style="padding:12px 0;color:#2563eb;font-size:14px;font-weight:600;"><a href="mailto:${email}" style="color:#2563eb;text-decoration:none;">${email}</a></td>
+                  <td style="padding:12px 0;color:#2563eb;font-size:14px;font-weight:600;"><a href="mailto:\${email}" style="color:#2563eb;text-decoration:none;">\${email}</a></td>
                 </tr>
                 <tr style="border-bottom:1px solid #f3f4f6;">
                   <td style="padding:12px 0;color:#6b7280;font-size:14px;font-weight:500;">Phone</td>
-                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">${phone}</td>
+                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">\${phone}</td>
                 </tr>
                 <tr>
                   <td style="padding:12px 0;color:#6b7280;font-size:14px;font-weight:500;">Subject</td>
-                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">${subject}</td>
+                  <td style="padding:12px 0;color:#111827;font-size:14px;font-weight:600;">\${subject}</td>
                 </tr>
               </table>
               
               <h3 style="color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;border-bottom:1px solid #e5e7eb;padding-bottom:8px;">Message</h3>
-              <div style="background-color:#f9fafb;border:1px solid #e5e7eb;padding:20px;border-radius:6px;color:#374151;font-size:15px;line-height:1.6;white-space:pre-wrap;">${message}</div>
+              <div style="background-color:#f9fafb;border:1px solid #e5e7eb;padding:20px;border-radius:6px;color:#374151;font-size:15px;line-height:1.6;white-space:pre-wrap;">\${message}</div>
             </div>
           </div>
         </div>
-      `
+      \`
     }),
     sendEmail({
       to: email,
-      subject: `We received your message — ${FIRM_NAME}`,
-      html: `
+      subject: \`We received your message — \${FIRM_NAME}\`,
+      html: \`
         <div style="background-color:#f9fafb;padding:40px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
           <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-            <div style="background-color:#17202d;padding:40px;text-align:center;">
-              <h1 style="color:#eb9f24;font-family:Georgia,serif;font-size:22px;margin:0;letter-spacing:1.5px;text-transform:uppercase;">Gloria Ondah &amp; Associates</h1>
-              <p style="color:#9ca3af;font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Legal Solutions &amp; Representation</p>
+            <div style="background-color:#440a18;padding:40px;text-align:center;">
+              <h1 style="color:#c28741;font-family:Georgia,serif;font-size:22px;margin:0;letter-spacing:1.5px;text-transform:uppercase;">Gloria Ondah &amp; Associates</h1>
+              <p style="color:#e8e0dc;font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Legal Solutions &amp; Representation</p>
             </div>
             <div style="padding:48px 40px;">
-              <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Dear ${name},</p>
-              <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Thank you for contacting Gloria Ondah &amp; Associates. We have received your enquiry (Ref: <strong style="color:#111827;font-family:monospace;">${refCode}</strong>) and a member of our team will respond within one business day.</p>
+              <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Dear \${name},</p>
+              <p style="color:#374151;font-size:16px;line-height:1.6;margin:0 0 24px 0;">Thank you for contacting Gloria Ondah &amp; Associates. We have received your enquiry (Ref: <strong style="color:#111827;font-family:monospace;">\${refCode}</strong>) and a member of our team will respond within one business day.</p>
               
               <div style="background-color:#f3f4f6;border-left:4px solid #9ca3af;padding:16px 20px;border-radius:0 6px 6px 0;margin-bottom:32px;">
                 <p style="color:#4b5563;font-size:14px;line-height:1.5;margin:0;">
@@ -306,7 +306,7 @@ export async function sendContactNotification({ name, email, phone, subject, mes
             </div>
           </div>
         </div>
-      `
+      \`
     })
   ]);
 }
