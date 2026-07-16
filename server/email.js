@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const FROM_EMAIL = process.env.BREVO_SENDER_EMAIL || 'info@gloriaondahlaw.com';
-const FIRM_EMAIL = process.env.BREVO_SENDER_EMAIL || 'info@gloriaondahlaw.com';
+const FROM_EMAIL = process.env.BREVO_SENDER_EMAIL || 'info@gloriaondah.com';
+const FIRM_EMAIL = process.env.BREVO_SENDER_EMAIL || 'info@gloriaondah.com';
 const FIRM_NAME = 'Gloria Ondah & Associates';
 const BREVO_API = 'https://api.brevo.com/v3/smtp/email';
 
@@ -174,7 +174,7 @@ export async function sendBookingConfirmation({ clientEmail, clientName, refCode
               <td style="padding:6px 0;color:#374151;font-size:15px;"><strong>WhatsApp:</strong> 0705 458 8490</td>
             </tr>
             <tr>
-              <td style="padding:6px 0;color:#374151;font-size:15px;"><strong>Email:</strong> <a href="mailto:info@gloriaondahlaw.com" style="color:#2563eb;text-decoration:none;">info@gloriaondahlaw.com</a></td>
+              <td style="padding:6px 0;color:#374151;font-size:15px;"><strong>Email:</strong> <a href="mailto:info@gloriaondah.com" style="color:#2563eb;text-decoration:none;">info@gloriaondah.com</a></td>
             </tr>
           </table>
         </div>
