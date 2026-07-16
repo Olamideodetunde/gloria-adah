@@ -310,7 +310,7 @@ export function Home() {
 
 const testimonials = [
   { text: "Gloria Ondah & Associates handled our complex regulatory filings and corporate compliance with absolute precision. Their deep regulatory insight saved our organization from massive administrative delays and ensured seamless operations.", author: "Gabriel Ayomide Mosaku", role: "Canada Institute of Knowledge Development and Productivity" },
-  { text: "Gloria Ondah & Associates has provided us with unparalleled legal guidance, ensuring our microfinance operations remain fully compliant and secure.", author: "Lucky LUCKY EHIWE", role: "MD, UBJ Microfinance Bank" },
+  { text: "Gloria Ondah & Associates has been a trusted legal partner, providing sound legal advice and practical solutions that have helped our bank maintain regulatory compliance and operate with confidence.", author: "Lucky Ehiwe", role: "Managing Director, UBJ Microfinance Bank" },
   { text: "From due diligence to final acquisition, their real estate advisory is top-tier. They don't just point out risks; they provide viable business solutions.", author: "Gbenga Tayo Shokefun", role: "Pacific Luxury Homes" },
   { text: "Their legal advisory on complex corporate restructures and contract management has been exceptional. GOA is more than an external counsel — they are a strategic growth partner.", author: "Frederick Ijewere", role: "DCPL" },
 ];
