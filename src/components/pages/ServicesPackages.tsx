@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Building2, 
@@ -23,6 +23,29 @@ type ShareCapitalOption = 1000000 | 10000000 | 50000000 | 100000000;
 
 export function ServicesPackages() {
   const [activeTab, setActiveTab] = useState<'packages' | 'calculator' | 'bespoke'>('packages');
+  const [packagePrices, setPackagePrices] = useState({
+    starter: 80000,
+    growth: 175000,
+    premium: 295000
+  });
+
+  useEffect(() => {
+    fetch('/api/services')
+      .then(res => res.json())
+      .then(data => {
+        if (data.services) {
+          const sPrice = data.services.find((s: any) => s.id === 'starter_package')?.price;
+          const gPrice = data.services.find((s: any) => s.id === 'growth_package')?.price;
+          const pPrice = data.services.find((s: any) => s.id === 'premium_package')?.price;
+          setPackagePrices({
+            starter: sPrice ?? 80000,
+            growth: gPrice ?? 175000,
+            premium: pPrice ?? 295000
+          });
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   // Calculator states
   const [entityType, setEntityType] = useState<EntityType>('limited_liability');
@@ -46,7 +69,7 @@ export function ServicesPackages() {
 
   // Calculate fees dynamically
   const calculateEstimatedFee = () => {
-    let base = 80000;
+    let base = packagePrices.starter;
     if (entityType === 'business_name') base = 30000;
     else if (entityType === 'ngo_association') base = 150000;
     else if (entityType === 'holding_company') base = 350000;
@@ -178,7 +201,7 @@ export function ServicesPackages() {
                         </div>
                         <div className="mb-6">
                           <span className="text-sm font-medium text-muted-foreground">Starting from</span>
-                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦80,000</div>
+                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦{packagePrices.starter.toLocaleString()}</div>
                           <span className="text-[10px] text-muted-foreground leading-none mt-1 block">*Excludes statutory government filing fees</span>
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-8">
@@ -227,7 +250,7 @@ export function ServicesPackages() {
                         </div>
                         <div className="mb-6">
                           <span className="text-sm font-medium text-muted-foreground">Starting from</span>
-                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦175,000</div>
+                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦{packagePrices.growth.toLocaleString()}</div>
                           <span className="text-[10px] text-muted-foreground leading-none mt-1 block">*Excludes statutory government filing fees</span>
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-8">
@@ -273,7 +296,7 @@ export function ServicesPackages() {
                         </div>
                         <div className="mb-6">
                           <span className="text-sm font-medium text-muted-foreground">Starting from</span>
-                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦295,000</div>
+                          <div className="text-4xl font-serif font-bold text-primary mt-1">₦{packagePrices.premium.toLocaleString()}</div>
                           <span className="text-[10px] text-muted-foreground leading-none mt-1 block">*Excludes statutory government filing fees</span>
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-8">
