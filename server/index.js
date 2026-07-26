@@ -1,3 +1,39 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const logPath = path.join(__dirname, '..', 'error.log');
+const logStream = fs.createWriteStream(logPath, { flags: 'a' });
+
+function logToFile(type, message) {
+  const timestamp = new Date().toISOString();
+  logStream.write(`[${timestamp}] [${type}] ${message}\n`);
+}
+
+const originalWrite = process.stdout.write;
+const originalErrWrite = process.stderr.write;
+
+process.stdout.write = function(chunk, encoding, callback) {
+  logToFile('INFO', chunk.toString().trim());
+  return originalWrite.apply(process.stdout, arguments);
+};
+
+process.stderr.write = function(chunk, encoding, callback) {
+  logToFile('ERROR', chunk.toString().trim());
+  return originalErrWrite.apply(process.stderr, arguments);
+};
+
+process.on('uncaughtException', (err) => {
+  logToFile('CRASH', `Uncaught Exception: ${err.stack || err}`);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  logToFile('CRASH', `Unhandled Rejection at: ${promise}, reason: ${reason?.stack || reason}`);
+});
+
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
