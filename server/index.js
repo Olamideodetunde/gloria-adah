@@ -102,13 +102,9 @@ async function startServer() {
 
   await initDb();
   
-  // Commented out app.listen() for Phusion Passenger in cPanel production.
-  // Passenger binds to the port/socket automatically when the app is exported.
-  /*
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(PORT, () => {
     console.log(`[GOA] Server running on port ${PORT} (${isProd ? 'production' : 'development'})`);
   });
-  */
 }
 
 startServer().catch((err) => {
