@@ -39,8 +39,6 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { initDb } from './db.js';
 import bookingsRouter from './routes/bookings.js';
 import contactRouter from './routes/contact.js';
@@ -49,7 +47,6 @@ import adminRouter from './routes/admin.js';
 import uploadRouter from './routes/upload.js';
 import servicesRouter from './routes/services.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === 'production';
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
