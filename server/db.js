@@ -1,28 +1,60 @@
-import pkg from 'pg';
-const { Pool } = pkg;
+import mysql from 'mysql2/promise';
 
-// Parse connection string manually to handle special characters
 const connectionString = process.env.DATABASE_URL;
 
-export const pool = new Pool({
-  connectionString: connectionString,
-  ssl: connectionString?.includes('neon.tech') 
-    ? { rejectUnauthorized: false } 
-    : false
-});
+// Test/create the pool
+export const pool = {
+  mysqlPool: null,
+  
+  getPool() {
+    if (!this.mysqlPool) {
+      this.mysqlPool = mysql.createPool(connectionString || '');
+    }
+    return this.mysqlPool;
+  },
 
-// Test connection on startup
-pool.on('error', (err) => {
-  console.error('[DB] Unexpected error:', err.message);
-});
+  async query(sql, params) {
+    let mysqlSql = sql;
+    if (params && params.length > 0) {
+      // Convert PostgreSQL $1, $2 parameter placeholders to MySQL ? placeholders
+      mysqlSql = sql.replace(/\$\d+/g, '?');
+    }
+    
+    const [rows, fields] = await this.getPool().query(mysqlSql, params);
+    
+    let rowCount = 0;
+    let insertId = null;
+    let rowArray = [];
+    
+    if (Array.isArray(rows)) {
+      rowArray = rows;
+      rowCount = rows.length;
+    } else if (rows) {
+      rowCount = rows.affectedRows || 0;
+      insertId = rows.insertId || null;
+    }
+    
+    return { rows: rowArray, fields, rowCount, insertId };
+  },
+
+  on(event, handler) {
+    this.getPool().on(event, handler);
+  },
+
+  async end() {
+    if (this.mysqlPool) {
+      await this.mysqlPool.end();
+    }
+  }
+};
 
 export async function initDb() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS bookings (
-      id SERIAL PRIMARY KEY,
+      id INT AUTO_INCREMENT PRIMARY KEY,
       ref_code VARCHAR(50) UNIQUE NOT NULL,
       service_type VARCHAR(100) NOT NULL,
-      service_price INTEGER NOT NULL,
+      service_price INT NOT NULL,
       practice_area VARCHAR(100),
       appointment_date DATE NOT NULL,
       appointment_time VARCHAR(20) NOT NULL,
@@ -34,11 +66,13 @@ export async function initDb() {
       paystack_reference VARCHAR(200),
       payment_status VARCHAR(50) DEFAULT 'pending',
       status VARCHAR(50) DEFAULT 'pending',
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    );
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
 
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS contact_submissions (
-      id SERIAL PRIMARY KEY,
+      id INT AUTO_INCREMENT PRIMARY KEY,
       ref_code VARCHAR(50) UNIQUE NOT NULL,
       name VARCHAR(200) NOT NULL,
       email VARCHAR(200) NOT NULL,
@@ -46,11 +80,13 @@ export async function initDb() {
       subject VARCHAR(300) NOT NULL,
       message TEXT NOT NULL,
       status VARCHAR(50) DEFAULT 'unread',
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    );
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
 
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS blog_posts (
-      id SERIAL PRIMARY KEY,
+      id INT AUTO_INCREMENT PRIMARY KEY,
       slug VARCHAR(200) UNIQUE NOT NULL,
       title VARCHAR(300) NOT NULL,
       excerpt TEXT,
@@ -59,26 +95,27 @@ export async function initDb() {
       cover_image VARCHAR(500),
       author VARCHAR(200) DEFAULT 'Gloria Ondah',
       is_published BOOLEAN DEFAULT false,
-      published_at TIMESTAMPTZ,
-      created_at TIMESTAMPTZ DEFAULT NOW(),
-      updated_at TIMESTAMPTZ DEFAULT NOW()
-    );
+      published_at TIMESTAMP NULL DEFAULT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
 
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS services (
       id VARCHAR(50) PRIMARY KEY,
       name VARCHAR(100) NOT NULL,
-      duration INTEGER NOT NULL,
-      price INTEGER NOT NULL
-    );
+      duration INT NOT NULL,
+      price INT NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   `);
 
   await seedBlogPosts();
   await seedServices();
-  console.log('[DB] Tables ready and seeded');
+  console.log('[DB] MySQL Tables ready and seeded');
 }
 
 async function seedBlogPosts() {
-
   const posts = [
     {
       slug: 'cac-annual-returns-guide-2026',
@@ -305,7 +342,7 @@ Every employer must deduct and remit employees' income tax monthly to the releva
 - **Documentation**: Monthly schedules, annual reconciliation
 
 ### 3. Value Added Tax (VAT)
-Businesses with annual turnover exceeding ₦25 million must register for VAT and collect 7.5% on applicable transactions.
+**Businesses with annual turnover exceeding ₦25 million must register for VAT and collect 7.5% on applicable transactions.**
 
 - **Filing deadline**: 21st of the following month
 - **Exemptions**: Basic food items, medical services, educational materials
@@ -344,9 +381,8 @@ Gloria Ondah & Associates works with SMEs to establish tax compliance processes,
 
   for (const post of posts) {
     await pool.query(
-      `INSERT INTO blog_posts (slug, title, excerpt, content, category, cover_image, author, is_published, published_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
-       ON CONFLICT (slug) DO NOTHING`,
+      `INSERT IGNORE INTO blog_posts (slug, title, excerpt, content, category, cover_image, author, is_published, published_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())`,
       [post.slug, post.title, post.excerpt, post.content, post.category, post.cover_image, post.author, post.is_published]
     );
   }
@@ -367,9 +403,8 @@ async function seedServices() {
 
   for (const svc of defaultServices) {
     await pool.query(
-      `INSERT INTO services (id, name, duration, price)
-       VALUES ($1, $2, $3, $4)
-       ON CONFLICT (id) DO NOTHING`,
+      `INSERT IGNORE INTO services (id, name, duration, price)
+       VALUES ($1, $2, $3, $4)`,
       [svc.id, svc.name, svc.duration, svc.price]
     );
   }

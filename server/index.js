@@ -50,7 +50,7 @@ async function startServer() {
   if (isProd) {
     const distPath = path.join(__dirname, '..', 'dist');
     app.use(express.static(distPath));
-    app.get('/{*splat}', (_req, res) => {
+    app.get('*', (_req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   } else {
@@ -68,12 +68,19 @@ async function startServer() {
   });
 
   await initDb();
+  
+  // Commented out app.listen() for Phusion Passenger in cPanel production.
+  // Passenger binds to the port/socket automatically when the app is exported.
+  /*
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`[GOA] Server running on port ${PORT} (${isProd ? 'production' : 'development'})`);
   });
+  */
 }
 
 startServer().catch((err) => {
   console.error('[GOA] Startup failed:', err.message);
   process.exit(1);
 });
+
+export default app;

@@ -51,14 +51,16 @@ router.post('/', verifyAdminToken, async (req, res) => {
     const { title, slug, excerpt, content, category, cover_image, author, is_published } = req.body;
     if (!title || !slug || !content) return res.status(400).json({ error: 'title, slug, and content are required' });
     const published_at = is_published ? new Date().toISOString() : null;
-    const { rows } = await pool.query(
+    const result = await pool.query(
       `INSERT INTO blog_posts (slug, title, excerpt, content, category, cover_image, author, is_published, published_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
       [slug, title, excerpt || null, content, category || 'Insights', cover_image || null, author || 'Gloria Ondah', !!is_published, published_at]
     );
+    const insertId = result.insertId || result.rows?.insertId;
+    const { rows } = await pool.query('SELECT * FROM blog_posts WHERE id = $1', [insertId]);
     res.status(201).json({ post: rows[0] });
   } catch (err) {
-    if (err.code === '23505') return res.status(409).json({ error: 'A post with this slug already exists' });
+    if (err.code === '23505' || err.code === 'ER_DUP_ENTRY') return res.status(409).json({ error: 'A post with this slug already exists' });
     res.status(500).json({ error: 'Failed to create post' });
   }
 });
@@ -71,16 +73,17 @@ router.put('/:id', verifyAdminToken, async (req, res) => {
     const old = existing.rows[0];
     const nowPublished = !!is_published;
     const published_at = nowPublished && !old.is_published ? new Date().toISOString() : old.published_at;
-    const { rows } = await pool.query(
+    await pool.query(
       `UPDATE blog_posts SET slug=$1,title=$2,excerpt=$3,content=$4,category=$5,cover_image=$6,
-       author=$7,is_published=$8,published_at=$9,updated_at=NOW() WHERE id=$10 RETURNING *`,
+       author=$7,is_published=$8,published_at=$9,updated_at=NOW() WHERE id=$10`,
       [slug || old.slug, title || old.title, excerpt ?? old.excerpt, content || old.content,
        category || old.category, cover_image ?? old.cover_image, author || old.author,
        nowPublished, published_at, req.params.id]
     );
+    const { rows } = await pool.query('SELECT * FROM blog_posts WHERE id = $1', [req.params.id]);
     res.json({ post: rows[0] });
   } catch (err) {
-    if (err.code === '23505') return res.status(409).json({ error: 'Slug already in use' });
+    if (err.code === '23505' || err.code === 'ER_DUP_ENTRY') return res.status(409).json({ error: 'Slug already in use' });
     res.status(500).json({ error: 'Failed to update post' });
   }
 });

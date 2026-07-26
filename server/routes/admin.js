@@ -29,14 +29,14 @@ router.post('/login', (req, res) => {
 router.get('/stats', verifyAdminToken, async (req, res) => {
   try {
     const [bRes, cRes, pRes] = await Promise.all([
-      pool.query('SELECT COUNT(*) as total, COUNT(*) FILTER (WHERE status=\'confirmed\') as confirmed FROM bookings'),
-      pool.query('SELECT COUNT(*) as total, COUNT(*) FILTER (WHERE status=\'unread\') as unread FROM contact_submissions'),
-      pool.query('SELECT COUNT(*) as total, COUNT(*) FILTER (WHERE is_published=true) as published FROM blog_posts')
+      pool.query("SELECT COUNT(*) as total, SUM(CASE WHEN status='confirmed' THEN 1 ELSE 0 END) as confirmed FROM bookings"),
+      pool.query("SELECT COUNT(*) as total, SUM(CASE WHEN status='unread' THEN 1 ELSE 0 END) as unread FROM contact_submissions"),
+      pool.query("SELECT COUNT(*) as total, SUM(CASE WHEN is_published=true THEN 1 ELSE 0 END) as published FROM blog_posts")
     ]);
     res.json({
-      bookings: { total: parseInt(bRes.rows[0].total), confirmed: parseInt(bRes.rows[0].confirmed) },
-      contacts: { total: parseInt(cRes.rows[0].total), unread: parseInt(cRes.rows[0].unread) },
-      posts: { total: parseInt(pRes.rows[0].total), published: parseInt(pRes.rows[0].published) }
+      bookings: { total: parseInt(bRes.rows[0].total) || 0, confirmed: parseInt(bRes.rows[0].confirmed) || 0 },
+      contacts: { total: parseInt(cRes.rows[0].total) || 0, unread: parseInt(cRes.rows[0].unread) || 0 },
+      posts: { total: parseInt(pRes.rows[0].total) || 0, published: parseInt(pRes.rows[0].published) || 0 }
     });
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch stats' });
